@@ -17,7 +17,7 @@ website:
     left:
       - href: index.qmd
         text: "Home"
-      - text: "Classes"
+      - text: "TP Activities"
         menu:
           - 1.bioinf-intro-tutorial.qmd
           # - 2.ensembl-tutorial.qmd
