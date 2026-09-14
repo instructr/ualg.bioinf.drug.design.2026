@@ -1,0 +1,46 @@
+/* Light styling for the tutorial callouts.
+   Delete this file (and the `css:` line in the YAML header) if you prefer
+   plain Quarto defaults. */
+
+:root {
+  --tut-handson: #1e6b52;
+  --tut-question: #8a5a00;
+  --tut-answer: #2b5d9e;
+}
+
+/* Hands-on blocks (callout-tip) */
+div.callout-tip.callout {
+  border-left-color: var(--tut-handson);
+}
+div.callout-tip .callout-title {
+  background-color: rgba(30, 107, 82, 0.08);
+}
+
+/* Question blocks (callout-warning) */
+div.callout-warning.callout {
+  border-left-color: var(--tut-question);
+}
+div.callout-warning .callout-title {
+  background-color: rgba(138, 90, 0, 0.08);
+}
+
+/* Answers nested inside questions */
+div.callout-warning div.callout-note.callout {
+  border-left-color: var(--tut-answer);
+  margin-top: 0.75rem;
+}
+
+/* A little more room around figures */
+figure {
+  margin: 2rem auto;
+}
+
+figcaption {
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* Practical-details table */
+table {
+  font-size: 0.95em;
+}

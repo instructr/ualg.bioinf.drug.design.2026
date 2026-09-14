@@ -1,0 +1,44 @@
+---
+title: "Introduction to Bioinformatics"
+subtitle: "A hands-on tutorial from EBI"
+author:
+  - name: "Isabel Duarte"
+abstract: |
+  In this TP class, you will follow the introductory course developed by EBI to provide an overview of what is bioinformatics for students (or researchers) who have little or no previous experience of using bioinformatics databases or tools. It will provide a broad overview of bioinformatics as a subject and the resources available publicly for researchers to access and use. The course takes about 1.5h, and it has videos and quizzes included.
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: 2
+    number-sections: true
+    code-copy: true
+    code-overflow: wrap
+    anchor-sections: true
+    smooth-scroll: true
+    theme:
+      - cosmo
+    css: styles.css
+    link-external-newwindow: true
+    link-external-icon: true
+    fig-cap-location: bottom
+---
+
+## Hands-on Tutorial {.unnumbered}
+
+**Learning goals**
+
+By the end of the course you will be able to:
+
+  - Assess the role of bioinformatics in molecular science.
+  - Describe the key features of primary and secondary databases.
+  - List strategies for describing data consistently.
+  - Identify some of the different types of data analysis that can be applied to solving biological problems.
+
+**TP Activity**
+
+Please follow the link to the course:
+[Introduction to bioinformatics](https://www.ebi.ac.uk/training/online/courses/bioinformatics-terrified/)
+
+
+
+

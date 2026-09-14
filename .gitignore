@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+sandbox/
+docs/sandbox
+
+/.quarto/
+
+**/*.quarto_ipynb

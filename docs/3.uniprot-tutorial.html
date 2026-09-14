@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Isabel Duarte">
+<meta name="dcterms.date" content="2026-09-14">
+
+<title>One protein along the UniProt page – Bioinformatics and Drug Design</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-83ab476c863e17697e9685ff7eb1a190.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Bioinformatics and Drug Design</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-classes" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Classes</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-classes">    
+        <li>
+    <a class="dropdown-item" href="./1.bioinf-intro-tutorial.html">
+ <span class="dropdown-text">Introduction to Bioinformatics</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-house-heart-fill"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://www.ualg.pt/">
+            Universidade do Algarve
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link" data-scroll-target="#sec-intro"><span class="header-section-number">1</span> Why bother with UniProt?</a></li>
+  <li><a href="#sec-search" id="toc-sec-search" class="nav-link" data-scroll-target="#sec-search"><span class="header-section-number">2</span> Finding the right entry</a></li>
+  <li><a href="#sec-entry" id="toc-sec-entry" class="nav-link" data-scroll-target="#sec-entry"><span class="header-section-number">3</span> Reading the entry page</a>
+  <ul class="collapse">
+  <li><a href="#sec-download" id="toc-sec-download" class="nav-link" data-scroll-target="#sec-download"><span class="header-section-number">3.1</span> Downloading the entry</a></li>
+  <li><a href="#sec-function" id="toc-sec-function" class="nav-link" data-scroll-target="#sec-function"><span class="header-section-number">3.2</span> Function</a></li>
+  <li><a href="#sec-names" id="toc-sec-names" class="nav-link" data-scroll-target="#sec-names"><span class="header-section-number">3.3</span> Names and taxonomy</a></li>
+  <li><a href="#sec-location" id="toc-sec-location" class="nav-link" data-scroll-target="#sec-location"><span class="header-section-number">3.4</span> Subcellular location</a></li>
+  <li><a href="#sec-disease" id="toc-sec-disease" class="nav-link" data-scroll-target="#sec-disease"><span class="header-section-number">3.5</span> Disease and variants</a></li>
+  <li><a href="#sec-ptm" id="toc-sec-ptm" class="nav-link" data-scroll-target="#sec-ptm"><span class="header-section-number">3.6</span> PTM and processing</a></li>
+  <li><a href="#sec-expression" id="toc-sec-expression" class="nav-link" data-scroll-target="#sec-expression"><span class="header-section-number">3.7</span> Expression</a></li>
+  <li><a href="#sec-interaction" id="toc-sec-interaction" class="nav-link" data-scroll-target="#sec-interaction"><span class="header-section-number">3.8</span> Interaction</a></li>
+  <li><a href="#sec-structure" id="toc-sec-structure" class="nav-link" data-scroll-target="#sec-structure"><span class="header-section-number">3.9</span> Structure</a></li>
+  <li><a href="#sec-family" id="toc-sec-family" class="nav-link" data-scroll-target="#sec-family"><span class="header-section-number">3.10</span> Family and domains</a></li>
+  <li><a href="#sec-sequence" id="toc-sec-sequence" class="nav-link" data-scroll-target="#sec-sequence"><span class="header-section-number">3.11</span> Sequence</a></li>
+  <li><a href="#sec-similar" id="toc-sec-similar" class="nav-link" data-scroll-target="#sec-similar"><span class="header-section-number">3.12</span> Similar proteins</a></li>
+  </ul></li>
+  <li><a href="#sec-variant-viewer" id="toc-sec-variant-viewer" class="nav-link" data-scroll-target="#sec-variant-viewer"><span class="header-section-number">4</span> Variant viewer</a></li>
+  <li><a href="#sec-feature-viewer" id="toc-sec-feature-viewer" class="nav-link" data-scroll-target="#sec-feature-viewer"><span class="header-section-number">5</span> Feature viewer</a></li>
+  <li><a href="#sec-publications" id="toc-sec-publications" class="nav-link" data-scroll-target="#sec-publications"><span class="header-section-number">6</span> Publications</a></li>
+  <li><a href="#sec-external" id="toc-sec-external" class="nav-link" data-scroll-target="#sec-external"><span class="header-section-number">7</span> External links</a></li>
+  <li><a href="#sec-history" id="toc-sec-history" class="nav-link" data-scroll-target="#sec-history"><span class="header-section-number">8</span> History</a></li>
+  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key points</a></li>
+  <li><a href="#exercises-to-extend-the-session" id="toc-exercises-to-extend-the-session" class="nav-link" data-scroll-target="#exercises-to-extend-the-session">Exercises to extend the session</a></li>
+  <li><a href="#adapting-this-document" id="toc-adapting-this-document" class="nav-link" data-scroll-target="#adapting-this-document">Adapting this document</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">One protein along the UniProt page</h1>
+<p class="subtitle lead">Exploring a UniProtKB entry using human opsins as an example</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Isabel Duarte </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Universidade do Algarve
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">14 September 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>A hands-on walk through a single UniProtKB entry (P04000, OPSR_HUMAN). You will learn how to search the database, read every section of an entry page, use the Variant and Feature viewers, follow cross-references to other resources, and inspect the annotation history of an entry.</p>
+  </div>
+</div>
+
+
+</header>
+
+
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Attribution and licence
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This lesson is adapted from <strong>“One protein along the UniProt page”</strong> by Lisanna Paladin and Bérénice Batut, Galaxy Training Network, published under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International licence</a>. Original material: <a href="https://gxy.io/GTN:T00360" class="uri">https://gxy.io/GTN:T00360</a>.</p>
+<p>The text below has been rewritten and reorganised for this course. Any errors introduced in adaptation are mine, not the original authors’.</p>
+</div>
+</div>
+<section id="overview" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Questions this lesson answers
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>How can you search for proteins by free text, gene name, or protein name?</li>
+<li>How do you read the information at the top of a UniProt entry page?</li>
+<li>What kind of information sits behind each download format (FASTA, JSON, XML, GFF)?</li>
+<li>How is the function of a protein such as an opsin described?</li>
+<li>What structured information lives in the <em>Names and Taxonomy</em>, <em>Subcellular location</em>, <em>Disease &amp; Variants</em>, and <em>PTM/Processing</em> sections?</li>
+<li>How do you find expression, interaction, structure, family, sequence, and similarity data?</li>
+<li>What do the <em>Variant viewer</em> and <em>Feature viewer</em> tabs add?</li>
+<li>What does the <em>Publications</em> tab list, and how can it be filtered?</li>
+<li>Why does the annotation history of an entry matter?</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Learning objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this session you should be able to:</p>
+<ol type="1">
+<li>Interpret a UniProtKB entry: function, taxonomy, localisation, structure, interactions, and variants.</li>
+<li>Use stable unique identifiers to move between databases.</li>
+<li>Download protein data in an appropriate format for a downstream task.</li>
+<li>Visualise and compare sequence features along a protein.</li>
+</ol>
+</div>
+</div>
+<table class="table-striped table-hover caption-top table">
+<caption>Practical details</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Time estimate</strong></td>
+<td>~1 hour</td>
+</tr>
+<tr class="even">
+<td><strong>Level</strong></td>
+<td>Introductory</td>
+</tr>
+<tr class="odd">
+<td><strong>Prerequisites</strong></td>
+<td>Basic familiarity with genes, proteins, and FASTA files</td>
+</tr>
+<tr class="even">
+<td><strong>Software needed</strong></td>
+<td>A web browser only</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-caution">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Numbers reported in the solutions below (counts of search hits, publications, variants, and so on) were correct when the lesson was written. UniProt is updated roughly every eight weeks, so your numbers may differ. That is a feature, not a bug.</p>
+<p>Ask yourself: Why does a knowledge base change?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-intro" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="sec-intro"><span class="header-section-number">1</span> Why bother with UniProt?</h2>
+<p>A typical analysis ends with a shortlist of interesting proteins. Then what? You need to find out what those proteins do, where they act, what is already known about their variants, and which other databases hold complementary information.</p>
+<p>This lesson uses <strong>human opsins</strong> as a worked example. Opsins sit in the cells of the retina, where they capture light and start the signalling cascade that produces vision. When they are disrupted, the result can be colour blindness or other visual impairment.</p>
+<p>Almost all of the work happens on the <a href="https://www.uniprot.org">UniProt</a> website rather than in any analysis platform, so nothing needs installing.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Sources and further reading
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The original Galaxy Training Network lesson drew on the UniProt help page <a href="https://www.uniprot.org/help/explore_uniprotkb_entry">Explore UniProtKB entry</a>, and chose the topic following Gale Rhodes’ <a href="https://spdbv.unil.ch/TheMolecularLevel/Matics/index.html">Bioinformatics Tutorial</a>. The latter can no longer be followed step by step (the resources have changed too much) but is still a good source of background on opsins and on building structural models from evolutionary information.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-search" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="sec-search"><span class="header-section-number">2</span> Finding the right entry</h2>
+<p>The starting point for protein annotation is <a href="https://www.uniprot.org/">UniProtKB</a>. You can query it with free text, a gene name, or a protein name. Let us begin with something deliberately vague.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: a broad search
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Open <a href="https://www.uniprot.org/" class="uri">https://www.uniprot.org/</a>.</li>
+<li>Type <code>Human opsin</code> into the search bar.</li>
+<li>Run the search.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>How many results come back?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Around 524 at the time of writing. Far too many to inspect by hand, even though (spoiler) the entry we want is near the top.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Free text is too blunt an instrument. A better strategy is to search on a <strong>unique identifier</strong>. The gene we are after is <code>OPN1LW</code>.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: search by gene name
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Type <code>OPN1LW</code> into the search bar.</li>
+<li>Run the search.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>How many results now?</li>
+<li>What is still missing from the query?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Over 240 results.</li>
+<li>The organism. The same gene name is used across many species, so add <code>Human</code> to restrict the search.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: search by gene name plus organism
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Type <code>Human OPN1LW</code> into the search bar.</li>
+<li>Run the search.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>How many results now?</li>
+<li>Is there a hit whose gene name is exactly OPN1LW?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Eight results.</li>
+<li>Yes. The first hit carries the label <code>Gene: OPN1LW (RCP)</code>.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>That first hit, <strong>P04000 (OPSR_HUMAN)</strong>, is our target. Two things are worth noticing before opening it:</p>
+<ul>
+<li>The protein name (<code>OPSR_HUMAN</code>) and the gene name (<code>OPN1LW</code>) are different, and so are their identifiers. Gene and protein are distinct entities with distinct names.</li>
+<li>The entry carries a gold star, meaning it has been manually annotated and curated by a human (Swiss-Prot) rather than generated automatically (via TrEMBL).</li>
+</ul>
+</section>
+<section id="sec-entry" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="sec-entry"><span class="header-section-number">3</span> Reading the entry page</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: open the entry
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Click on <code>P04000 · OPSR_HUMAN</code>, or go directly to <a href="https://www.uniprot.org/uniprotkb/P04000/entry" class="uri">https://www.uniprot.org/uniprotkb/P04000/entry</a>.</p>
+</div>
+</div>
+<div id="fig-uniprot" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Screenshot of the UniProt entry page header for P04000.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-uniprot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/online-resources-protein/images/UniProt.png" class="img-fluid figure-img" alt="Screenshot of the UniProt entry page header for P04000.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-uniprot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The header of a UniProt entry page. Image from the Galaxy Training Network lesson, CC BY 4.0.
+</figcaption>
+</figure>
+</div>
+<!-- Tip for reuse: download this image and store it locally, e.g. in an
+     images/ folder next to this .qmd, rather than hotlinking. Keep the
+     CC BY 4.0 credit in the caption. -->
+<p>The page is long, so the left-hand navigation bar does a lot of work. It stays fixed as you scroll, and just reading it tells you what the database holds about this entry:</p>
+<div class="grid">
+<div class="g-col-6">
+<ul>
+<li>known functions</li>
+<li>taxonomy</li>
+<li>subcellular location</li>
+<li>variants and associated diseases</li>
+<li>post-translational modifications (PTMs)</li>
+</ul>
+</div>
+<div class="g-col-6">
+<ul>
+<li>expression</li>
+<li>interactions</li>
+<li>structure</li>
+<li>domains and their classification</li>
+<li>sequences and similar proteins</li>
+</ul>
+</div>
+</div>
+<p>At the very top of the page you get the accession and entry name, the protein and gene names, the organism, whether the entry has been reviewed by a curator, an annotation score, and the evidence level for the protein’s existence.</p>
+<p>Below the header sit six tabs: <em>Entry</em>, <em>Variant viewer</em>, <em>Feature viewer</em>, <em>Publications</em>, <em>External links</em>, and <em>History</em>. Stay on <em>Entry</em> for now.</p>
+<section id="sec-download" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="sec-download"><span class="header-section-number">3.1</span> Downloading the entry</h3>
+<p>Just under the tabs there is a toolbar. From here you can BLAST the sequence, align it against its isoforms, add the entry to a basket for later, or download it.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Which formats does the <em>Download</em> menu offer?</li>
+<li>What sort of information does each one carry?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Text, FASTA (canonical), FASTA (canonical and isoform), JSON, XML, RDF/XML, and GFF.</li>
+<li>The FASTA options give you the sequence, optionally as a multi-FASTA that includes isoforms. The rest are general-purpose structured formats, not biology-specific: they carry the same annotation you are reading on the page, but in a form that a script can parse. JSON is usually the most convenient for programmatic work.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-function" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="sec-function"><span class="header-section-number">3.2</span> Function</h3>
+<p>The <em>Function</em> section opens with a short free-text summary: visual pigments are the light-absorbing molecules behind vision, and consist of an apoprotein (opsin) covalently bound to cis-retinal.</p>
+<p>Two sentences to stand in for decades of literature. That compression is possible because someone has already done the curation work, and because the protein has been classified in the <strong>Gene Ontology</strong> (GO), which describes molecular function, biological process, and cellular component.</p>
+<p>GO is a good example of a resource that flattens a very complex body of knowledge into a graph. Detail is lost, but in exchange the information becomes countable, comparable, and machine-readable, which is exactly what makes summary pages like this one possible.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Which GO terms is this protein annotated with, for:</p>
+<ol type="1">
+<li>molecular function?</li>
+<li>cellular component?</li>
+<li>biological process?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Photoreceptor protein, G-protein coupled receptor.</li>
+<li>Photoreceptor disc membrane.</li>
+<li>Sensory transduction, vision.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-names" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="sec-names"><span class="header-section-number">3.3</span> Names and taxonomy</h3>
+<p>The next section holds more structured information, including the taxonomic placement of the protein. It also lists other identifiers that point at the same biological entity, or at linked entities (for example associated diseases under <code>MIM</code>).</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>What is the taxonomic identifier?</li>
+<li>What is the proteome identifier?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>9606, that is <em>Homo sapiens</em>.</li>
+<li>UP000005640, and this protein is a component of chromosome X.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-location" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="sec-location"><span class="header-section-number">3.4</span> Subcellular location</h3>
+<p>We already know where the protein is in the body (the retina). Where is it in the cell?</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Where does UniProt place this protein within the cell?</li>
+<li>Is that consistent with the GO annotation you saw earlier?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>It is described as a multi-pass membrane protein: it is embedded in the membrane and crosses it several times.</li>
+<li>Yes. GO is more specific, naming the photoreceptor disc membrane.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>This section also has a <em>Features</em> area showing which stretches of the sequence sit inside the membrane (transmembrane) and which do not (topological domain).</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>How many transmembrane and topological domains are listed?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Eight transmembrane regions and seven topological domains.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-disease" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="sec-disease"><span class="header-section-number">3.5</span> Disease and variants</h3>
+<p>This gene and protein are linked to several diseases. The section describes those associations and lists the specific variants implicated in each.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What kinds of study establish that a genetic variant is associated with a disease?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Three common designs:</p>
+<ul>
+<li><strong>Genome-wide association studies (GWAS).</strong> Scan whole genomes across large cohorts to find common variants that track with a trait or disease.</li>
+<li><strong>Case-control studies.</strong> Compare the frequency of specific variants between affected and unaffected individuals.</li>
+<li><strong>Family studies.</strong> Follow inheritance patterns within families in which several members are affected, which can pinpoint candidate genes.</li>
+</ul>
+<p>All of these lean heavily on genomic file formats such as SAM, BAM, and VCF.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>A <em>Features</em> area maps the natural variants along the sequence, and points you to the fuller view in the <em>Variant viewer</em> tab. Resist the temptation for now.</p>
+</section>
+<section id="sec-ptm" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="sec-ptm"><span class="header-section-number">3.6</span> PTM and processing</h3>
+<p>A post-translational modification is a covalent event after translation: either a proteolytic cleavage, or the addition of a chemical group to an amino acid.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Which post-translational modifications are annotated here?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chain, glycosylation, disulfide bond, and modified residue.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-expression" class="level3" data-number="3.7">
+<h3 data-number="3.7" class="anchored" data-anchor-id="sec-expression"><span class="header-section-number">3.7</span> Expression</h3>
+<p>For human proteins there is often tissue-level expression information, drawn from resources such as the <a href="https://www.ebi.ac.uk/gxa/home">Expression Atlas</a>.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In which tissue is this protein found?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The three colour pigments are found in the cone photoreceptor cells.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-interaction" class="level3" data-number="3.8">
+<h3 data-number="3.8" class="anchored" data-anchor-id="sec-interaction"><span class="header-section-number">3.8</span> Interaction</h3>
+<p>Proteins do their work by interacting with their surroundings, and above all with other proteins. This section lists known interactors in a table you can filter by subcellular location, disease, and interaction type. Much of the underlying data comes from databases such as STRING, which is linked directly.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: follow the link out to STRING
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Open the <a href="https://string-db.org/network/9606.ENSP00000358967">STRING network for this protein</a> in a new tab.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>How many download formats does STRING offer?</li>
+<li>What does each one carry?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-32" class="callout-32-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>STRING exports interaction data in several shapes:</p>
+<ul>
+<li><strong>TSV</strong>, a tabular layout that drops straight into analysis tools.</li>
+<li><strong>PSI-MI XML</strong>, a community standard for interaction data, which makes the results interoperable with other interaction databases.</li>
+<li><strong>PNG and SVG</strong> images of the network, for slides and figures.</li>
+<li><strong>Flat files</strong> with detailed interaction evidence, and multiple alignment files for comparing sequences across the network.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-structure" class="level3" data-number="3.9">
+<h3 data-number="3.9" class="anchored" data-anchor-id="sec-structure"><span class="header-section-number">3.9</span> Structure</h3>
+<p>The <em>Structure</em> section is the way into the three-dimensional world. It reports experimentally determined structures where they exist, and gives you an interactive viewer embedded in the page, so you can rotate the molecule and explore domains, binding sites, and other functional regions without leaving UniProt.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Which variant is associated with colour blindness?</li>
+<li>Can you locate that amino acid in the structure?</li>
+<li>Why might that substitution be disruptive?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-34" class="callout-34-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>From the <em>Disease &amp; Variants</em> section: a glycine to glutamic acid change at position 338.</li>
+<li>Yes. Rotate the model and hover over residues to find position 338. It takes patience given how many helices there are. Residue 338 is not in a helix, but in what looks like a loop, just before a region of low prediction confidence.</li>
+<li>A reasonable hypothesis: since it is not in a helix, and helices in transmembrane proteins are usually the membrane-spanning parts, this residue is in one of the larger domains protruding from the membrane. So the mutation probably disturbs a functional domain rather than the membrane-embedded core. Use the <em>Feature viewer</em> to check whether that domain faces the inside or the outside of the cell.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Where does the model actually come from?</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: download the structure
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Click the download icon underneath the structure viewer.</li>
+<li>Open the downloaded file in a text editor and look at the first few lines.</li>
+</ol>
+</div>
+</div>
+<p>You get a <strong>PDB</strong> file, describing the arrangement of atoms and residues. But notice that the list of 3D structure databases does not link to the Protein Data Bank first. It links to <strong>AlphaFoldDB</strong>.</p>
+<p>That matters. This is a <em>predicted</em> structure, not an experimentally determined one. AlphaFold infers the spatial arrangement of atoms using deep learning and evolutionary information. It is also why the model is coloured by confidence: blue regions are predicted reliably, orange regions are either uncertain or genuinely disordered (flexible and mobile). The file format is the same as for an experimental structure, because the information it encodes is still structural, but the epistemic status is very different.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Teaching note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-37" class="callout-37-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This is a good moment to stop and discuss provenance with students. Two files can look identical in format while differing completely in how much you should trust them. Ask: how would you record that distinction in your own project metadata?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-family" class="level3" data-number="3.10">
+<h3 data-number="3.10" class="anchored" data-anchor-id="sec-family"><span class="header-section-number">3.10</span> Family and domains</h3>
+<p>This section places the protein in its evolutionary context: the families, superfamilies, and domains it belongs to, plus conserved regions, motifs, and other notable sequence features.</p>
+<p>The <em>Features</em> area confirms that at least one of the two protruding domains (the N-terminal one) is disordered, and reiterates that we are dealing with a transmembrane protein. The links out to phylogenetic and domain databases are the route into questions of common ancestry and functional specialisation.</p>
+</section>
+<section id="sec-sequence" class="level3" data-number="3.11">
+<h3 data-number="3.11" class="anchored" data-anchor-id="sec-sequence"><span class="header-section-number">3.11</span> Sequence</h3>
+<p>Everything above is ultimately encoded in the sequence. Here you can download the FASTA file, trace the data back to the sequencing experiments that produced it, and see any isoforms that have been detected.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>How many potential isoforms map to this entry?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-38" class="callout-38-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>One: H0Y622.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-similar" class="level3" data-number="3.12">
+<h3 data-number="3.12" class="anchored" data-anchor-id="sec-similar"><span class="header-section-number">3.12</span> Similar proteins</h3>
+<p>The final section of the <em>Entry</em> tab lists similar proteins, produced by clustering at 100%, 90%, and 50% identity thresholds.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>How many similar proteins are there at each threshold?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-40-contents" aria-controls="callout-40" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-40" class="callout-40-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="table-striped caption-top table">
+<caption>Cluster membership</caption>
+<thead>
+<tr class="header">
+<th>Identity threshold</th>
+<th>Similar proteins</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>100%</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>90%</td>
+<td>83</td>
+</tr>
+<tr class="odd">
+<td>50%</td>
+<td>397</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>A pattern should be emerging: much of what we do with protein data is mapping different layers of information onto the same sequence and asking how they relate. The next two tabs do exactly that, visually.</p>
+</section>
+</section>
+<section id="sec-variant-viewer" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="sec-variant-viewer"><span class="header-section-number">4</span> Variant viewer</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Click the <em>Variant viewer</em> tab.</p>
+</div>
+</div>
+<p>This view maps every known alternative version of the sequence. Some have a known effect (pathogenic or benign); many do not.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>How many variants are flagged as likely pathogenic?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-43-contents" aria-controls="callout-43" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-43" class="callout-43-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Zoom out and count the red points: five.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The sheer number of variants is a useful corrective. A “protein sequence” (like a gene sequence, or a structure) is much less of a fixed object than the singular canonical entry suggests.</p>
+</section>
+<section id="sec-feature-viewer" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="sec-feature-viewer"><span class="header-section-number">5</span> Feature viewer</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Click the <em>Feature viewer</em> tab.</p>
+</div>
+</div>
+<p>The <em>Feature viewer</em> merges all the <em>Features</em> areas scattered through the <em>Entry</em> page into one track-based display: domains and sites, molecule processing, PTMs, topology, proteomics, and variants. Clicking a feature highlights the corresponding region in the structure.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: locate the variant in context
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Expand the <em>Variants</em> track.</li>
+<li>Zoom out.</li>
+<li>Click the red point at position 338.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is the topology at that position?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-47-contents" aria-controls="callout-47" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-47" class="callout-47-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>It falls in a topological cytoplasmic domain, so on the inside of the cell. This also answers the open question from <a href="#sec-structure" class="quarto-xref">Section&nbsp;3.9</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-publications" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="sec-publications"><span class="header-section-number">6</span> Publications</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Click the <em>Publications</em> tab.</p>
+</div>
+</div>
+<p>This tab lists papers relevant to the protein, combining a manually curated list (from UniProtKB/Swiss-Prot) with automatically imported references. You can filter by source, by the category of data a paper contributes (function, interaction, sequence, and so on), and by study size (small scale versus large scale).</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>How many publications are linked to this protein?</li>
+<li>How many of them contribute information about its function?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-50-contents" aria-controls="callout-50" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-50" class="callout-50-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><ol start="57" type="1">
+<li></li>
+</ol></li>
+<li><ol start="23" type="1">
+<li></li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-external" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="sec-external"><span class="header-section-number">7</span> External links</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Click the <em>External links</em> tab.</p>
+</div>
+</div>
+<p>This tab gathers every cross-reference scattered across the entry into one place. The link text usually shows the identifier that represents the same entity in the other database, which is what makes automated cross-referencing possible at all.</p>
+<p>For a sense of how tangled that web is, look at the bioDBnet network diagram (<a href="https://biodbnet-abcc.ncifcrf.gov/dbInfo/netGraph.php">source</a>). Databases are the major nodes, identifiers the minor ones, and the region around the UniProt entry name, Gene ID, and Ensembl Gene ID is extremely dense. The diagram is already partly out of date, which rather makes the point.</p>
+</section>
+<section id="sec-history" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="sec-history"><span class="header-section-number">8</span> History</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Click the <em>History</em> tab.</p>
+</div>
+</div>
+<p>The <em>History</em> tab exposes every previous version of the entry’s annotation, in this case going back to 1988, and lets you download them. It is a record of how knowledge about this protein has accumulated and been revised.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Was this entry ever <em>not</em> manually annotated?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-54-contents" aria-controls="callout-54" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-54" class="callout-54-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Scroll back through the table and check the <code>Database</code> column. It never sits in TrEMBL, only in Swiss-Prot, so the entry has been manually curated from the start.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="key-points" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="key-points">Key points</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Take home messages
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>UniProtKB entries collect function, taxonomy, localisation, interactions, and much more in one curated place.</li>
+<li>Search on unique identifiers, not free text, whenever you can.</li>
+<li>The <em>Variant viewer</em> and <em>Feature viewer</em> let you see variants, domains, modifications, and topology mapped onto the sequence.</li>
+<li>External links and shared identifiers are what let you cross-reference between resources.</li>
+<li>The <em>History</em> tab shows that annotation is a moving target, not a fixed fact.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="exercises-to-extend-the-session" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="exercises-to-extend-the-session">Exercises to extend the session</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Suggested follow-up (edit or remove these for your own course)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Repeat the whole walk-through for <code>OPN1MW</code> (medium-wave opsin) or <code>RHO</code> (rhodopsin) and note where the entries differ in evidence level and annotation score.</li>
+<li>Download the JSON for P04000 and write a short script that extracts every annotated transmembrane region as a table.</li>
+<li>Compare the AlphaFold model with an experimentally determined GPCR structure of your choice. Where do the confidence estimates and the experimental data agree?</li>
+<li>Pick one paper from the <em>Publications</em> tab and trace which annotations in the entry it supports.</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="adapting-this-document" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="adapting-this-document">Adapting this document</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-58-contents" aria-controls="callout-58" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Notes for the instructor
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-58" class="callout-58-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Render locally with <code>quarto render uniprot-tutorial.qmd</code>, or build the whole site with <code>quarto render</code> if you keep the <code>_quarto.yml</code> file alongside it.</li>
+<li>Publish to GitHub Pages with <code>quarto publish gh-pages</code>, or to Quarto Pub with <code>quarto publish quarto-pub</code>.</li>
+<li>To hide all solutions, delete <code>collapse="true"</code> and add <code>.content-hidden</code> to the answer callouts, or wrap them in <code>::: {.content-visible when-profile="instructor"}</code> and render with <code>quarto render --profile instructor</code>.</li>
+<li>Screenshots are hotlinked to the Galaxy Training Network. For a stable build, download them into an <code>images/</code> folder and update the paths, keeping the CC BY 4.0 credit in the caption.</li>
+<li>The <code>references.bib</code> file referenced in the YAML header is expected next to this document. Remove the <code>bibliography:</code> line if you are not using citations.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<p>Original lesson:</p>
+<blockquote class="blockquote">
+<p>Paladin, L. and Batut, B. <em>One protein along the UniProt page</em> (Galaxy Training Materials). <a href="https://gxy.io/GTN:T00360" class="uri">https://gxy.io/GTN:T00360</a>. Licensed CC BY 4.0.</p>
+</blockquote>
+<p>Framework papers behind the original material:</p>
+<blockquote class="blockquote">
+<p>Hiltemann, S., Rasche, H., <em>et al.</em> (2023). Galaxy Training: A powerful framework for teaching! <em>PLOS Computational Biology</em> 19(1): e1010752. <a href="https://doi.org/10.1371/journal.pcbi.1010752" class="uri">https://doi.org/10.1371/journal.pcbi.1010752</a></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Batut, B., <em>et al.</em> (2018). Community-driven data analysis training for biology. <em>Cell Systems</em> 6(6): 752-758. <a href="https://doi.org/10.1016/j.cels.2018.05.012" class="uri">https://doi.org/10.1016/j.cels.2018.05.012</a></p>
+</blockquote>
+<p>Primary resource:</p>
+<blockquote class="blockquote">
+<p>The UniProt Consortium. UniProt: the Universal Protein Knowledgebase. <a href="https://www.uniprot.org/" class="uri">https://www.uniprot.org/</a></p>
+</blockquote>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/SA/">CC BY SA</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{duarte2026,
+  author = {Duarte, Isabel},
+  title = {One Protein Along the {UniProt} Page},
+  date = {2026-09-14},
+  langid = {en},
+  abstract = {A hands-on walk through a single UniProtKB entry (P04000,
+    OPSR\_HUMAN). You will learn how to search the database, read every
+    section of an entry page, use the Variant and Feature viewers,
+    follow cross-references to other resources, and inspect the
+    annotation history of an entry.}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-duarte2026" class="csl-entry quarto-appendix-citeas" role="listitem">
+Duarte, Isabel. 2026. <span>“One Protein Along the UniProt Page.”</span>
+September 14.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2026, Isabel Duarte</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/instructr/ualg.bioinf.drug.design.2026">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

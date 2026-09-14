@@ -1,0 +1,234 @@
+---
+title: "Bioinformatics Module | Bioinformatics and Drug Design"
+subtitle: "Pharmaceutical Sciences | 2026/27"
+author: "Instructor: Isabel Duarte"
+date: "September 2026"
+output: html_document
+---
+
+:::{.panel-tabset}
+
+## General Information
+
+This 9-week module introduces bioinformatics concepts and tools relevant for pharmaceutical sciences. Students will gain hands-on experience with public databases and online tools to retrieve, analyse, and interpret molecular databases.
+
+**Format**:  
+
+- Weekly: 1-hour theory class + 1.5-hour practical class (repeated for 2 student groups).
+
+
+**Target audience**: Pharmacy students with introductory knowledge in molecular biology and genetics.
+
+**Evaluation**:
+
+- 1. Participation in class is welcome, and will be positively evaluated. 
+- 2. The details related to the final evaluation format will be discussed and agreed with the students. Either: 
+
+  - A final written exam; or 
+  - A video (3 minutes maximum; in groups of 5 students) + oral presentation (10 min) of one drug target (explored in at least 3 of the molecular databases covered in class).  
+
+<!-- - Final short video report: characterisation of a gene/protein using bioinformatics tools. -->
+<!--   - 2-5 minutes; -->
+<!--   - Groups of 2 students; -->
+<!--   - Final presentation and discussion of the video report. -->
+  
+
+## TP Classes Overview
+
+#### **Goal**
+
+Learn to independently explore and critically interpret bioinformatics resources in order to connect drugs with their molecular targets and understand their pharmacological, mechanistic, and clinical relevance.
+
+#### **Learning outcomes**
+
+By the end of the TP practical classes, students should be able to:
+
+-   Identify the molecular target(s) of a given drug using authoritative online bioinformatics resources.
+
+-   Retrieve and interpret relevant molecular information on drug classes, mechanisms of action, target function, 3D structure, and clinical associations.
+
+-   Integrate data from multiple sources to explain the pharmacological and clinical importance of a drug–target pair.
+
+-   Demonstrate independent inquiry skills by selecting appropriate databases, justifying search strategies, and reflecting on findings.
+
+-   Communicate discoveries clearly through concise answers.
+
+#### **TP Activities overview** 
+
+The students will have access to a hands-on guided tutorial to learn how to explore online resources in order to uncover information that is central to pharmaceutical sciences students.
+
+The following databases will be covered: 
+
+-   [Ensembl](https://www.ensembl.org/) = gene identity, functional details, and Genome browsing
+-   [UniProt](https://www.uniprot.org/) = protein details
+-   [PDB](https://www.rcsb.org/) = protein structure
+-   [Drug bank](https://go.drugbank.com/) = drug details
+-   [ClinPGx](https://www.clinpgx.org/) = clinical pharmacogenomics 
+-   [Opentargets](https://platform.opentargets.org/) = therapeutic drug targets
+
+
+<!-- #### **Resources summary table | Useful additional resources** -->
+
+<!-- | **Category** | **What to Find** | **Top Resource(s)** | -->
+<!-- |-------------------|-------------------|----------------------------------| -->
+<!-- | **1. Drug Basics** | **Therapeutic category** <br> (e.g. NSAID, benzodiazepine, kinase inhibitor, etc.) | [NCBI](https://www.ncbi.nlm.nih.gov), [EBI Search](https://www.ebi.ac.uk/ebisearch/), [DrugBank](https://go.drugbank.com), ([PubChem](https://pubchem.ncbi.nlm.nih.gov), [ChEMBL](https://www.ebi.ac.uk/chembl/)) | -->
+<!-- |  | **Therapeutic use** <br> (major diseases or conditions it treats) | [OMIM](https://www.omim.org), ([PubChem](https://pubchem.ncbi.nlm.nih.gov), [ChEMBL](https://www.ebi.ac.uk/chembl/)) | -->
+<!-- |  | **Mechanism of action** <br> (at a high level: inhibits, activates, modulates…) | [UniProt](https://www.uniprot.org), [DrugBank](https://go.drugbank.com), ([PubChem](https://pubchem.ncbi.nlm.nih.gov), [ChEMBL](https://www.ebi.ac.uk/chembl/)) | -->
+<!-- |  | **Common adverse effects** <br> (especially those linked to its mechanism) | [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), [OMIM](https://www.omim.org) | -->
+<!-- | **2. Target Identity** | **Gene name + synonyms** <br> (official symbol, aliases) | [Ensembl](https://www.ensembl.org), [NCBI Gene](https://www.ncbi.nlm.nih.gov/gene) | -->
+<!-- |  | **Protein function** <br> (normal biological role) | [UniProt](https://www.uniprot.org) | -->
+<!-- |  | **Tissue expression** <br> (where it is most abundant in the body) | [UCSC Genome Browser](https://genome.ucsc.edu), [UniProt](https://www.uniprot.org), ([The Human Protein Atlas](https://www.proteinatlas.org/)) | -->
+<!-- |  | **Pathophysiological relevance** <br> (disease(s) associated with target) | [OMIM](https://www.omim.org), [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), ([dbSNP](https://www.ncbi.nlm.nih.gov/snp/)) | -->
+<!-- | **3. Molecular Mechanism** | **Drug binding site** <br> (active site, allosteric site, receptor domain) | [RCSB PDB](https://www.rcsb.org) | -->
+<!-- |  | **Structural information** <br> (are there PDB structures with the drug bound?) | [RCSB PDB](https://www.rcsb.org) | -->
+<!-- |  | **Known variants/mutations** <br> (variants that alter drug response) | [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), ([dbSNP](https://www.ncbi.nlm.nih.gov/snp/)) | -->
+<!-- |  | **Pathways** <br> (biological processes where the target participates) | [KEGG](https://www.genome.jp/kegg/), [Reactome](https://reactome.org) | -->
+<!-- | **4. Clinical & Translational Relevance** | **Drug resistance mechanisms** <br> (mutations, enzymatic degradation) | [OMIM](https://www.omim.org), [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), ([dbSNP](https://www.ncbi.nlm.nih.gov/snp/)) | -->
+<!-- |  | **Drug–drug interactions** <br> (e.g. common metabolising enzymes) | [DrugBank](https://go.drugbank.com), ([PubChem](https://pubchem.ncbi.nlm.nih.gov), [ChEMBL](https://www.ebi.ac.uk/chembl/)) | -->
+<!-- |  | **Biomarkers of response** <br> (genetic or protein markers that predict efficacy/toxicity) | [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), [OMIM](https://www.omim.org), ([ChEMBL](https://www.ebi.ac.uk/chembl/)) | -->
+<!-- |  | **Approved vs experimental/repurposed uses** <br> (has it been repurposed, or are there ongoing trials?) | ([ClinicalTrials.gov](https://clinicaltrials.gov)), [DrugBank](https://go.drugbank.com), ([PubChem](https://pubchem.ncbi.nlm.nih.gov), [ChEMBL](https://www.ebi.ac.uk/chembl/)) | -->
+
+<br>
+
+
+## Weekly Schedule
+
+### Topic 1 \| Introduction to Bioinformatics and Biological Databases
+
+* **Lecture Topics**:
+
+  - Definition and scope of bioinformatics.
+  - Bioinformatics in drug discovery.
+  - Overview of databases per biological data types.
+  - Primary and secondary databases.
+  - Bioinformatics as an experimental science: search, compare, model, and integrate data.
+
+
+* **TP Activity**:
+
+  - Introductory hands-on tutorial from EBI: [Bioinformatics for the terrified](https://www.ebi.ac.uk/training/online/courses/bioinformatics-terrified/)
+
+---
+
+### Topic 2 \| Genes, Genomes, and Regulation
+
+* **Database**:
+[Ensembl](https://www.ensembl.org)
+
+* **Lecture topics**
+
+  * Navigating the Ensembl genome browser 
+  * Understanding gene structure (exons, introns, UTRs, CDS) 
+  * Finding and exploring gene variants
+
+* **Learning goals**
+
+  * Learn to locate a gene in a genome browser.
+  * Retrieve basic genomic information such as chromosomal position and gene structure.
+  * Interpret visual representations of genes and transcripts.
+
+* **TP Activity**
+
+  * Part 1: Introductory video + Hands-on tutorial
+  * Part 2: Hands-on tutorial (continuation)
+
+---
+
+### Topic 3 \| Proteins
+
+* **Database**:
+[UniProt](https://www.uniprot.org),
+
+* **Lecture topics**
+
+  * Accessing protein annotation, domains, and sequence features
+  * Exploring the rich network of external links to complement protein information
+
+* **Learning goals**
+
+  * Learn to retrieve and interpret protein functional information.
+  * Use UniProt as and entry point to integrate information from variuous sources.
+
+* **TP Activity**
+
+  * Hands-on tutorial.
+
+---
+
+### Topic 4 \| Protein structure
+
+* **Database**:
+[PDB](https://www.rcsb.org)
+
+* **Lecture topics**
+
+  * Visualising protein structures
+  * Exploring ligand binding sites in protein complexes
+
+* **Learning goals**
+
+  * Explore 3D protein structures.
+  * Integrate protein sequence and structural data.
+
+* **TP Activity**
+
+  * Hands-on tutorial.
+
+---
+
+### Topic 5 \| Drugs
+
+* **Database**:
+[Drug bank](https://www.rcsb.org)
+
+* **Lecture topics**
+
+  * TBA
+
+* **Learning goals**
+
+  * TBA
+
+* **TP Activity**
+
+  * TBA
+
+---
+
+### Topic 6 \| Clinical pharmacogenomics
+
+* **Database**:
+[ClinPGx](https://www.clinpgx.org/)
+
+* **Lecture topics**
+
+  * TBA
+
+* **Learning goals**
+
+  * TBA
+
+* **TP Activity**
+
+  * Hands-on tutorial.
+
+---
+
+### Topic 7 \| Therapeutic drug targets
+
+* **Database**:
+[Opentargets](https://platform.opentargets.org/)
+
+* **Lecture topics**
+
+  * TBA
+
+* **Learning goals**
+
+  * TBA
+
+* **TP Activity**
+
+  * Hands-on tutorial.
+
+:::

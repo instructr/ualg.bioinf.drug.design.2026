@@ -1,0 +1,50 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "!sandbox/"
+
+website:
+  title: "Bioinformatics and Drug Design"
+  navbar:
+    search: true
+    tools:
+      - icon: house-heart-fill
+        menu:
+          - text: Universidade do Algarve
+            url: https://www.ualg.pt/  
+    left:
+      - href: index.qmd
+        text: "Home"
+      - text: "Classes"
+        menu:
+          - 1.bioinf-intro-tutorial.qmd
+          # - 2.ensembl-tutorial.qmd
+          # - 3.uniprot-tutorial.qmd
+          # - 4.pdb-tutorial.qmd
+          # - 5.brugbank-tutorial.qmd
+          # - 6.clinpgx-tutorial.qmd
+          # - 7.opentargets-tutorial.qmd
+      # - text: "Calendar"
+      #   menu:
+      #     - calendar.qmd
+      # - text: "Extras"
+      #   menu:
+      #     - contact_me.qmd
+          
+  back-to-top-navigation: true
+  page-footer: 
+    left: "Copyright 2026, Isabel Duarte" 
+    right: 
+      - icon: github
+        href: https://github.com/instructr/ualg.bioinf.drug.design.2026
+    background: light
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+
+editor: source
