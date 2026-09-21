@@ -1,0 +1,153 @@
+---
+title: "Ensembl genes and transcripts | Part 1"
+subtitle: "A hands-on tour of the Ensembl browser: genes, transcripts, regions, variants, and VEP"
+author:
+  - name: "Isabel Duarte"
+date: today
+date-format: "D MMMM YYYY"
+abstract: |
+  First parte of five short practicals on the Ensembl genome browser. You will explore a
+  human gene and its transcripts, navigate and configure a genomic region, 
+  interpret population and phenotype data for a SNP, and predict the consequences of a
+  structural variant with the Variant Effect Predictor.
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: 2
+    number-sections: true
+    code-copy: true
+    code-overflow: wrap
+    anchor-sections: true
+    smooth-scroll: true
+    theme:
+      - cosmo
+    css: styles.css
+    link-external-newwindow: true
+    link-external-icon: true
+    fig-cap-location: bottom
+license: "CC BY 4.0"
+---
+
+::: {.callout-important collapse="true" appearance="minimal"}
+## Attribution and licence
+
+The exercises in this lesson are adapted from the Ensembl browser training
+material produced by EMBL-EBI and the Ensembl team, which is made available
+under a [Creative Commons Attribution 4.0 International licence](https://creativecommons.org/licenses/by/4.0/).
+
+<!-- Replace the line below with the exact course or PDF you took the
+     exercises from, e.g. the Ensembl Browser Workshop handbook, so the
+     attribution is specific. -->
+Source: Ensembl training materials, <https://training.ensembl.org/>.
+
+The wording has been reorganised for this course and the questions renumbered.
+If you redistribute this version, please keep this block and note that changes
+were made.
+:::
+
+## Overview {.unnumbered}
+
+::: {.callout-note}
+## Questions this lesson answers
+
+- How do you find a gene in Ensembl and read its Gene tab?
+- What is the difference between all annotated transcripts, protein-coding transcripts, and the MANE Select transcript?
+:::
+
+::: {.callout-tip}
+## Learning objectives
+
+By the end of this session you should be able to:
+
+1. Search Ensembl by gene name.
+2. Choose an appropriate transcript for downstream work, and justify the choice.
+3. Turn browser tracks on and off, and explore transcript information.
+:::
+
+| | |
+|---|---|
+| **Time estimate** | ~1.5 hours (5 exercises, roughly 15 to 20 minutes each) |
+| **Level** | Introductory |
+| **Prerequisites** | Genes, transcripts, exons, UTRs, and the idea of a reference genome |
+| **Software needed** | A web browser only |
+
+: Practical details {.striped .hover tbl-colwidths="[25,75]"}
+
+::: {.callout-caution title="Ensembl updates" collapse="true" appearance="simple"}
+Ensembl publishes a new release several times a year, and annotation changes
+between releases. Transcript counts, transcript names, identifier versions, and
+even the set of associated phenotypes may differ from the answers given here.
+Treat any mismatch as a discussion point rather than a mistake: look at
+which release you are looking at.
+:::
+
+## Learning the Ensembl data platform {#sec-ensembl}
+
+Before using Ensembl, you should become familiar with its interface and the types of data it provides.
+
+Start by **completing the [introductory tutorial on the Ensembl data platform](https://www.ebi.ac.uk/training/online/courses/ensembl-data-platform/)**.
+
+Take your time and make sure you understand the main concepts and how to navigate 
+the platform before moving to the next step.
+
+
+## Exploring the PCSK9 gene in human {#sec-pcsk9}
+
+`PCSK9` encodes the proprotein convertase subtilisin/kexin type 9.
+
+### Locating the gene {#sec-pcsk9-locate}
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on
+
+1. Go to <https://www.ensembl.org>.
+2. Click the `Genome selector`, type **Human** in the search box, and click `Find`. 
+3. Select the `Reference` genome, and click the green `Add` button.
+4. Type **PCSK9** in the `Find a feature in the selected genomes` search box, and click `Find.`
+5. Click the **PCSK9** gene in the results and choose to `View in Genome browser`.
+6. Expand the side tab (top blue arrow) to view more information related to the **PCSK9** gene: `Genomic`, `Variation`, and `Regulation.` Notice the `Eye icon` that toggles the **View/Hide** function for each track.
+7. Explore the genome browser view. Notice that to obtain more information you can **click the transcript** or the `...`, and you can also use the `Feature explorer` to find more information related to the `Transcripts` and the full `Transcript table` (among other info to be explored in the next class).  
+:::
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. Which chromosome and which strand is the gene on?
+2. How many transcripts (splice variants) are annotated?   
+3. How many transcripts are protein coding?
+4. Which is the longest protein-coding transcript (exon length in bp), and how long is the protein it encodes (amino acid length)?
+5. Which transcript would you take forward for further study, and why?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. Chromosome 1, on the forward strand.
+2. 16 transcripts.
+3. 7 transcripts are protein coding.
+4. The longest transcript is **ENST00000713786.2** with **3,852 bp**, coding for a **733 aa** protein.
+5. **ENST00000302118.5** because it is the **MANE Select** transcript. MANE Select transcripts are agreed between **Ensembl** and **RefSeq** (two large databases) as the single representative transcript for a gene, with matching sequences in both databases, which makes results easier to compare across resources. Click on the `?` next to the MANE Select transcript for the formal definition.
+:::
+::::
+
+::: {.callout-note collapse="false"}
+## Why "longest" and "best" are not the same thing
+
+Note that the longest protein-coding transcript is not the one we choose to work with. Length is a poor proxy for biological relevance. 
+Ask yourself: What would you do if a gene had no MANE Select transcript, and what
+evidence would look for instead: Expression support, protein evidence,
+**TSL** and **APPRIS** flags in the transcript table (click on the tags to learn more about them), publications, external databases?
+:::
+
+## Part 2 | Next class
+
+The second part of this tutorial will be completed in the next class, 
+where you will explore more information present on the Ensembl browser: gene function, diseases, variants, external links, and how to download data. 
+
+## References {.unnumbered}
+
+> Ensembl training materials, EMBL-EBI. <https://training.ensembl.org/>.
+> Licensed CC BY 4.0.
+
+> Ensembl genome browser. <https://www.ensembl.org/>
+
+> McLaren, W. *et al.* (2016). The Ensembl Variant Effect Predictor.
+> *Genome Biology* 17: 122. <https://doi.org/10.1186/s13059-016-0974-4>

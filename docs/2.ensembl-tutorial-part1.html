@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Instructor: Isabel Duarte">
-<meta name="dcterms.date" content="2026-09-01">
+<meta name="author" content="Isabel Duarte">
+<meta name="dcterms.date" content="2026-09-21">
 
-<title>Bioinformatics Module | Bioinformatics and Drug Design – Bioinformatics and Drug Design</title>
+<title>Ensembl genes and transcripts | Part 1 – Bioinformatics and Drug Design</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -47,7 +47,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-3afdf904ffd723d7893bcc04cd19f421.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-83ab476c863e17697e9685ff7eb1a190.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,8 +75,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -97,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -136,16 +138,29 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#sec-ensembl" id="toc-sec-ensembl" class="nav-link" data-scroll-target="#sec-ensembl"><span class="header-section-number">1</span> Learning the Ensembl data platform</a></li>
+  <li><a href="#sec-pcsk9" id="toc-sec-pcsk9" class="nav-link" data-scroll-target="#sec-pcsk9"><span class="header-section-number">2</span> Exploring the PCSK9 gene in human</a>
+  <ul class="collapse">
+  <li><a href="#sec-pcsk9-locate" id="toc-sec-pcsk9-locate" class="nav-link" data-scroll-target="#sec-pcsk9-locate"><span class="header-section-number">2.1</span> Locating the gene</a></li>
+  </ul></li>
+  <li><a href="#part-2-next-class" id="toc-part-2-next-class" class="nav-link" data-scroll-target="#part-2-next-class"><span class="header-section-number">3</span> Part 2 | Next class</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bioinformatics Module | Bioinformatics and Drug Design</h1>
-<p class="subtitle lead">Pharmaceutical Sciences | 2026/27</p>
+<h1 class="title">Ensembl genes and transcripts | Part 1</h1>
+<p class="subtitle lead">A hands-on tour of the Ensembl browser: genes, transcripts, regions, variants, and VEP</p>
 </div>
 
 
@@ -155,251 +170,243 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Instructor: Isabel Duarte </p>
+             <p>Isabel Duarte </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 1, 2026</p>
+      <p class="date">21 September 2026</p>
     </div>
   </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>First parte of five short practicals on the Ensembl genome browser. You will explore a human gene and its transcripts, navigate and configure a genomic region, interpret population and phenotype data for a SNP, and predict the consequences of a structural variant with the Variant Effect Predictor.</p>
+  </div>
+</div>
 
 
 </header>
 
 
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">General Information</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">TP Classes Overview</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Weekly Schedule</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>This 9-week module introduces bioinformatics concepts and tools relevant for pharmaceutical sciences. Students will gain hands-on experience with public databases and online tools to retrieve, analyse, and interpret molecular databases.</p>
-<p><strong>Format</strong>:</p>
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Attribution and licence
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The exercises in this lesson are adapted from the Ensembl browser training material produced by EMBL-EBI and the Ensembl team, which is made available under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International licence</a>.</p>
+<!-- Replace the line below with the exact course or PDF you took the
+     exercises from, e.g. the Ensembl Browser Workshop handbook, so the
+     attribution is specific. -->
+<p>Source: Ensembl training materials, <a href="https://training.ensembl.org/" class="uri">https://training.ensembl.org/</a>.</p>
+<p>The wording has been reorganised for this course and the questions renumbered. If you redistribute this version, please keep this block and note that changes were made.</p>
+</div>
+</div>
+</div>
+<section id="overview" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Questions this lesson answers
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li>Weekly: 1-hour theory class + 1.5-hour practical class (repeated for 2 student groups).</li>
+<li>How do you find a gene in Ensembl and read its Gene tab?</li>
+<li>What is the difference between all annotated transcripts, protein-coding transcripts, and the MANE Select transcript?</li>
 </ul>
-<p><strong>Target audience</strong>: Pharmacy students with introductory knowledge in molecular biology and genetics.</p>
-<p><strong>Evaluation</strong>:</p>
-<ul>
-<li><ol type="1">
-<li>Participation in class is welcome, and will be positively evaluated.</li>
-</ol></li>
-<li><ol start="2" type="1">
-<li>The details related to the final evaluation format will be discussed and agreed with the students. Either:</li>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Learning objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this session you should be able to:</p>
+<ol type="1">
+<li>Search Ensembl by gene name.</li>
+<li>Choose an appropriate transcript for downstream work, and justify the choice.</li>
+<li>Turn browser tracks on and off, and explore transcript information.</li>
 </ol>
-<ul>
-<li>A final written exam; or</li>
-<li>A video (3 minutes maximum; in groups of 5 students) + oral presentation (10 min) of one drug target (explored in at least 3 of the molecular databases covered in class).</li>
-</ul></li>
-</ul>
-<!-- - Final short video report: characterisation of a gene/protein using bioinformatics tools. -->
-<!--   - 2-5 minutes; -->
-<!--   - Groups of 2 students; -->
-<!--   - Final presentation and discussion of the video report. -->
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<section id="goal" class="level4">
-<h4 class="anchored" data-anchor-id="goal"><strong>Goal</strong></h4>
-<p>Learn to independently explore and critically interpret bioinformatics resources in order to connect drugs with their molecular targets and understand their pharmacological, mechanistic, and clinical relevance.</p>
-</section>
-<section id="learning-outcomes" class="level4">
-<h4 class="anchored" data-anchor-id="learning-outcomes"><strong>Learning outcomes</strong></h4>
-<p>By the end of the TP practical classes, students should be able to:</p>
-<ul>
-<li><p>Identify the molecular target(s) of a given drug using authoritative online bioinformatics resources.</p></li>
-<li><p>Retrieve and interpret relevant molecular information on drug classes, mechanisms of action, target function, 3D structure, and clinical associations.</p></li>
-<li><p>Integrate data from multiple sources to explain the pharmacological and clinical importance of a drug–target pair.</p></li>
-<li><p>Demonstrate independent inquiry skills by selecting appropriate databases, justifying search strategies, and reflecting on findings.</p></li>
-<li><p>Communicate discoveries clearly through concise answers.</p></li>
-</ul>
-</section>
-<section id="tp-activities-overview" class="level4">
-<h4 class="anchored" data-anchor-id="tp-activities-overview"><strong>TP Activities overview</strong></h4>
-<p>The students will have access to a hands-on guided tutorial to learn how to explore online resources in order to uncover information that is central to pharmaceutical sciences students.</p>
-<p>The following databases will be covered:</p>
-<ul>
-<li><a href="https://www.ensembl.org/">Ensembl</a> = gene identity, functional details, and Genome browsing</li>
-<li><a href="https://www.uniprot.org/">UniProt</a> = protein details</li>
-<li><a href="https://www.rcsb.org/">PDB</a> = protein structure</li>
-<li><a href="https://go.drugbank.com/">Drug bank</a> = drug details</li>
-<li><a href="https://www.clinpgx.org/">ClinPGx</a> = clinical pharmacogenomics</li>
-<li><a href="https://platform.opentargets.org/">Opentargets</a> = therapeutic drug targets</li>
-</ul>
-<!-- #### **Resources summary table | Useful additional resources** -->
-<!-- | **Category** | **What to Find** | **Top Resource(s)** | -->
-<!-- |-------------------|-------------------|----------------------------------| -->
-<!-- | **1. Drug Basics** | **Therapeutic category** <br> (e.g. NSAID, benzodiazepine, kinase inhibitor, etc.) | [NCBI](https://www.ncbi.nlm.nih.gov), [EBI Search](https://www.ebi.ac.uk/ebisearch/), [DrugBank](https://go.drugbank.com), ([PubChem](https://pubchem.ncbi.nlm.nih.gov), [ChEMBL](https://www.ebi.ac.uk/chembl/)) | -->
-<!-- |  | **Therapeutic use** <br> (major diseases or conditions it treats) | [OMIM](https://www.omim.org), ([PubChem](https://pubchem.ncbi.nlm.nih.gov), [ChEMBL](https://www.ebi.ac.uk/chembl/)) | -->
-<!-- |  | **Mechanism of action** <br> (at a high level: inhibits, activates, modulates…) | [UniProt](https://www.uniprot.org), [DrugBank](https://go.drugbank.com), ([PubChem](https://pubchem.ncbi.nlm.nih.gov), [ChEMBL](https://www.ebi.ac.uk/chembl/)) | -->
-<!-- |  | **Common adverse effects** <br> (especially those linked to its mechanism) | [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), [OMIM](https://www.omim.org) | -->
-<!-- | **2. Target Identity** | **Gene name + synonyms** <br> (official symbol, aliases) | [Ensembl](https://www.ensembl.org), [NCBI Gene](https://www.ncbi.nlm.nih.gov/gene) | -->
-<!-- |  | **Protein function** <br> (normal biological role) | [UniProt](https://www.uniprot.org) | -->
-<!-- |  | **Tissue expression** <br> (where it is most abundant in the body) | [UCSC Genome Browser](https://genome.ucsc.edu), [UniProt](https://www.uniprot.org), ([The Human Protein Atlas](https://www.proteinatlas.org/)) | -->
-<!-- |  | **Pathophysiological relevance** <br> (disease(s) associated with target) | [OMIM](https://www.omim.org), [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), ([dbSNP](https://www.ncbi.nlm.nih.gov/snp/)) | -->
-<!-- | **3. Molecular Mechanism** | **Drug binding site** <br> (active site, allosteric site, receptor domain) | [RCSB PDB](https://www.rcsb.org) | -->
-<!-- |  | **Structural information** <br> (are there PDB structures with the drug bound?) | [RCSB PDB](https://www.rcsb.org) | -->
-<!-- |  | **Known variants/mutations** <br> (variants that alter drug response) | [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), ([dbSNP](https://www.ncbi.nlm.nih.gov/snp/)) | -->
-<!-- |  | **Pathways** <br> (biological processes where the target participates) | [KEGG](https://www.genome.jp/kegg/), [Reactome](https://reactome.org) | -->
-<!-- | **4. Clinical & Translational Relevance** | **Drug resistance mechanisms** <br> (mutations, enzymatic degradation) | [OMIM](https://www.omim.org), [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), ([dbSNP](https://www.ncbi.nlm.nih.gov/snp/)) | -->
-<!-- |  | **Drug–drug interactions** <br> (e.g. common metabolising enzymes) | [DrugBank](https://go.drugbank.com), ([PubChem](https://pubchem.ncbi.nlm.nih.gov), [ChEMBL](https://www.ebi.ac.uk/chembl/)) | -->
-<!-- |  | **Biomarkers of response** <br> (genetic or protein markers that predict efficacy/toxicity) | [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/), [OMIM](https://www.omim.org), ([ChEMBL](https://www.ebi.ac.uk/chembl/)) | -->
-<!-- |  | **Approved vs experimental/repurposed uses** <br> (has it been repurposed, or are there ongoing trials?) | ([ClinicalTrials.gov](https://clinicaltrials.gov)), [DrugBank](https://go.drugbank.com), ([PubChem](https://pubchem.ncbi.nlm.nih.gov), [ChEMBL](https://www.ebi.ac.uk/chembl/)) | -->
-<p><br></p>
-</section>
 </div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<section id="topic-1-introduction-to-bioinformatics-and-biological-databases" class="level3">
-<h3 class="anchored" data-anchor-id="topic-1-introduction-to-bioinformatics-and-biological-databases">Topic 1 | Introduction to Bioinformatics and Biological Databases</h3>
-<ul>
-<li><p><strong>Lecture Topics</strong>:</p>
-<ul>
-<li>Definition and scope of bioinformatics.</li>
-<li>Bioinformatics in drug discovery.</li>
-<li>Overview of databases per biological data types.</li>
-<li>Primary and secondary databases.</li>
-<li>Bioinformatics as an experimental science: search, compare, model, and integrate data.</li>
-</ul></li>
-<li><p><strong>TP Activity</strong>:</p>
-<ul>
-<li>Introductory hands-on tutorial from EBI: <a href="https://www.ebi.ac.uk/training/online/courses/bioinformatics-terrified/">Bioinformatics for the terrified</a></li>
-</ul></li>
-</ul>
-<hr>
-</section>
-<section id="topic-2-genes-genomes-and-regulation" class="level3">
-<h3 class="anchored" data-anchor-id="topic-2-genes-genomes-and-regulation">Topic 2 | Genes, Genomes, and Regulation</h3>
-<ul>
-<li><p><strong>Database</strong>: <a href="https://www.ensembl.org">Ensembl</a></p></li>
-<li><p><strong>Lecture topics</strong></p>
-<ul>
-<li>Navigating the Ensembl genome browser</li>
-<li>Understanding gene structure (exons, introns, UTRs, CDS)</li>
-<li>Finding and exploring gene variants</li>
-</ul></li>
-<li><p><strong>Learning goals</strong></p>
-<ul>
-<li>Learn to locate a gene in a genome browser.</li>
-<li>Retrieve basic genomic information such as chromosomal position and gene structure.</li>
-<li>Interpret visual representations of genes and transcripts.</li>
-</ul></li>
-<li><p><strong>TP Activity</strong></p>
-<ul>
-<li>Part 1: Introductory video + Hands-on tutorial</li>
-<li>Part 2: Hands-on tutorial (continuation)</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-<section id="topic-3-proteins" class="level3">
-<h3 class="anchored" data-anchor-id="topic-3-proteins">Topic 3 | Proteins</h3>
-<ul>
-<li><p><strong>Database</strong>: <a href="https://www.uniprot.org">UniProt</a>,</p></li>
-<li><p><strong>Lecture topics</strong></p>
-<ul>
-<li>Accessing protein annotation, domains, and sequence features</li>
-<li>Exploring the rich network of external links to complement protein information</li>
-</ul></li>
-<li><p><strong>Learning goals</strong></p>
-<ul>
-<li>Learn to retrieve and interpret protein functional information.</li>
-<li>Use UniProt as and entry point to integrate information from variuous sources.</li>
-</ul></li>
-<li><p><strong>TP Activity</strong></p>
-<ul>
-<li>Hands-on tutorial.</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-<section id="topic-4-protein-structure" class="level3">
-<h3 class="anchored" data-anchor-id="topic-4-protein-structure">Topic 4 | Protein structure</h3>
-<ul>
-<li><p><strong>Database</strong>: <a href="https://www.rcsb.org">PDB</a></p></li>
-<li><p><strong>Lecture topics</strong></p>
-<ul>
-<li>Visualising protein structures</li>
-<li>Exploring ligand binding sites in protein complexes</li>
-</ul></li>
-<li><p><strong>Learning goals</strong></p>
-<ul>
-<li>Explore 3D protein structures.</li>
-<li>Integrate protein sequence and structural data.</li>
-</ul></li>
-<li><p><strong>TP Activity</strong></p>
-<ul>
-<li>Hands-on tutorial.</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-<section id="topic-5-drugs" class="level3">
-<h3 class="anchored" data-anchor-id="topic-5-drugs">Topic 5 | Drugs</h3>
-<ul>
-<li><p><strong>Database</strong>: <a href="https://www.rcsb.org">Drug bank</a></p></li>
-<li><p><strong>Lecture topics</strong></p>
-<ul>
-<li>TBA</li>
-</ul></li>
-<li><p><strong>Learning goals</strong></p>
-<ul>
-<li>TBA</li>
-</ul></li>
-<li><p><strong>TP Activity</strong></p>
-<ul>
-<li>TBA</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-<section id="topic-6-clinical-pharmacogenomics" class="level3">
-<h3 class="anchored" data-anchor-id="topic-6-clinical-pharmacogenomics">Topic 6 | Clinical pharmacogenomics</h3>
-<ul>
-<li><p><strong>Database</strong>: <a href="https://www.clinpgx.org/">ClinPGx</a></p></li>
-<li><p><strong>Lecture topics</strong></p>
-<ul>
-<li>TBA</li>
-</ul></li>
-<li><p><strong>Learning goals</strong></p>
-<ul>
-<li>TBA</li>
-</ul></li>
-<li><p><strong>TP Activity</strong></p>
-<ul>
-<li>Hands-on tutorial.</li>
-</ul></li>
-</ul>
-<hr>
-</section>
-<section id="topic-7-therapeutic-drug-targets" class="level3">
-<h3 class="anchored" data-anchor-id="topic-7-therapeutic-drug-targets">Topic 7 | Therapeutic drug targets</h3>
-<ul>
-<li><p><strong>Database</strong>: <a href="https://platform.opentargets.org/">Opentargets</a></p></li>
-<li><p><strong>Lecture topics</strong></p>
-<ul>
-<li>TBA</li>
-</ul></li>
-<li><p><strong>Learning goals</strong></p>
-<ul>
-<li>TBA</li>
-</ul></li>
-<li><p><strong>TP Activity</strong></p>
-<ul>
-<li>Hands-on tutorial.</li>
-</ul></li>
-</ul>
-</section>
+<table class="table-striped table-hover caption-top table">
+<caption>Practical details</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Time estimate</strong></td>
+<td>~1.5 hours (5 exercises, roughly 15 to 20 minutes each)</td>
+</tr>
+<tr class="even">
+<td><strong>Level</strong></td>
+<td>Introductory</td>
+</tr>
+<tr class="odd">
+<td><strong>Prerequisites</strong></td>
+<td>Genes, transcripts, exons, UTRs, and the idea of a reference genome</td>
+</tr>
+<tr class="even">
+<td><strong>Software needed</strong></td>
+<td>A web browser only</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-caution callout-titled" title="Ensembl updates">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Ensembl updates
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ensembl publishes a new release several times a year, and annotation changes between releases. Transcript counts, transcript names, identifier versions, and even the set of associated phenotypes may differ from the answers given here. Treat any mismatch as a discussion point rather than a mistake: look at which release you are looking at.</p>
 </div>
 </div>
 </div>
+</section>
+<section id="sec-ensembl" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="sec-ensembl"><span class="header-section-number">1</span> Learning the Ensembl data platform</h2>
+<p>Before using Ensembl, you should become familiar with its interface and the types of data it provides.</p>
+<p>Start by <strong>completing the <a href="https://www.ebi.ac.uk/training/online/courses/ensembl-data-platform/">introductory tutorial on the Ensembl data platform</a></strong>.</p>
+<p>Take your time and make sure you understand the main concepts and how to navigate the platform before moving to the next step.</p>
+</section>
+<section id="sec-pcsk9" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="sec-pcsk9"><span class="header-section-number">2</span> Exploring the PCSK9 gene in human</h2>
+<p><code>PCSK9</code> encodes the proprotein convertase subtilisin/kexin type 9.</p>
+<section id="sec-pcsk9-locate" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="sec-pcsk9-locate"><span class="header-section-number">2.1</span> Locating the gene</h3>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Go to <a href="https://www.ensembl.org" class="uri">https://www.ensembl.org</a>.</li>
+<li>Click the <code>Genome selector</code>, type <strong>Human</strong> in the search box, and click <code>Find</code>.</li>
+<li>Select the <code>Reference</code> genome, and click the green <code>Add</code> button.</li>
+<li>Type <strong>PCSK9</strong> in the <code>Find a feature in the selected genomes</code> search box, and click <code>Find.</code></li>
+<li>Click the <strong>PCSK9</strong> gene in the results and choose to <code>View in Genome browser</code>.</li>
+<li>Expand the side tab (top blue arrow) to view more information related to the <strong>PCSK9</strong> gene: <code>Genomic</code>, <code>Variation</code>, and <code>Regulation.</code> Notice the <code>Eye icon</code> that toggles the <strong>View/Hide</strong> function for each track.</li>
+<li>Explore the genome browser view. Notice that to obtain more information you can <strong>click the transcript</strong> or the <code>...</code>, and you can also use the <code>Feature explorer</code> to find more information related to the <code>Transcripts</code> and the full <code>Transcript table</code> (among other info to be explored in the next class).<br>
+</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Which chromosome and which strand is the gene on?</li>
+<li>How many transcripts (splice variants) are annotated?<br>
+</li>
+<li>How many transcripts are protein coding?</li>
+<li>Which is the longest protein-coding transcript (exon length in bp), and how long is the protein it encodes (amino acid length)?</li>
+<li>Which transcript would you take forward for further study, and why?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Chromosome 1, on the forward strand.</li>
+<li>16 transcripts.</li>
+<li>7 transcripts are protein coding.</li>
+<li>The longest transcript is <strong>ENST00000713786.2</strong> with <strong>3,852 bp</strong>, coding for a <strong>733 aa</strong> protein.</li>
+<li><strong>ENST00000302118.5</strong> because it is the <strong>MANE Select</strong> transcript. MANE Select transcripts are agreed between <strong>Ensembl</strong> and <strong>RefSeq</strong> (two large databases) as the single representative transcript for a gene, with matching sequences in both databases, which makes results easier to compare across resources. Click on the <code>?</code> next to the MANE Select transcript for the formal definition.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why “longest” and “best” are not the same thing
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Note that the longest protein-coding transcript is not the one we choose to work with. Length is a poor proxy for biological relevance. Ask yourself: What would you do if a gene had no MANE Select transcript, and what evidence would look for instead: Expression support, protein evidence, <strong>TSL</strong> and <strong>APPRIS</strong> flags in the transcript table (click on the tags to learn more about them), publications, external databases?</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="part-2-next-class" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="part-2-next-class"><span class="header-section-number">3</span> Part 2 | Next class</h2>
+<p>The second part of this tutorial will be completed in the next class, where you will explore more information present on the Ensembl browser: gene function, diseases, variants, external links, and how to download data.</p>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<blockquote class="blockquote">
+<p>Ensembl training materials, EMBL-EBI. <a href="https://training.ensembl.org/" class="uri">https://training.ensembl.org/</a>. Licensed CC BY 4.0.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Ensembl genome browser. <a href="https://www.ensembl.org/" class="uri">https://www.ensembl.org/</a></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>McLaren, W. <em>et al.</em> (2016). The Ensembl Variant Effect Predictor. <em>Genome Biology</em> 17: 122. <a href="https://doi.org/10.1186/s13059-016-0974-4" class="uri">https://doi.org/10.1186/s13059-016-0974-4</a></p>
+</blockquote>
 
 
+</section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -487,6 +494,13 @@ ul.task-list li input[type="checkbox"] {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -825,4 +839,5 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
