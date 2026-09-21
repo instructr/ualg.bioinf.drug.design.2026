@@ -1,0 +1,743 @@
+---
+title: "One protein along the UniProt page"
+subtitle: "Exploring a UniProtKB entry using human opsins as an example"
+author:
+  - name: "Isabel Duarte"
+    affiliation: "Universidade do Algarve"
+date: today
+date-format: "D MMMM YYYY"
+abstract: |
+  A hands-on walk through a single UniProtKB entry (P04000, OPSR_HUMAN).
+  You will learn how to search the database, read every section of an entry
+  page, use the Variant and Feature viewers, follow cross-references to other
+  resources, and inspect the annotation history of an entry.
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: 2
+    number-sections: true
+    code-copy: true
+    code-overflow: wrap
+    anchor-sections: true
+    smooth-scroll: true
+    theme:
+      - cosmo
+    css: styles.css
+    link-external-newwindow: true
+    link-external-icon: true
+    fig-cap-location: bottom
+license: "CC BY SA 4.0"
+citation: true
+bibliography: references.bib
+---
+
+::: {.callout-important appearance="minimal"}
+## Attribution and licence
+
+This lesson is adapted from **"One protein along the UniProt page"** by Lisanna
+Paladin and Bérénice Batut, Galaxy Training Network, published under a
+[Creative Commons Attribution 4.0 International licence](https://creativecommons.org/licenses/by/4.0/).
+Original material: <https://gxy.io/GTN:T00360>.
+
+The text below has been rewritten and reorganised for this course. Any errors
+introduced in adaptation are mine, not the original authors'. 
+:::
+
+## Overview {.unnumbered}
+
+::: {.callout-note}
+## Questions this lesson answers
+
+- How can you search for proteins by free text, gene name, or protein name?
+- How do you read the information at the top of a UniProt entry page?
+- What kind of information sits behind each download format (FASTA, JSON, XML, GFF)?
+- How is the function of a protein such as an opsin described?
+- What structured information lives in the *Names and Taxonomy*, *Subcellular location*, *Disease & Variants*, and *PTM/Processing* sections?
+- How do you find expression, interaction, structure, family, sequence, and similarity data?
+- What do the *Variant viewer* and *Feature viewer* tabs add?
+- What does the *Publications* tab list, and how can it be filtered?
+- Why does the annotation history of an entry matter?
+:::
+
+::: {.callout-tip}
+## Learning objectives
+
+By the end of this session you should be able to:
+
+1. Interpret a UniProtKB entry: function, taxonomy, localisation, structure, interactions, and variants.
+2. Use stable unique identifiers to move between databases.
+3. Download protein data in an appropriate format for a downstream task.
+4. Visualise and compare sequence features along a protein.
+:::
+
+| | |
+|---|---|
+| **Time estimate** | ~1 hour |
+| **Level** | Introductory |
+| **Prerequisites** | Basic familiarity with genes, proteins, and FASTA files |
+| **Software needed** | A web browser only |
+
+: Practical details {.striped .hover tbl-colwidths="[25,75]"}
+
+::: {.callout-caution appearance="simple"}
+Numbers reported in the solutions below (counts of search hits, publications,
+variants, and so on) were correct when the lesson was written. UniProt is
+updated roughly every eight weeks, so your numbers may differ. That is a
+feature, not a bug.
+
+Ask yourself: Why does a knowledge base change?
+:::
+
+## Why bother with UniProt? {#sec-intro}
+
+A typical analysis ends with a shortlist of interesting proteins. Then what?
+You need to find out what those proteins do, where they act, what is already
+known about their variants, and which other databases hold complementary
+information.
+
+This lesson uses **human opsins** as a worked example. Opsins sit in the cells
+of the retina, where they capture light and start the signalling cascade that
+produces vision. When they are disrupted, the result can be colour blindness or
+other visual impairment.
+
+Almost all of the work happens on the [UniProt](https://www.uniprot.org)
+website rather than in any analysis platform, so nothing needs installing.
+
+::: {.callout-note collapse="true"}
+## Sources and further reading
+
+The original Galaxy Training Network lesson drew on the UniProt help page
+[Explore UniProtKB entry](https://www.uniprot.org/help/explore_uniprotkb_entry),
+and chose the topic following Gale Rhodes'
+[Bioinformatics Tutorial](https://spdbv.unil.ch/TheMolecularLevel/Matics/index.html).
+The latter can no longer be followed step by step (the resources have changed
+too much) but is still a good source of background on opsins and on building
+structural models from evolutionary information.
+:::
+
+## Finding the right entry {#sec-search}
+
+The starting point for protein annotation is [UniProtKB](https://www.uniprot.org/).
+You can query it with free text, a gene name, or a protein name. Let us begin
+with something deliberately vague.
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on: a broad search
+
+1. Open <https://www.uniprot.org/>.
+2. Type `Human opsin` into the search bar.
+3. Run the search.
+:::
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+How many results come back?
+
+::: {.callout-note collapse="true" title="Show answer"}
+Around 524 at the time of writing. Far too many to inspect by hand, even
+though (spoiler) the entry we want is near the top.
+:::
+::::
+
+Free text is too blunt an instrument. A better strategy is to search on a
+**unique identifier**. The gene we are after is `OPN1LW`.
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on: search by gene name
+
+1. Type `OPN1LW` into the search bar.
+2. Run the search.
+:::
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. How many results now?
+2. What is still missing from the query?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. Over 240 results.
+2. The organism. The same gene name is used across many species, so add
+   `Human` to restrict the search.
+:::
+::::
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on: search by gene name plus organism
+
+1. Type `Human OPN1LW` into the search bar.
+2. Run the search.
+:::
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. How many results now?
+2. Is there a hit whose gene name is exactly OPN1LW?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. Eight results.
+2. Yes. The first hit carries the label `Gene: OPN1LW (RCP)`.
+:::
+::::
+
+That first hit, **P04000 (OPSR_HUMAN)**, is our target. Two things are worth
+noticing before opening it:
+
+- The protein name (`OPSR_HUMAN`) and the gene name (`OPN1LW`) are different,
+  and so are their identifiers. Gene and protein are distinct entities with
+  distinct names.
+- The entry carries a gold star, meaning it has been manually annotated and
+  curated by a human (Swiss-Prot) rather than generated automatically (via TrEMBL).
+
+## Reading the entry page {#sec-entry}
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on: open the entry
+
+Click on `P04000 · OPSR_HUMAN`, or go directly to
+<https://www.uniprot.org/uniprotkb/P04000/entry>.
+:::
+
+![The header of a UniProt entry page. Image from the Galaxy Training Network lesson, CC BY 4.0.](https://training.galaxyproject.org/training-material/topics/data-science/tutorials/online-resources-protein/images/UniProt.png){#fig-uniprot fig-alt="Screenshot of the UniProt entry page header for P04000."}
+
+<!-- Tip for reuse: download this image and store it locally, e.g. in an
+     images/ folder next to this .qmd, rather than hotlinking. Keep the
+     CC BY 4.0 credit in the caption. -->
+
+The page is long, so the left-hand navigation bar does a lot of work. It stays
+fixed as you scroll, and just reading it tells you what the database holds
+about this entry:
+
+::: {.grid}
+::: {.g-col-6}
+- known functions
+- taxonomy
+- subcellular location
+- variants and associated diseases
+- post-translational modifications (PTMs)
+:::
+::: {.g-col-6}
+- expression
+- interactions
+- structure
+- domains and their classification
+- sequences and similar proteins
+:::
+:::
+
+At the very top of the page you get the accession and entry name, the protein
+and gene names, the organism, whether the entry has been reviewed by a curator,
+an annotation score, and the evidence level for the protein's existence.
+
+Below the header sit six tabs: *Entry*, *Variant viewer*, *Feature viewer*,
+*Publications*, *External links*, and *History*. Stay on *Entry* for now.
+
+### Downloading the entry {#sec-download}
+
+Just under the tabs there is a toolbar. From here you can BLAST the sequence,
+align it against its isoforms, add the entry to a basket for later, or download
+it.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. Which formats does the *Download* menu offer?
+2. What sort of information does each one carry?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. Text, FASTA (canonical), FASTA (canonical and isoform), JSON, XML, RDF/XML,
+   and GFF.
+2. The FASTA options give you the sequence, optionally as a multi-FASTA that
+   includes isoforms. The rest are general-purpose structured formats, not
+   biology-specific: they carry the same annotation you are reading on the page,
+   but in a form that a script can parse. JSON is usually the most convenient
+   for programmatic work.
+:::
+::::
+
+### Function {#sec-function}
+
+The *Function* section opens with a short free-text summary: visual pigments
+are the light-absorbing molecules behind vision, and consist of an apoprotein
+(opsin) covalently bound to cis-retinal.
+
+Two sentences to stand in for decades of literature. That compression is
+possible because someone has already done the curation work, and because the
+protein has been classified in the **Gene Ontology** (GO), which describes
+molecular function, biological process, and cellular component.
+
+GO is a good example of a resource that flattens a very complex body of
+knowledge into a graph. Detail is lost, but in exchange the information becomes
+countable, comparable, and machine-readable, which is exactly what makes summary
+pages like this one possible.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+Which GO terms is this protein annotated with, for:
+
+1. molecular function?
+2. cellular component?
+3. biological process?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. Photoreceptor protein, G-protein coupled receptor.
+2. Photoreceptor disc membrane.
+3. Sensory transduction, vision.
+:::
+::::
+
+### Names and taxonomy {#sec-names}
+
+The next section holds more structured information, including the taxonomic
+placement of the protein. It also lists other identifiers that point at the same
+biological entity, or at linked entities (for example associated diseases under
+`MIM`).
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. What is the taxonomic identifier?
+2. What is the proteome identifier?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. 9606, that is *Homo sapiens*.
+2. UP000005640, and this protein is a component of chromosome X.
+:::
+::::
+
+### Subcellular location {#sec-location}
+
+We already know where the protein is in the body (the retina). Where is it in
+the cell?
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. Where does UniProt place this protein within the cell?
+2. Is that consistent with the GO annotation you saw earlier?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. It is described as a multi-pass membrane protein: it is embedded in the
+   membrane and crosses it several times.
+2. Yes. GO is more specific, naming the photoreceptor disc membrane.
+:::
+::::
+
+This section also has a *Features* area showing which stretches of the sequence
+sit inside the membrane (transmembrane) and which do not (topological domain).
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+How many transmembrane and topological domains are listed?
+
+::: {.callout-note collapse="true" title="Show answer"}
+Eight transmembrane regions and seven topological domains.
+:::
+::::
+
+### Disease and variants {#sec-disease}
+
+This gene and protein are linked to several diseases. The section describes
+those associations and lists the specific variants implicated in each.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+What kinds of study establish that a genetic variant is associated with a
+disease?
+
+::: {.callout-note collapse="true" title="Show answer"}
+Three common designs:
+
+- **Genome-wide association studies (GWAS).** Scan whole genomes across large
+  cohorts to find common variants that track with a trait or disease.
+- **Case-control studies.** Compare the frequency of specific variants between
+  affected and unaffected individuals.
+- **Family studies.** Follow inheritance patterns within families in which
+  several members are affected, which can pinpoint candidate genes.
+
+All of these lean heavily on genomic file formats such as SAM, BAM, and VCF.
+:::
+::::
+
+A *Features* area maps the natural variants along the sequence, and points you
+to the fuller view in the *Variant viewer* tab. Resist the temptation for now.
+
+### PTM and processing {#sec-ptm}
+
+A post-translational modification is a covalent event after translation: either
+a proteolytic cleavage, or the addition of a chemical group to an amino acid.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+Which post-translational modifications are annotated here?
+
+::: {.callout-note collapse="true" title="Show answer"}
+Chain, glycosylation, disulfide bond, and modified residue.
+:::
+::::
+
+### Expression {#sec-expression}
+
+For human proteins there is often tissue-level expression information, drawn
+from resources such as the [Expression Atlas](https://www.ebi.ac.uk/gxa/home).
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+In which tissue is this protein found?
+
+::: {.callout-note collapse="true" title="Show answer"}
+The three colour pigments are found in the cone photoreceptor cells.
+:::
+::::
+
+### Interaction {#sec-interaction}
+
+Proteins do their work by interacting with their surroundings, and above all
+with other proteins. This section lists known interactors in a table you can
+filter by subcellular location, disease, and interaction type. Much of the
+underlying data comes from databases such as STRING, which is linked directly.
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on: follow the link out to STRING
+
+Open the [STRING network for this protein](https://string-db.org/network/9606.ENSP00000358967)
+in a new tab.
+:::
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. How many download formats does STRING offer?
+2. What does each one carry?
+
+::: {.callout-note collapse="true" title="Show answer"}
+STRING exports interaction data in several shapes:
+
+- **TSV**, a tabular layout that drops straight into analysis tools.
+- **PSI-MI XML**, a community standard for interaction data, which makes the
+  results interoperable with other interaction databases.
+- **PNG and SVG** images of the network, for slides and figures.
+- **Flat files** with detailed interaction evidence, and multiple alignment
+  files for comparing sequences across the network.
+:::
+::::
+
+### Structure {#sec-structure}
+
+The *Structure* section is the way into the three-dimensional world. It reports
+experimentally determined structures where they exist, and gives you an
+interactive viewer embedded in the page, so you can rotate the molecule and
+explore domains, binding sites, and other functional regions without leaving
+UniProt.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. Which variant is associated with colour blindness?
+2. Can you locate that amino acid in the structure?
+3. Why might that substitution be disruptive?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. From the *Disease & Variants* section: a glycine to glutamic acid change at
+   position 338.
+2. Yes. Rotate the model and hover over residues to find position 338. It takes
+   patience given how many helices there are. Residue 338 is not in a helix, but
+   in what looks like a loop, just before a region of low prediction confidence.
+3. A reasonable hypothesis: since it is not in a helix, and helices in
+   transmembrane proteins are usually the membrane-spanning parts, this residue
+   is in one of the larger domains protruding from the membrane. So the mutation
+   probably disturbs a functional domain rather than the membrane-embedded core.
+   Use the *Feature viewer* to check whether that domain faces the inside or the
+   outside of the cell.
+:::
+::::
+
+Where does the model actually come from?
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on: download the structure
+
+1. Click the download icon underneath the structure viewer.
+2. Open the downloaded file in a text editor and look at the first few lines.
+:::
+
+You get a **PDB** file, describing the arrangement of atoms and residues. But
+notice that the list of 3D structure databases does not link to the Protein Data
+Bank first. It links to **AlphaFoldDB**.
+
+That matters. This is a *predicted* structure, not an experimentally determined
+one. AlphaFold infers the spatial arrangement of atoms using deep learning and
+evolutionary information. It is also why the model is coloured by confidence:
+blue regions are predicted reliably, orange regions are either uncertain or
+genuinely disordered (flexible and mobile). The file format is the same as for
+an experimental structure, because the information it encodes is still
+structural, but the epistemic status is very different.
+
+::: {.callout-important collapse="true"}
+## Teaching note
+
+This is a good moment to stop and discuss provenance with students. Two files
+can look identical in format while differing completely in how much you should
+trust them. Ask: how would you record that distinction in your own project
+metadata?
+:::
+
+### Family and domains {#sec-family}
+
+This section places the protein in its evolutionary context: the families,
+superfamilies, and domains it belongs to, plus conserved regions, motifs, and
+other notable sequence features.
+
+The *Features* area confirms that at least one of the two protruding domains
+(the N-terminal one) is disordered, and reiterates that we are dealing with a
+transmembrane protein. The links out to phylogenetic and domain databases are
+the route into questions of common ancestry and functional specialisation.
+
+### Sequence {#sec-sequence}
+
+Everything above is ultimately encoded in the sequence. Here you can download
+the FASTA file, trace the data back to the sequencing experiments that produced
+it, and see any isoforms that have been detected.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+How many potential isoforms map to this entry?
+
+::: {.callout-note collapse="true" title="Show answer"}
+One: H0Y622.
+:::
+::::
+
+### Similar proteins {#sec-similar}
+
+The final section of the *Entry* tab lists similar proteins, produced by
+clustering at 100%, 90%, and 50% identity thresholds.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+How many similar proteins are there at each threshold?
+
+::: {.callout-note collapse="true" title="Show answer"}
+| Identity threshold | Similar proteins |
+|---|---|
+| 100% | 0 |
+| 90% | 83 |
+| 50% | 397 |
+
+: Cluster membership {.striped}
+:::
+::::
+
+A pattern should be emerging: much of what we do with protein data is mapping
+different layers of information onto the same sequence and asking how they
+relate. The next two tabs do exactly that, visually.
+
+## Variant viewer {#sec-variant-viewer}
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on
+
+Click the *Variant viewer* tab.
+:::
+
+This view maps every known alternative version of the sequence. Some have a
+known effect (pathogenic or benign); many do not.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+How many variants are flagged as likely pathogenic?
+
+::: {.callout-note collapse="true" title="Show answer"}
+Zoom out and count the red points: five.
+:::
+::::
+
+The sheer number of variants is a useful corrective. A "protein sequence" (like
+a gene sequence, or a structure) is much less of a fixed object than the
+singular canonical entry suggests.
+
+## Feature viewer {#sec-feature-viewer}
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on
+
+Click the *Feature viewer* tab.
+:::
+
+The *Feature viewer* merges all the *Features* areas scattered through the
+*Entry* page into one track-based display: domains and sites, molecule
+processing, PTMs, topology, proteomics, and variants. Clicking a feature
+highlights the corresponding region in the structure.
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on: locate the variant in context
+
+1. Expand the *Variants* track.
+2. Zoom out.
+3. Click the red point at position 338.
+:::
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+What is the topology at that position?
+
+::: {.callout-note collapse="true" title="Show answer"}
+It falls in a topological cytoplasmic domain, so on the inside of the cell.
+This also answers the open question from @sec-structure.
+:::
+::::
+
+## Publications {#sec-publications}
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on
+
+Click the *Publications* tab.
+:::
+
+This tab lists papers relevant to the protein, combining a manually curated list
+(from UniProtKB/Swiss-Prot) with automatically imported references. You can
+filter by source, by the category of data a paper contributes (function,
+interaction, sequence, and so on), and by study size (small scale versus large
+scale).
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. How many publications are linked to this protein?
+2. How many of them contribute information about its function?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. 57.
+2. 23.
+:::
+::::
+
+## External links {#sec-external}
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on
+
+Click the *External links* tab.
+:::
+
+This tab gathers every cross-reference scattered across the entry into one
+place. The link text usually shows the identifier that represents the same
+entity in the other database, which is what makes automated cross-referencing
+possible at all.
+
+For a sense of how tangled that web is, look at the bioDBnet network diagram
+([source](https://biodbnet-abcc.ncifcrf.gov/dbInfo/netGraph.php)). Databases are
+the major nodes, identifiers the minor ones, and the region around the UniProt
+entry name, Gene ID, and Ensembl Gene ID is extremely dense. The diagram is
+already partly out of date, which rather makes the point.
+
+## History {#sec-history}
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on
+
+Click the *History* tab.
+:::
+
+The *History* tab exposes every previous version of the entry's annotation, in
+this case going back to 1988, and lets you download them. It is a record of how
+knowledge about this protein has accumulated and been revised.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+Was this entry ever *not* manually annotated?
+
+::: {.callout-note collapse="true" title="Show answer"}
+Scroll back through the table and check the `Database` column. It never sits in
+TrEMBL, only in Swiss-Prot, so the entry has been manually curated from the
+start.
+:::
+::::
+
+## Key points {.unnumbered}
+
+::: {.callout-tip icon=false}
+## Take home messages
+
+- UniProtKB entries collect function, taxonomy, localisation, interactions, and
+  much more in one curated place.
+- Search on unique identifiers, not free text, whenever you can.
+- The *Variant viewer* and *Feature viewer* let you see variants, domains,
+  modifications, and topology mapped onto the sequence.
+- External links and shared identifiers are what let you cross-reference between
+  resources.
+- The *History* tab shows that annotation is a moving target, not a fixed fact.
+:::
+
+## Exercises to extend the session {.unnumbered}
+
+::: {.callout-note icon=false}
+## Suggested follow-up (edit or remove these for your own course)
+
+1. Repeat the whole walk-through for `OPN1MW` (medium-wave opsin) or `RHO`
+   (rhodopsin) and note where the entries differ in evidence level and
+   annotation score.
+2. Download the JSON for P04000 and write a short script that extracts every
+   annotated transmembrane region as a table.
+3. Compare the AlphaFold model with an experimentally determined GPCR structure
+   of your choice. Where do the confidence estimates and the experimental data
+   agree?
+4. Pick one paper from the *Publications* tab and trace which annotations in the
+   entry it supports.
+:::
+
+## Adapting this document {.unnumbered}
+
+::: {.callout-note collapse="true"}
+## Notes for the instructor
+
+- Render locally with `quarto render uniprot-tutorial.qmd`, or build the whole
+  site with `quarto render` if you keep the `_quarto.yml` file alongside it.
+- Publish to GitHub Pages with `quarto publish gh-pages`, or to Quarto Pub with
+  `quarto publish quarto-pub`.
+- To hide all solutions, delete `collapse="true"` and add `.content-hidden` to
+  the answer callouts, or wrap them in
+  `::: {.content-visible when-profile="instructor"}` and render with
+  `quarto render --profile instructor`.
+- Screenshots are hotlinked to the Galaxy Training Network. For a stable build,
+  download them into an `images/` folder and update the paths, keeping the
+  CC BY 4.0 credit in the caption.
+- The `references.bib` file referenced in the YAML header is expected next to
+  this document. Remove the `bibliography:` line if you are not using citations.
+:::
+
+## References {.unnumbered}
+
+Original lesson:
+
+> Paladin, L. and Batut, B. *One protein along the UniProt page* (Galaxy
+> Training Materials). <https://gxy.io/GTN:T00360>. Licensed CC BY 4.0.
+
+Framework papers behind the original material:
+
+> Hiltemann, S., Rasche, H., *et al.* (2023). Galaxy Training: A powerful
+> framework for teaching! *PLOS Computational Biology* 19(1): e1010752.
+> <https://doi.org/10.1371/journal.pcbi.1010752>
+
+> Batut, B., *et al.* (2018). Community-driven data analysis training for
+> biology. *Cell Systems* 6(6): 752-758.
+> <https://doi.org/10.1016/j.cels.2018.05.012>
+
+Primary resource:
+
+> The UniProt Consortium. UniProt: the Universal Protein Knowledgebase.
+> <https://www.uniprot.org/>
