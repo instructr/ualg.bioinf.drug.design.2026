@@ -40,10 +40,6 @@ under a [Creative Commons Attribution 4.0 International licence](https://creativ
      exercises from, e.g. the Ensembl Browser Workshop handbook, so the
      attribution is specific. -->
 Source: Ensembl training materials, <https://training.ensembl.org/>.
-
-The wording has been reorganised for this course and the questions renumbered.
-If you redistribute this version, please keep this block and note that changes
-were made.
 :::
 
 ## Overview {.unnumbered}
@@ -67,14 +63,14 @@ By the end of this session you should be able to:
 
 | | |
 |---|---|
-| **Time estimate** | ~1.5 hours (5 exercises, roughly 15 to 20 minutes each) |
+| **Time estimate** | ~1.5 hours (1 online course, plus hands-on tutorial with exercises) |
 | **Level** | Introductory |
 | **Prerequisites** | Genes, transcripts, exons, UTRs, and the idea of a reference genome |
 | **Software needed** | A web browser only |
 
 : Practical details {.striped .hover tbl-colwidths="[25,75]"}
 
-::: {.callout-caution title="Ensembl updates" collapse="true" appearance="simple"}
+::: {.callout-caution title="Note on Ensembl updates" collapse="true" appearance="simple"}
 Ensembl publishes a new release several times a year, and annotation changes
 between releases. Transcript counts, transcript names, identifier versions, and
 even the set of associated phenotypes may differ from the answers given here.
