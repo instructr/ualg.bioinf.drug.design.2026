@@ -21,7 +21,7 @@ website:
         menu:
           - 1.bioinf-intro-tutorial.qmd
           - 2.ensembl-tutorial-part1.qmd
-          # - 2.ensembl-tutorial-part2.qmd
+          - 2.ensembl-tutorial-part2.qmd
           # - 3.uniprot-tutorial.qmd
           # - 4.pdb-tutorial.qmd
           # - 5.brugbank-tutorial.qmd
