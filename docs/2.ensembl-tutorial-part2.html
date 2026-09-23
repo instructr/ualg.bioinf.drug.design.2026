@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Isabel Duarte">
-<meta name="dcterms.date" content="2026-09-21">
+<meta name="dcterms.date" content="2026-09-23">
 
-<title>Ensembl genes and transcripts | Part 1 – Bioinformatics and Drug Design</title>
+<title>Ensembl genes and transcripts | Part 2 – Bioinformatics and Drug Design</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -150,6 +150,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./2.ensembl-tutorial-part1.html">
  <span class="dropdown-text">Ensembl genes and transcripts | Part 1</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./2.ensembl-tutorial-part2.html">
+ <span class="dropdown-text">Ensembl genes and transcripts | Part 2</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -181,20 +185,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#sec-pcsk9" id="toc-sec-pcsk9" class="nav-link" data-scroll-target="#sec-pcsk9"><span class="header-section-number">1</span> Exploring the PCSK9 gene in human</a>
   <ul class="collapse">
-  <li><a href="#sec-pcsk9-locate" id="toc-sec-pcsk9-locate" class="nav-link" data-scroll-target="#sec-pcsk9-locate"><span class="header-section-number">1.1</span> Locating the gene</a></li>
-  <li><a href="#sec-pcsk9-phenotypes" id="toc-sec-pcsk9-phenotypes" class="nav-link" data-scroll-target="#sec-pcsk9-phenotypes"><span class="header-section-number">1.2</span> Phenotypes</a></li>
-  <li><a href="#sec-pcsk9-go" id="toc-sec-pcsk9-go" class="nav-link" data-scroll-target="#sec-pcsk9-go"><span class="header-section-number">1.3</span> Gene Ontology</a></li>
-  <li><a href="#sec-pcsk9-transcript" id="toc-sec-pcsk9-transcript" class="nav-link" data-scroll-target="#sec-pcsk9-transcript"><span class="header-section-number">1.4</span> Inside one transcript</a></li>
-  <li><a href="#sec-pcsk9-probes" id="toc-sec-pcsk9-probes" class="nav-link" data-scroll-target="#sec-pcsk9-probes"><span class="header-section-number">1.5</span> Expression probes</a></li>
+  <li><a href="#sec-pcsk9-locate" id="toc-sec-pcsk9-locate" class="nav-link" data-scroll-target="#sec-pcsk9-locate"><span class="header-section-number">1.1</span> Navigate to the human PCSK9 gene</a></li>
+  <li><a href="#sec-pcsk9-go" id="toc-sec-pcsk9-go" class="nav-link" data-scroll-target="#sec-pcsk9-go"><span class="header-section-number">1.2</span> Feature explorer</a></li>
+  <li><a href="#sec-pcsk9-transcript" id="toc-sec-pcsk9-transcript" class="nav-link" data-scroll-target="#sec-pcsk9-transcript"><span class="header-section-number">1.3</span> Inside one transcript</a></li>
+  <li><a href="#export-the-genetranscript-sequence" id="toc-export-the-genetranscript-sequence" class="nav-link" data-scroll-target="#export-the-genetranscript-sequence"><span class="header-section-number">1.4</span> Export the gene/transcript sequence</a></li>
   </ul></li>
-  <li><a href="#sec-pah" id="toc-sec-pah" class="nav-link" data-scroll-target="#sec-pah"><span class="header-section-number">2</span> Finding a gene associated with a phenotype</a></li>
+  <li><a href="#using-blast-to-find-sequence-homologues" id="toc-using-blast-to-find-sequence-homologues" class="nav-link" data-scroll-target="#using-blast-to-find-sequence-homologues"><span class="header-section-number">2</span> Using BLAST to find sequence homologues</a></li>
   <li><a href="#sec-region" id="toc-sec-region" class="nav-link" data-scroll-target="#sec-region"><span class="header-section-number">3</span> Exploring a genomic region</a></li>
   <li><a href="#sec-snp" id="toc-sec-snp" class="nav-link" data-scroll-target="#sec-snp"><span class="header-section-number">4</span> Population genetics and phenotype data</a></li>
   <li><a href="#sec-vep" id="toc-sec-vep" class="nav-link" data-scroll-target="#sec-vep"><span class="header-section-number">5</span> VEP analysis of a structural variant</a></li>
-  <li><a href="#sec-api" id="toc-sec-api" class="nav-link" data-scroll-target="#sec-api"><span class="header-section-number">6</span> Optional: the same queries without the browser</a></li>
   <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key points</a></li>
-  <li><a href="#exercises-to-extend-the-session" id="toc-exercises-to-extend-the-session" class="nav-link" data-scroll-target="#exercises-to-extend-the-session">Exercises to extend the session</a></li>
-  <li><a href="#adapting-this-document" id="toc-adapting-this-document" class="nav-link" data-scroll-target="#adapting-this-document">Adapting this document</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -204,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Ensembl genes and transcripts | Part 1</h1>
+<h1 class="title">Ensembl genes and transcripts | Part 2</h1>
 <p class="subtitle lead">A hands-on tour of the Ensembl browser: genes, transcripts, regions, variants, and VEP</p>
 </div>
 
@@ -222,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">21 September 2026</p>
+      <p class="date">23 September 2026</p>
     </div>
   </div>
   
@@ -232,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    <p>Five short practicals on the Ensembl genome browser. You will explore a human gene and its transcripts, find a gene from a disease phenotype, navigate and configure a genomic region, interpret population and phenotype data for a SNP, and predict the consequences of a structural variant with the Variant Effect Predictor.</p>
+    <p>Second part of five short practicals on the Ensembl genome browser. You will explore a human gene and its transcripts, navigate and configure a genomic region, interpret population and phenotype data for a SNP, and predict the consequences of a structural variant with the Variant Effect Predictor.</p>
   </div>
 </div>
 
@@ -257,7 +257,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
      exercises from, e.g. the Ensembl Browser Workshop handbook, so the
      attribution is specific. -->
 <p>Source: Ensembl training materials, <a href="https://training.ensembl.org/" class="uri">https://training.ensembl.org/</a>.</p>
-<p>The wording has been reorganised for this course and the questions renumbered. If you redistribute this version, please keep this block and note that changes were made.</p>
 </div>
 </div>
 </div>
@@ -274,8 +273,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>How do you find a gene in Ensembl and read its Gene tab?</li>
-<li>What is the difference between all annotated transcripts, protein-coding transcripts, and the MANE Select transcript? <!-- - Where do phenotype, disease, and Gene Ontology annotations appear, and where do they come from? --> <!-- - How do you inspect exons, untranslated regions, cross-references, and expression probes for a single transcript? --> <!-- - How do you start from a disease and work back to a gene? --> <!-- - How do you navigate, configure, and export a genomic region? --> <!-- - How do you read allele frequencies, ancestral alleles, and conservation for a SNP? --> <!-- - How do you predict the consequences of a structural variant with VEP? --></li>
+<li>Where do phenotype, disease, and Gene Ontology annotations appear, and where do they come from?</li>
+<li>How do you inspect exons, untranslated regions, cross-references, and expression probes for a single transcript?</li>
+<li>How do you start from a disease and work back to a gene?</li>
+<li>How do you navigate, configure, and export a genomic region?</li>
+<li>How do you read allele frequencies, ancestral alleles, and conservation for a SNP?</li>
+<li>How do you predict the consequences of a structural variant with VEP?</li>
 </ul>
 </div>
 </div>
@@ -291,9 +294,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>By the end of this session you should be able to:</p>
 <ol type="1">
-<li>Search Ensembl by gene name, by phenotype, and by genomic coordinates.</li>
-<li>Choose an appropriate transcript for downstream work, and justify the choice.</li>
-<li>Turn browser tracks on and off, and export sequence in FASTA format. <!-- 4. Interpret population genetics, conservation, and phenotype association data for a variant. --> <!-- 5. Run the Variant Effect Predictor on a structural variant and filter the results. --></li>
+<li>Search Ensembl by phenotype, and by genomic coordinates.</li>
+<li>Export sequences in FASTA format.</li>
+<li>Interpret population genetics, conservation, and phenotype association data for a variant.</li>
+<li>Run the Variant Effect Predictor on a structural variant and filter the results.</li>
 </ol>
 </div>
 </div>
@@ -306,7 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td><strong>Time estimate</strong></td>
-<td>~1.5 hours (5 exercises, roughly 15 to 20 minutes each)</td>
+<td>~1.5 hours</td>
 </tr>
 <tr class="even">
 <td><strong>Level</strong></td>
@@ -314,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td><strong>Prerequisites</strong></td>
-<td>Genes, transcripts, exons, UTRs, and the idea of a reference genome</td>
+<td>Genes, transcripts, exons, UTRs, variants, and phenotype</td>
 </tr>
 <tr class="even">
 <td><strong>Software needed</strong></td>
@@ -322,13 +326,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div class="callout callout-style-simple callout-caution callout-titled" title="Ensembl updates">
+<div class="callout callout-style-simple callout-caution callout-titled" title="Note on Ensembl updates">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span>Ensembl updates
+<span class="screen-reader-only">Caution</span>Note on Ensembl updates
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -343,7 +347,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="1" class="anchored" data-anchor-id="sec-pcsk9"><span class="header-section-number">1</span> Exploring the PCSK9 gene in human</h2>
 <p><code>PCSK9</code> encodes the proprotein convertase subtilisin/kexin type 9.</p>
 <section id="sec-pcsk9-locate" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="sec-pcsk9-locate"><span class="header-section-number">1.1</span> Locating the gene</h3>
+<h3 data-number="1.1" class="anchored" data-anchor-id="sec-pcsk9-locate"><span class="header-section-number">1.1</span> Navigate to the human PCSK9 gene</h3>
+<p>Use the skills acquired last week to search again for the gene of interest in <a href="https://www.ensembl.org/">Ensembl</a>:</p>
+<ul>
+<li>Gene: <code>PCSK9</code></li>
+<li>Organism: <code>Human</code> (<em>Homo sapiens</em>)</li>
+<li>Select the <code>Reference genome</code></li>
+</ul>
+</section>
+<section id="sec-pcsk9-go" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="sec-pcsk9-go"><span class="header-section-number">1.2</span> Feature explorer</h3>
+<p>Explore the transcripts, the function, and the homology for our gene of interest in the <code>Feature explorer</code> app.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -355,14 +369,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Go to <a href="https://www.ensembl.org" class="uri">https://www.ensembl.org</a>.</li>
-<li>Click the <code>Genome selector</code>, type <strong>Human</strong> in the search box, and click <code>Find</code>.</li>
-<li>Select the <code>Reference</code> genome, and click the green <code>Add</code> button.</li>
-<li>Type <strong>PCSK9</strong> in the <code>Find a feature in the selected genomes</code> search box, and click <code>Find.</code></li>
-<li>Click the <strong>PCSK9</strong> gene in the results and choose to <code>View in Genome browser</code>.</li>
-<li>Expand the side tab (top blue arrow) to view more information related to the <strong>PCSK9</strong> gene: <code>Genomic</code>, <code>Variation</code>, and <code>Regulation.</code> Notice the <code>Eye icon</code> that toggles the <strong>View/Hide</strong> function for each track.</li>
-<li>Explore the genome browser view. Notice that to obtain more information you can <strong>click the transcript</strong> or the <code>...</code>, and you can also format the view in the <code>cog icon</code>.<br>
-</li>
+<li>Click on the <strong>Feature explorer</strong> icon on top.</li>
+<li>Confirm that the correct gene of interest is selected and being shown.</li>
+<li>Click the <strong>Gene function</strong> tab on top.</li>
+<li>Follow the three external links: UniprotKB, Interpro and PDBe-KB, that allow you to learn more about this gene and its protein.</li>
+<li>The UniprotKB shows information on the protein.</li>
+<li>Interpro shows information on the protein domains.</li>
+<li>PDBe-KB shows information on the protein 3D structure.</li>
 </ol>
 </div>
 </div>
@@ -377,13 +390,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Which chromosome and which strand is the gene on?</li>
-<li>How many transcripts (splice variants) are annotated?<br>
-</li>
-<li>How many transcripts are protein coding?</li>
-<li>Which is the longest protein-coding transcript (exon length in bp), and how long is the protein it encodes (amino acid length)?</li>
-<li>Which transcript would you take forward for further study, and why?</li>
+<li>How many known structures are available for the protein encoded by this gene?</li>
+<li>How many ligands does it have? Can you name three of them? Where did you get this information?</li>
+<li>What functions is PCSK9 annotated with? Where did you get this information?</li>
 </ol>
+<p><strong>Critical thinking exercise:</strong> <code>Does it make sense for a **gene** to have a **function**?</code></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -397,36 +408,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Chromosome 1, on the forward strand.</li>
-<li>16 transcripts.</li>
-<li>7 transcripts are protein coding.</li>
-<li>The longest transcript is <strong>ENST00000713786.2</strong> with <strong>3,852 bp</strong>, coding for a <strong>733 aa</strong> protein.</li>
-<li><strong>ENST00000302118.5</strong> because it is the <strong>MANE Select</strong> transcript. MANE Select transcripts are agreed between <strong>Ensembl</strong> and <strong>RefSeq</strong> (two large databases) as the single representative transcript for a gene, with matching sequences in both databases, which makes results easier to compare across resources. Click on the <code>?</code> next to the MANE Select transcript for the formal definition.</li>
+<li><p>66 structures.</p></li>
+<li><p>27 ligands that can be viewed in the PDBe-KB link (<code>Ligands</code> tab):</p>
+<ul>
+<li><strong>NAG</strong> (2-acetamido-2-deoxy-beta-D-glucopyranose)</li>
+<li><strong>FUC</strong> (alpha-L-fucopyranose)</li>
+<li>…(etc)…</li>
+<li><strong>CA</strong> (Calcium ion)</li>
+<li><strong>GOL</strong> (Glycerol)<br>
+</li>
+<li><strong>ZN</strong> (Zinc ion)</li>
+<li><strong>SO4</strong> (Sulfate ion)</li>
+<li><strong>NA</strong> (Sodium ion)</li>
+<li><strong>EDO</strong> (1,2-ethanediol)</li>
+<li><strong>CL</strong> (Chloride ion)</li>
+<li><strong>89N</strong> ((2E)-but-2-ene-1,4-diol)</li>
+<li><strong>HG</strong> (Mercury (II) ion)</li>
+<li><strong>GOA</strong> (Glycolic acid)</li>
+<li><strong>PG4</strong> (Tetraethylene glycol)</li>
+</ul></li>
+<li><p>The function is presented in all 3 databases (UniprotKB, Interpro, and PDBe-KB) :</p>
+<ul>
+<li>Crucial player in the <strong>regulation of plasma cholesterol homeostasis</strong>. Binds to low-density lipid receptor family members: low density lipoprotein receptor (LDLR), very low density lipoprotein receptor (VLDLR), apolipoprotein E receptor (LRP1/APOER) and apolipoprotein receptor 2 (LRP8/APOER2), and promotes their degradation in intracellular acidic compartments.</li>
+<li>Acts via a non-proteolytic mechanism to <strong>enhance the degradation of the hepatic LDLR</strong> through a clathrin LDLRAP1/ARH-mediated pathway.</li>
+<li>May <strong>prevent the recycling of LDLR from endosomes</strong> to the cell surface or direct it to lysosomes for degradation.</li>
+<li><strong>Can induce ubiquitination of LDLR</strong> leading to its subsequent degradation.</li>
+<li><strong>Inhibits intracellular degradation of APOB</strong> via the autophagosome/lysosome pathway in a LDLR-independent manner.</li>
+<li>Involved in the <strong>disposal of non-acetylated intermediates of BACE1</strong> in the early secretory pathway.</li>
+<li><strong>Inhibits epithelial Na+ channel (ENaC)-mediated Na+ absorption</strong> by reducing ENaC surface expression primarily by increasing its proteasomal degradation.</li>
+<li><strong>Regulates neuronal apoptosis</strong> via modulation of LRP8/APOER2 levels and related anti-apoptotic signaling pathways.</li>
+</ul></li>
 </ol>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Why “longest” and “best” are not the same thing
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Note that the longest protein-coding transcript is not the one we choose to work with. Length is a poor proxy for biological relevance. Ask yourself: What would you do if a gene had no MANE Select transcript, and what evidence would look for instead: Expression support, protein evidence, TSL and APPRIS flags in the transcript table, publications, external databases?</p>
-</div>
-</div>
-</div>
 </section>
-<section id="sec-pcsk9-phenotypes" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="sec-pcsk9-phenotypes"><span class="header-section-number">1.2</span> Phenotypes</h3>
+<section id="sec-pcsk9-transcript" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="sec-pcsk9-transcript"><span class="header-section-number">1.3</span> Inside one transcript</h3>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -438,103 +458,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Click <strong>Phenotypes</strong> in the left-hand panel.</li>
-<li>The table is long. Type <code>MIM</code> in the filter box at the top right to keep only entries from Mendelian Inheritance in Man.</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Are any diseases associated with this gene according to MIM?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Yes, several. Two examples are deafness (autosomal dominant 17) and macrothrombocytopenia with granulocyte inclusions, with or without nephritis or sensorineural hearing loss. Click any record for more detail.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="sec-pcsk9-go" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="sec-pcsk9-go"><span class="header-section-number">1.3</span> Gene Ontology</h3>
-<p>The Gene Ontology project annotates gene products in three separate namespaces: biological process, cellular component, and molecular function.</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Click <strong>GO: Biological process</strong> in the left-hand panel.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What functions is PCSK9 annotated with?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Angiogenesis, cell adhesion, and protein transport are among the biological processes listed. Note that all of the GO terms here are attached to a single transcript, ENST00000216181.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="sec-pcsk9-transcript" class="level3" data-number="1.4">
-<h3 data-number="1.4" class="anchored" data-anchor-id="sec-pcsk9-transcript"><span class="header-section-number">1.4</span> Inside one transcript</h3>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>In the transcript table, click the transcript ID for <strong>PCSK9-201</strong> (ENST00000216181) to move to the <strong>Transcript</strong> tab.</li>
-<li>Click <strong>Exons</strong> in the left-hand panel.</li>
-<li>Then click <strong>General identifiers</strong> in the left-hand panel.</li>
+<li>In the Transcripts tab, click the transcript scheme for <strong>ENST00000302118.5</strong> to get some general information related to the transcript.</li>
+<li>Click on the arrow of the right-hand panel, and click the <strong>External references</strong> tab.</li>
+<li>Then click <strong>MIM morbid</strong> to see diseases associated with this gene/protein.</li>
+<li>Explore the MIM entry for this disease.</li>
 </ol>
 </div>
 </div>
@@ -549,12 +476,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>How many exons does this transcript have?</li>
-<li>Are any exons completely or partially untranslated?</li>
-<li>Is there a matching sequence in UniProtKB/Swiss-Prot?</li>
+<li>How many coding exons does this transcript have?</li>
+<li>What diseases are associated with this gene/protein?</li>
+<li>Is it a Mendelian inheritance disease? What is its mode of inheritance?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -563,42 +490,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>41 exons, as reported in the transcript summary.</li>
-<li>Exon 1 is completely untranslated, and exons 2 and 41 are partially untranslated. UTR sequence is shown in orange. The <strong>cDNA</strong> view in the left-hand panel shows the same thing in sequence form.</li>
-<li>Yes: P35579.254 in UniProt/Swiss-Prot matches the translation of this Ensembl transcript. Click the accession to jump to UniProtKB, or click <strong>align</strong> to see the alignment.</li>
+<li>12 total exons, all reported to be coding.</li>
+<li>Hypercholesterolemia.</li>
+<li>Yes, it is an Autosomal Dominant (AD) Mendelian disease, meaning that an individual receiving a single copy of the altered gene from one parent is enough to develop the condition.</li>
 </ol>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>That UniProt accession is the hand-off point between this lesson and the <a href="uniprot-tutorial.qmd">UniProt entry walk-through</a>. If you are teaching both, this is a natural place to switch resources: same protein, different database, different kind of annotation.</p>
-</div>
-</div>
-</div>
 </section>
-<section id="sec-pcsk9-probes" class="level3" data-number="1.5">
-<h3 data-number="1.5" class="anchored" data-anchor-id="sec-pcsk9-probes"><span class="header-section-number">1.5</span> Expression probes</h3>
+<section id="export-the-genetranscript-sequence" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="export-the-genetranscript-sequence"><span class="header-section-number">1.4</span> Export the gene/transcript sequence</h3>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on
+<span class="screen-reader-only">Tip</span>🔬 Hands on: export the sequence
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Click <strong>Oligo probes</strong> in the left-hand panel.</p>
+<ol type="1">
+<li>In the Feature explorer, click the transcript of interest, and next click the <strong>Download</strong> arrow.</li>
+<li>Notice that when you select the box next to <strong>cDNA</strong> or <strong>CDS</strong>, or any of the options, the cartoon gene highlights which parts of the sequence will be present in the download file.</li>
+<li>Select <strong>cDNA</strong> and click <strong>Download</strong>.</li>
+<li>Save the file and open it to look at it. This file format is called: FASTA format.</li>
+<li>Navigate to the AI search engine provider <a href="https://www.perplexity.ai/">Perplexity</a>, and query it to learn about what a FASTA format is by asking: <em>“In the context of bioinformatics, what is a FASTA file? Explain it using clear, scientific tone, for postgradute students.”</em></li>
+<li>Read the answer and use your critical thought to check if what it is telling you makes sense.</li>
+<li>Compare your answer to the answers from your neighbouring computer classemates.<br>
+</li>
+</ol>
 </div>
 </div>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
@@ -611,9 +537,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Are there microarray probes that could be used to monitor expression of ENST00000216181?</p>
+<p>What information does the FASTA header carry?</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -622,9 +548,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Yes. Probesets from Affymetrix, Agilent, Codelink, Illumina, and Phalanx OneArray map to this transcript, so an expression experiment using any of them would report on this transcript. Expression results for many of these are searchable in <a href="https://www.ebi.ac.uk/biostudies/arrayexpress">ArrayExpress / BioStudies</a>.</p>
+<p>A FASTA header starts with a <code>&gt;</code> symbol, and it provides information related to the sequence starting in th next line. This information should include a stable and unique identifier. For example:</p>
+<pre><code>&gt;ENST00000335137.4|TP53|Homo_sapiens</code></pre>
 </div>
 </div>
 </div>
@@ -632,23 +559,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="sec-pah" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="sec-pah"><span class="header-section-number">2</span> Finding a gene associated with a phenotype</h2>
-<p>Phenylketonuria is a genetic disorder in which phenylalanine cannot be metabolised in any body tissue. Phenylalanine accumulates, causing seizures and intellectual disability. Here we work in the opposite direction to the previous exercise: from the disease to the gene.</p>
+<section id="using-blast-to-find-sequence-homologues" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="using-blast-to-find-sequence-homologues"><span class="header-section-number">2</span> Using BLAST to find sequence homologues</h2>
+<p>Are there other similar genes, homologues, in the human genome? To answer this we can use the BLAST tool to search the database for similar sequences.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on
+<span class="screen-reader-only">Tip</span>🔬 Hands on: BLAST app
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Go to the Ensembl homepage.</li>
-<li>Type <code>phenylketonuria</code> in the search box and click <strong>Go</strong>.</li>
-<li>Narrow the results to <strong>Gene</strong> using the left-hand menu.</li>
+<li>Click the <strong>BLAST</strong> icon on top (thunderbolt).</li>
+<li>Click the help button (<code>?</code>) and read the instructions on how to run a BLAST search.</li>
+<li>Paste the fasta sequence download above, or drag the file to upload the sequence.</li>
+<li>Leave the default parameters, and click <strong>Run</strong>.</li>
+<li>Wait until complete, and click <strong>Results</strong>.</li>
 </ol>
 </div>
 </div>
@@ -658,13 +587,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
+<span class="screen-reader-only">Warning</span>❓ Questions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Which gene is associated with this disorder?</p>
+<ol type="1">
+<li>How many hits did you obtain?</li>
+<li>Is it easy to interpret the results?</li>
+</ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -673,108 +605,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><code>PAH</code>, phenylalanine hydroxylase, ENSG00000171759.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: compare the transcripts
-</div>
-</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>If the transcript table is hidden, click <strong>Show transcript table</strong>.</li>
-<li>Click <strong>Transcript comparison</strong> in the left-hand menu.</li>
-<li>Click <strong>Select transcripts</strong>, then either tick each protein-coding transcript in turn or use the drop-down and choose <strong>Protein coding</strong>.</li>
-<li>Close the menu to see the comparison.</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>How many protein-coding transcripts does PAH have?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-25" class="callout-25-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Six.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: cross-references and structure
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Click <strong>External references</strong> in the left-hand menu.</li>
-<li>Then open the transcript table, click the MANE Select ID (ENST00000553106.6), and choose <strong>PDB 3D protein model</strong> in the left-hand menu.</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>What is the MIM gene identifier for PAH?</li>
-<li>In the model 2pah, how many protein molecules can you see?</li>
-</ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-28" class="callout-28-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><ol start="612349" type="1">
-<li></li>
-</ol></li>
-<li>Two. The model 2pah is shown by default; rotate it if the second chain is not obvious at first.</li>
+<li>[Could not run. The app is down!]</li>
+<li>[Could not run. The app is down!]</li>
 </ol>
 </div>
 </div>
@@ -796,9 +631,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li><p>Go to the Ensembl homepage and select <strong>Human</strong>.</p></li>
-<li><p>Type the coordinates in the search box and click <strong>Go</strong>:</p>
-<pre><code>13:32264000-32492000</code></pre></li>
+<li><p>Go to the genome browser view of the <strong>PCSK9</strong> gene.</p></li>
+<li><p>Type the following coordinates in the search box and click <strong>Go</strong>:</p>
+<pre><code>Y:1-57227415</code></pre></li>
+<li><p>Notice that you are seeing the complete human reference Y chromosome.</p></li>
+<li><p>Zoom in (using the plus sign or the mouse wheel) and scroll horizontally to choose a region that is enriched with protein coding genes.</p></li>
+<li><p>Briefly explore the genes present in that region, their sizes, and their annotated functions.</p></li>
 </ol>
 </div>
 </div>
@@ -813,11 +651,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>On which cytogenetic band does this region sit?</li>
-<li>How many contigs make up this part of the assembly?</li>
+<li>What is the size of the whole Y chromosome? (Hint: The size of a genomic region calculated from an interval is: final coordinate - start coordinate + 1)</li>
+<li>How many coding genes are in your selected region?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -826,148 +664,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-31" class="callout-31-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Band q13.1.</li>
-<li>Three, shown by the alternating light and dark blue bars in the <strong>Contigs</strong> track. A contig is a contiguous stretch of sequence assembled from direct sequencing information alone.</li>
+<li>57227415 (In this case, the size is the same as the final coordinate of the genomic region.)</li>
+<li>I chose the following coordinates: <strong>Y:1084826-6714927</strong>. Here, there are <strong>10 genes in the forward strand</strong>, and <strong>7 genes in the reverse strand</strong>. I just counted them by eye (since this new Ensembl interface is not yet fully developed to explore a genomic region.)</li>
 </ol>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: zoom in on BRCA2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Drag a box with the mouse around the BRCA2 transcripts, then choose <strong>Jump to region</strong> from the pop-up menu.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: add the LTR repeat track
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Click <strong>Configure this page</strong> in the side menu, or the cog wheel icon at the top left of the lower image.</li>
-<li>Go to <strong>Repeats</strong> in the left-hand menu and select <strong>LTR</strong>.</li>
-<li>Click the (i) button to read the track information.</li>
-<li>Save and close with ✓, or by clicking outside the pop-up.</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Which tool was used to annotate the LTRs?</li>
-<li>How many LTRs fall within BRCA2, and do any overlap exons?</li>
-</ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-35" class="callout-35-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>RepeatMasker.</li>
-<li>Ten LTRs overlap BRCA2, and none of them overlaps an exon.</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: export the sequence
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Click <strong>Export data</strong> in the side menu.</li>
-<li>Leave the defaults (FASTA sequence should already be selected) and click <strong>Next</strong>.</li>
-<li>Click <strong>Text</strong>.</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What information does the FASTA header carry?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-38" class="callout-38-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The assembly, the sequence type, the chromosome, the start and end coordinates, and the strand. For example:</p>
-<pre><code>&gt;13_dna:chromosome_chromosome:GRCh38:13:32311910:32405865:1</code></pre>
-<p>This is worth dwelling on: coordinates are meaningless without an assembly version, and a FASTA file that does not record one is a liability in any project.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: tidy up
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Click <strong>Configure this page</strong>, then <strong>Reset configuration</strong>, then ✓. This turns off every track you added, so the next exercise starts from the default view.</p>
 </div>
 </div>
 </section>
 <section id="sec-snp" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="sec-snp"><span class="header-section-number">4</span> Population genetics and phenotype data</h2>
 <p>The SNP <code>rs1738074</code>, in the 5’ UTR of the human <code>TAGAP</code> gene, has been reported as a genetic risk factor for several diseases.</p>
+<p>[Please add a “Remember” callout explaining what are genetic variants and why they are important for pharmaceutical sciences professionals. Be brief, clear, short, and pedagogical.]</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -978,101 +690,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>There is more than one route. Either:</p>
-<ul>
-<li>open the <strong>Variation table</strong> for the human TAGAP gene and use the <strong>Consequence</strong> filter to keep only 5’ UTR variants, or</li>
-<li>search Ensembl directly for <code>rs1738074</code>.</li>
-</ul>
-<p>Once you are on the <strong>Variant</strong> tab, click <strong>Genes and regulation</strong> in the menu.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>In which transcripts is this SNP found?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-42-contents" aria-controls="callout-42" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-42" class="callout-42-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>In four transcripts of TAGAP. It is also an intron variant of one lncRNA transcript of TAGAP-AS1.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: allele frequencies
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Click <strong>Population genetics</strong> in the left-hand panel (or click <strong>Explore this variant</strong> and then the Population genetics icon).</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What is the least frequent genotype in the Yoruba (YRI) population from 1000 Genomes phase 3?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-45-contents" aria-controls="callout-45" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-45" class="callout-45-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>CC, at a frequency of 5.6%.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: conservation
-</div>
-</div>
-<div class="callout-body-container callout-body">
 <ol type="1">
-<li>Click <strong>Phylogenetic context</strong> in the left-hand panel.</li>
-<li>Click <strong>Select an alignment</strong>, open <strong>Multiple alignments</strong>, choose <strong>91 eutherian mammals EPO-Extended</strong>, and click <strong>Apply</strong>.</li>
+<li>Start by searching Ensembl directly for <code>rs1738074</code>.</li>
+<li>Click in the genome browser view and inspect the information related to this genetic variant.</li>
 </ol>
 </div>
 </div>
+<p>[Include a call out with this information (clarify and correct please): “Notice that if you click the <code>...</code> in the topright of the variation tab next to the <strong>rs1738074</strong> name you can find more info related to this variant, namely the population genetics associated with the variant (which will not be explored further in this class, but now you know that the dbSNP database that is linked will provide all the details needed if you ever need to further explore genetic variants for their risk phenotype associassociation, or diseases, etc.)”]</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1084,11 +708,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>What is the ancestral allele, and how was it determined?</li>
-<li>Is it conserved across the eutherian mammals?</li>
+<li>In which gene is this Single Nucleotide Variant (SNV) found?</li>
+<li>In which chromosome is the gene located?</li>
+<li>In how many transcripts is the variant found?</li>
+<li>In which region of the transcript is the variant located?</li>
+<li>What are the coordinates of the variant location?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-48-contents" aria-controls="callout-48" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1097,55 +724,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-48" class="callout-48-contents callout-collapse collapse">
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>The ancestral allele is T, inferred from the alignment in primates.</li>
-<li>The view centres the SNP (highlighted in red) with its flanking sequence. The T allele is conserved in all but two of the eutherian mammals shown.</li>
+<li>This SNP is in the <em>TAGAP</em> gene.</li>
+<li>This gene is in chromosome 6 (6:159034481-159044991).</li>
+<li>It is present in 7 transcripts of TAGAP. It is also an intron variant of one long non-coding RNA (lncRNA) transcript of TAGAP-AS1 in the forward strand.</li>
+<li>In the 5-prime-UTR.</li>
+<li>rs1738074 variant is located in <code>6:159044945</code>.</li>
 </ol>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: phenotype associations
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Click <strong>Phenotype data</strong> in the left-hand panel.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Which diseases is this SNP associated with, and are risk alleles reported?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-51-contents" aria-controls="callout-51" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-51" class="callout-51-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Multiple sclerosis, celiac disease, and white blood cell count. Risk alleles and the corresponding P values are given for all three.</p>
-<p>Watch the strand. The allele A is reported as associated with celiac disease, and G appears for multiple sclerosis, yet Ensembl lists the alleles for this variant as T/C. Ensembl always reports alleles on the forward strand, so the original publications must have reported theirs on the reverse strand. This is a common and easily missed source of error when combining variant data from different sources.</p>
 </div>
 </div>
 </div>
@@ -1154,8 +741,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sec-vep" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="sec-vep"><span class="header-section-number">5</span> VEP analysis of a structural variant</h2>
-<p>A breast cancer sample carries a genomic deletion, described here in VCF format:</p>
+<p>A breast cancer sample from a patient presents a genomic deletion, described here in VCF format:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>13  32307062    sv1 .   &lt;DEL&gt;   .   .   SVTYPE=DEL;END=32908738</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We now want to know if this variant is relevant for the disease… [Explain what is VEP and why it is important for students: clear, concise, simple, pedagogical and informative.]</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1167,10 +755,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Click <strong>VEP</strong> at the top of any Ensembl page and open the web interface.</li>
-<li>Check that the species is <strong>Human</strong>.</li>
+<li>Click <strong>Ensebl VEP</strong> at the top of any Ensembl page.</li>
+<li>Read the help page (click the <code>?</code> sign).</li>
+<li>Add the <strong>Human</strong> genome (<code>+</code> sign in the <strong>Genome</strong> row).</li>
 <li>Give the job a descriptive name, for example <code>Patient deletion exercise</code>. Naming jobs is a good habit: it is how you tell results apart later, and the name is what appears in the browser when you view the data.</li>
-<li>Paste the variant into the <strong>Paste data</strong> field and click <strong>Run</strong>.</li>
+<li>Click the <code>+</code> sign in the variant row, and paste the text <code>13    32307062    sv1 .   &lt;DEL&gt;   .   .   SVTYPE=DEL;END=32908738</code>.</li>
+<li>Click <code>Add</code>.</li>
+<li>Leave the default job options (by default, the results will name the genes and transcripts the variants fall in, and report the predicted molecular consequence for each), and click <code>Run</code>.</li>
 </ol>
 </div>
 </div>
@@ -1184,9 +775,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>How many genes are affected?</p>
+<ol type="1">
+<li>How many genes are affected?</li>
+<li>What are the <strong>predicted</strong> molecular consequences of this variant?</li>
+</ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-54-contents" aria-controls="callout-54" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1195,154 +789,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-54" class="callout-54-contents callout-collapse collapse">
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Twelve.</p>
+<ol type="1">
+<li>7 genes are affected: <em>N4BP2L2</em>, <em>PDS5B</em>, <em>N4BP2L1</em>, <em>BRCA2</em>, <em>ZAR1L</em>, <em>IFIT1P1</em>, and <em>ATP8A2P2.</em></li>
+<li>Mostly <em>transcript ablation</em>, but also <em>coding_sequence_variant</em>, <em>5_prime_UTR_variant</em>, and <em>intron_variant</em> for the <em>ZAR1L</em> gene.</li>
+</ol>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: filter the results
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>At the top of the results table, add the filter <strong>Consequence is transcript_ablation</strong> and click <strong>Add</strong>.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Does the deletion remove any complete transcripts?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-57-contents" aria-controls="callout-57" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-57" class="callout-57-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Yes. Complete transcripts are lost for PDS5B, N4BP2L1, BRCA2, RNY1P4, IFIT1P1, ATP8A2P2, N4BP2L2, and N4BP2L2-IT2, plus one gene with no official symbol, ENSG00000212293.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: view it in the browser
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Click the location link in the results table, <code>13:32307062-32908738</code>. This opens <strong>Region in detail</strong> in a new tab. If you named the job, the data appears automatically in red. If not, use <strong>Configure this page</strong> and add it under the <strong>Personal data</strong> tab.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You saw part of this region already in <a href="#sec-region" class="quarto-xref">Section&nbsp;3</a>. What does the deletion do to BRCA2, and why might that matter in a breast cancer sample?</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-60-contents" aria-controls="callout-60" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-60" class="callout-60-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The deletion spans the whole of BRCA2, so the gene is lost entirely rather than altered. BRCA2 is a tumour suppressor involved in homologous recombination repair, so complete loss is a far more consequential event than a single missense change, and it is the kind of variant that a SNV-focused pipeline can easily miss.</p>
-<p>This question is an addition to the original exercise set; drop it if you are short of time.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="sec-api" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="sec-api"><span class="header-section-number">6</span> Optional: the same queries without the browser</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-62-contents" aria-controls="callout-62" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ensembl REST API and biomaRt
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-62" class="callout-62-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Everything above is clickable, but none of it has to be. The same annotation is available programmatically, which is how you would do this for 500 genes rather than one.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gene record, with transcripts expanded</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> <span class="st">'https://rest.ensembl.org/lookup/symbol/homo_sapiens/MYH9?expand=1'</span> <span class="dt">\</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-type:application/json'</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># consequences of a known variant</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> <span class="st">'https://rest.ensembl.org/vep/human/id/rs1738074'</span> <span class="dt">\</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">-H</span> <span class="st">'Content-type:application/json'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(biomaRt)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>mart <span class="ot">&lt;-</span> <span class="fu">useEnsembl</span>(<span class="at">biomart =</span> <span class="st">"genes"</span>, <span class="at">dataset =</span> <span class="st">"hsapiens_gene_ensembl"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">getBM</span>(</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">attributes =</span> <span class="fu">c</span>(<span class="st">"ensembl_transcript_id"</span>, <span class="st">"transcript_biotype"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"transcript_length"</span>, <span class="st">"transcript_mane_select"</span>),</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">filters    =</span> <span class="st">"hgnc_symbol"</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">values     =</span> <span class="st">"PCSK9"</span>,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">mart       =</span> mart</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> requests.get(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://rest.ensembl.org/lookup/symbol/homo_sapiens/PCSK9"</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    params<span class="op">=</span>{<span class="st">"expand"</span>: <span class="dv">1</span>},</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    headers<span class="op">=</span>{<span class="st">"Content-Type"</span>: <span class="st">"application/json"</span>},</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    timeout<span class="op">=</span><span class="dv">30</span>,</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>r.raise_for_status()</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>gene <span class="op">=</span> r.json()</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gene[<span class="st">"seq_region_name"</span>], gene[<span class="st">"strand"</span>])</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(gene[<span class="st">"Transcript"</span>]), <span class="st">"transcripts"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Both chunks are set to <code>eval: false</code> so the site renders without a network connection. Set them to <code>true</code> if you want live output, and be aware that the numbers may then disagree with the answers above whenever Ensembl updates.</p>
-</div>
-</div>
-</div>
+<p><strong>Critical thought exercise: </strong> Use the AI chatbot <a href="https://www.perplexity.ai">Perplexity</a> to learn what is the meaning of the most common predicted molecular consequence: “In the context of variant effect predictor for genomic variant analysis, what is the meaning of”[insert most common value here]“? Explain using clear, concise, scientific yet simple tone for postgraduate students.”</p>
 </section>
 <section id="key-points" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="key-points">Key points</h2>
@@ -1357,58 +815,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Ensembl can be entered from three directions: a gene name, a phenotype, or a set of coordinates. All three converge on the same annotation.</li>
-<li>A gene usually has many transcripts. Pick one deliberately, and prefer MANE Select where it exists.</li>
-<li>Left-hand panel links (Phenotypes, GO, Exons, General identifiers, Oligo probes) are where the cross-references live.</li>
+<li>Ensembl can be entered from a gene name, or a set of coordinates.</li>
+<li>A gene usually has many transcripts. Pick one deliberately, and prefer MANE</li>
 <li>Genomic coordinates mean nothing without an assembly version, and alleles mean nothing without a strand.</li>
 <li>VEP scales the same reasoning up from single bases to structural variants, and its consequence filters are how you find the events that matter.</li>
 </ul>
-</div>
-</div>
-</section>
-<section id="exercises-to-extend-the-session" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="exercises-to-extend-the-session">Exercises to extend the session</h2>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Suggested follow-up (edit or remove these for your own course)
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Repeat the first exercise for a gene of your own choosing and report the transcript you would take forward, with reasons.</li>
-<li>Take P35579 from the PCSK9 General identifiers page into the UniProt lesson and compare what each database tells you about the same molecule.</li>
-<li>Use BioMart to export the exon coordinates of all protein-coding transcripts of PAH as a TSV file.</li>
-<li>Construct a VCF line for a deletion of your own and predict, before running VEP, which consequence terms it should return.</li>
-</ol>
-</div>
-</div>
-</section>
-<section id="adapting-this-document" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="adapting-this-document">Adapting this document</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-65-contents" aria-controls="callout-65" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Notes for the instructor
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-65" class="callout-65-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Render with <code>quarto render ensembl-tutorial.qmd</code>, or build the site with <code>quarto render</code> if <code>_quarto.yml</code> sits alongside it.</li>
-<li>This file reuses <code>styles.css</code> from the UniProt lesson, so the two pages look the same. No extra setup is needed if both live in the same project.</li>
-<li>To hide solutions from the student build, wrap the answer callouts in <code>::: {.content-visible when-profile="instructor"}</code> and render with <code>quarto render --profile instructor</code>.</li>
-<li>There are no screenshots in this lesson. If you add them, put them in an <code>images/</code> folder and credit the source in the caption.</li>
-<li>Answers were taken from the exercise set as supplied. Before each teaching session it is worth clicking through exercise 1 yourself to check the counts against the current Ensembl release.</li>
-</ul>
-</div>
 </div>
 </div>
 </section>

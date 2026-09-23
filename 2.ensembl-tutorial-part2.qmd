@@ -1,16 +1,15 @@
 ---
-title: "Ensembl genes and transcripts | Part 1"
+title: "Ensembl genes and transcripts | Part 2"
 subtitle: "A hands-on tour of the Ensembl browser: genes, transcripts, regions, variants, and VEP"
 author:
   - name: "Isabel Duarte"
 date: today
 date-format: "D MMMM YYYY"
 abstract: |
-  Five short practicals on the Ensembl genome browser. You will explore a
-  human gene and its transcripts, find a gene from a disease phenotype,
-  navigate and configure a genomic region, interpret population and phenotype
-  data for a SNP, and predict the consequences of a structural variant with
-  the Variant Effect Predictor.
+  Second part of five short practicals on the Ensembl genome browser. You will explore a
+  human gene and its transcripts, navigate and configure a genomic region, 
+  interpret population and phenotype data for a SNP, and predict the consequences of a
+  structural variant with the Variant Effect Predictor.
 format:
   html:
     toc: true
@@ -41,10 +40,6 @@ under a [Creative Commons Attribution 4.0 International licence](https://creativ
      exercises from, e.g. the Ensembl Browser Workshop handbook, so the
      attribution is specific. -->
 Source: Ensembl training materials, <https://training.ensembl.org/>.
-
-The wording has been reorganised for this course and the questions renumbered.
-If you redistribute this version, please keep this block and note that changes
-were made.
 :::
 
 ## Overview {.unnumbered}
@@ -52,14 +47,7 @@ were made.
 ::: {.callout-note}
 ## Questions this lesson answers
 
-- How do you find a gene in Ensembl and read its Gene tab?
-- What is the difference between all annotated transcripts, protein-coding transcripts, and the MANE Select transcript?
-<!-- - Where do phenotype, disease, and Gene Ontology annotations appear, and where do they come from? -->
-<!-- - How do you inspect exons, untranslated regions, cross-references, and expression probes for a single transcript? -->
-<!-- - How do you start from a disease and work back to a gene? -->
-<!-- - How do you navigate, configure, and export a genomic region? -->
-<!-- - How do you read allele frequencies, ancestral alleles, and conservation for a SNP? -->
-<!-- - How do you predict the consequences of a structural variant with VEP? -->
+[Add the relevant questions here, please].
 :::
 
 ::: {.callout-tip}
@@ -67,23 +55,19 @@ were made.
 
 By the end of this session you should be able to:
 
-1. Search Ensembl by gene name, by phenotype, and by genomic coordinates.
-2. Choose an appropriate transcript for downstream work, and justify the choice.
-3. Turn browser tracks on and off, and export sequence in FASTA format.
-<!-- 4. Interpret population genetics, conservation, and phenotype association data for a variant. -->
-<!-- 5. Run the Variant Effect Predictor on a structural variant and filter the results. -->
+[Add the relevant learning goals here, please].
 :::
 
 | | |
 |---|---|
-| **Time estimate** | ~1.5 hours (5 exercises, roughly 15 to 20 minutes each) |
+| **Time estimate** | ~1.5 hours |
 | **Level** | Introductory |
-| **Prerequisites** | Genes, transcripts, exons, UTRs, and the idea of a reference genome |
+| **Prerequisites** | Genes, transcripts, exons, UTRs, variants, and phenotype |
 | **Software needed** | A web browser only |
 
 : Practical details {.striped .hover tbl-colwidths="[25,75]"}
 
-::: {.callout-caution title="Ensembl updates" collapse="true" appearance="simple"}
+::: {.callout-caution title="Note on Ensembl updates" collapse="true" appearance="simple"}
 Ensembl publishes a new release several times a year, and annotation changes
 between releases. Transcript counts, transcript names, identifier versions, and
 even the set of associated phenotypes may differ from the answers given here.
@@ -95,89 +79,71 @@ which release you are looking at.
 
 `PCSK9` encodes the proprotein convertase subtilisin/kexin type 9.
 
-### Locating the gene {#sec-pcsk9-locate}
+### Navigate to the human PCSK9 gene {#sec-pcsk9-locate}
+
+Use the skills acquired last week to search again for the gene of interest in 
+[Ensembl](https://www.ensembl.org/): 
+
+  - Gene: `PCSK9`
+  - Organism: `Human` (*Homo sapiens*)
+  - Select the `Reference genome`
+
+
+### Feature explorer {#sec-pcsk9-go}
+
+Explore the transcripts, the function, and the homology for our gene of interest in 
+the `Feature explorer` app.  
 
 ::: {.callout-tip icon=false}
 ## 🔬 Hands on
 
-1. Go to <https://www.ensembl.org>.
-2. Click the `Genome selector`, type **Human** in the search box, and click `Find`. 
-3. Select the `Reference` genome, and click the green `Add` button.
-4. Type **PCSK9** in the `Find a feature in the selected genomes` search box, and click `Find.`
-5. Click the **PCSK9** gene in the results and choose to `View in Genome browser`.
-6. Expand the side tab (top blue arrow) to view more information related to the **PCSK9** gene: `Genomic`, `Variation`, and `Regulation.` Notice the `Eye icon` that toggles the **View/Hide** function for each track.
-7. Explore the genome browser view. Notice that to obtain more information you can **click the transcript** or the `...`, and you can also format the view in the `cog icon`.  
+1. Click on the **Feature explorer** icon on top.
+2. Confirm that the correct gene of interest is selected and being shown.
+3. Click the **Gene function** tab on top.
+4. Follow the three external links: UniprotKB, Interpro and PDBe-KB, that allow you to learn more about this gene and its protein.
+5. The UniprotKB shows information on the protein.
+6. Interpro shows information on the protein domains.
+7. PDBe-KB shows information on the protein 3D structure.
 :::
 
 :::: {.callout-warning icon=false}
 ## ❓ Question
 
-1. Which chromosome and which strand is the gene on?
-2. How many transcripts (splice variants) are annotated?   
-3. How many transcripts are protein coding?
-4. Which is the longest protein-coding transcript (exon length in bp), and how long is the protein it encodes (amino acid length)?
-5. Which transcript would you take forward for further study, and why?
+1. How many known structures are available for the protein encoded by this gene? 
+2. How many ligands does it have? Can you name three of them? Where did you get this information? 
+3. What functions is PCSK9 annotated with? Where did you get this information? 
+
+**Critical thinking exercise:** `Does it make sense for a **gene** to have a **function**?`
 
 ::: {.callout-note collapse="true" title="Show answer"}
-1. Chromosome 1, on the forward strand.
-2. 16 transcripts.
-3. 7 transcripts are protein coding.
-4. The longest transcript is **ENST00000713786.2** with **3,852 bp**, coding for a **733 aa** protein.
-5. **ENST00000302118.5** because it is the **MANE Select** transcript. MANE Select transcripts are agreed between **Ensembl** and **RefSeq** (two large databases) as the single representative transcript for a gene, with matching sequences in both databases, which makes results easier to compare across resources. Click on the `?` next to the MANE Select transcript for the formal definition.
-:::
-::::
+1. 66 structures.
+2. 27 ligands that can be viewed in the PDBe-KB link (`Ligands` tab): 
+  
+    - **NAG** (2-acetamido-2-deoxy-beta-D-glucopyranose)
+    - **FUC** (alpha-L-fucopyranose)
+    - ...(etc)...
+    - **CA** (Calcium ion)
+    - **GOL** (Glycerol)    
+    - **ZN** (Zinc ion)
+    - **SO4** (Sulfate ion)
+    - **NA** (Sodium ion)
+    - **EDO** (1,2-ethanediol)
+    - **CL** (Chloride ion)
+    - **89N** ((2E)-but-2-ene-1,4-diol)
+    - **HG** (Mercury (II) ion)
+    - **GOA** (Glycolic acid)
+    - **PG4** (Tetraethylene glycol)
 
-::: {.callout-note collapse="true"}
-## Why "longest" and "best" are not the same thing
+3. The function is presented in all 3 databases (UniprotKB, Interpro, and PDBe-KB) :
 
-Note that the longest protein-coding transcript is not the one we choose to work with. Length is a poor proxy for biological relevance. 
-Ask yourself: What would you do if a gene had no MANE Select transcript, and what
-evidence would look for instead: Expression support, protein evidence,
-TSL and APPRIS flags in the transcript table, publications, external databases?
-:::
-
-### Phenotypes {#sec-pcsk9-phenotypes}
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on
-
-1. Click **Phenotypes** in the left-hand panel.
-2. The table is long. Type `MIM` in the filter box at the top right to keep only
-   entries from Mendelian Inheritance in Man.
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-Are any diseases associated with this gene according to MIM?
-
-::: {.callout-note collapse="true" title="Show answer"}
-Yes, several. Two examples are deafness (autosomal dominant 17) and
-macrothrombocytopenia with granulocyte inclusions, with or without nephritis
-or sensorineural hearing loss. Click any record for more detail.
-:::
-::::
-
-### Gene Ontology {#sec-pcsk9-go}
-
-The Gene Ontology project annotates gene products in three separate namespaces:
-biological process, cellular component, and molecular function.
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on
-
-Click **GO: Biological process** in the left-hand panel.
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-What functions is PCSK9 annotated with?
-
-::: {.callout-note collapse="true" title="Show answer"}
-Angiogenesis, cell adhesion, and protein transport are among the biological
-processes listed. Note that all of the GO terms here are attached to a single
-transcript, ENST00000216181.
+    - Crucial player in the **regulation of plasma cholesterol homeostasis**. Binds to low-density lipid receptor family members: low density lipoprotein receptor (LDLR), very low density lipoprotein receptor (VLDLR), apolipoprotein E receptor (LRP1/APOER) and apolipoprotein receptor 2 (LRP8/APOER2), and promotes their degradation in intracellular acidic compartments.
+    - Acts via a non-proteolytic mechanism to **enhance the degradation of the hepatic LDLR** through a clathrin LDLRAP1/ARH-mediated pathway. 
+    - May **prevent the recycling of LDLR from endosomes** to the cell surface or direct it to lysosomes for degradation. 
+    - **Can induce ubiquitination of LDLR** leading to its subsequent degradation.
+    - **Inhibits intracellular degradation of APOB** via the autophagosome/lysosome pathway in a LDLR-independent manner. 
+    - Involved in the **disposal of non-acetylated intermediates of BACE1** in the early secretory pathway.
+    - **Inhibits epithelial Na+ channel (ENaC)-mediated Na+ absorption** by reducing ENaC surface expression primarily by increasing its proteasomal degradation. 
+    - **Regulates neuronal apoptosis** via modulation of LRP8/APOER2 levels and related anti-apoptotic signaling pathways.
 :::
 ::::
 
@@ -186,192 +152,38 @@ transcript, ENST00000216181.
 ::: {.callout-tip icon=false}
 ## 🔬 Hands on
 
-1. In the transcript table, click the transcript ID for **PCSK9-201**
-   (ENST00000216181) to move to the **Transcript** tab.
-2. Click **Exons** in the left-hand panel.
-3. Then click **General identifiers** in the left-hand panel.
+1. In the Transcripts tab, click the transcript scheme for **ENST00000302118.5** to get some general information related to the transcript. 
+2. Click on the arrow of the right-hand panel, and click the **External references** tab. 
+3. Then click **MIM morbid** to see diseases associated with this gene/protein.
+4. Explore the MIM entry for this disease.
 :::
 
 :::: {.callout-warning icon=false}
 ## ❓ Question
 
-1. How many exons does this transcript have?
-2. Are any exons completely or partially untranslated?
-3. Is there a matching sequence in UniProtKB/Swiss-Prot?
+1. How many coding exons does this transcript have?
+2. What diseases are associated with this gene/protein?
+3. Is it a Mendelian inheritance disease? What is its mode of inheritance? 
 
 ::: {.callout-note collapse="true" title="Show answer"}
-1. 41 exons, as reported in the transcript summary.
-2. Exon 1 is completely untranslated, and exons 2 and 41 are partially
-   untranslated. UTR sequence is shown in orange. The **cDNA** view in the
-   left-hand panel shows the same thing in sequence form.
-3. Yes: P35579.254 in UniProt/Swiss-Prot matches the translation of this
-   Ensembl transcript. Click the accession to jump to UniProtKB, or click
-   **align** to see the alignment.
+1. 12 total exons, all reported to be coding. 
+2. Hypercholesterolemia.
+3. Yes, it is an Autosomal Dominant (AD) Mendelian disease, meaning that an individual receiving a single copy of the altered gene from one parent is enough to develop the condition. 
 :::
 ::::
 
-::: {.callout-note appearance="simple"}
-That UniProt accession is the hand-off point between this lesson and the
-[UniProt entry walk-through](uniprot-tutorial.qmd). If you are teaching both,
-this is a natural place to switch resources: same protein, different database,
-different kind of annotation.
-:::
-
-### Expression probes {#sec-pcsk9-probes}
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on
-
-Click **Oligo probes** in the left-hand panel.
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-Are there microarray probes that could be used to monitor expression of
-ENST00000216181?
-
-::: {.callout-note collapse="true" title="Show answer"}
-Yes. Probesets from Affymetrix, Agilent, Codelink, Illumina, and Phalanx
-OneArray map to this transcript, so an expression experiment using any of them
-would report on this transcript. Expression results for many of these are
-searchable in
-[ArrayExpress / BioStudies](https://www.ebi.ac.uk/biostudies/arrayexpress).
-:::
-::::
-
-## Finding a gene associated with a phenotype {#sec-pah}
-
-Phenylketonuria is a genetic disorder in which phenylalanine cannot be
-metabolised in any body tissue. Phenylalanine accumulates, causing seizures and
-intellectual disability. Here we work in the opposite direction to the previous
-exercise: from the disease to the gene.
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on
-
-1. Go to the Ensembl homepage.
-2. Type `phenylketonuria` in the search box and click **Go**.
-3. Narrow the results to **Gene** using the left-hand menu.
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-Which gene is associated with this disorder?
-
-::: {.callout-note collapse="true" title="Show answer"}
-`PAH`, phenylalanine hydroxylase, ENSG00000171759.
-:::
-::::
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on: compare the transcripts
-
-1. If the transcript table is hidden, click **Show transcript table**.
-2. Click **Transcript comparison** in the left-hand menu.
-3. Click **Select transcripts**, then either tick each protein-coding transcript
-   in turn or use the drop-down and choose **Protein coding**.
-4. Close the menu to see the comparison.
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-How many protein-coding transcripts does PAH have?
-
-::: {.callout-note collapse="true" title="Show answer"}
-Six.
-:::
-::::
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on: cross-references and structure
-
-1. Click **External references** in the left-hand menu.
-2. Then open the transcript table, click the MANE Select ID
-   (ENST00000553106.6), and choose **PDB 3D protein model** in the left-hand
-   menu.
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-1. What is the MIM gene identifier for PAH?
-2. In the model 2pah, how many protein molecules can you see?
-
-::: {.callout-note collapse="true" title="Show answer"}
-1. 612349.
-2. Two. The model 2pah is shown by default; rotate it if the second chain is
-   not obvious at first.
-:::
-::::
-
-## Exploring a genomic region {#sec-region}
-
-This exercise moves from gene-centric to coordinate-centric browsing.
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on: navigate to the region
-
-1. Go to the Ensembl homepage and select **Human**.
-2. Type the coordinates in the search box and click **Go**:
-
-   ```
-   13:32264000-32492000
-   ```
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-1. On which cytogenetic band does this region sit?
-2. How many contigs make up this part of the assembly?
-
-::: {.callout-note collapse="true" title="Show answer"}
-1. Band q13.1.
-2. Three, shown by the alternating light and dark blue bars in the **Contigs**
-   track. A contig is a contiguous stretch of sequence assembled from direct
-   sequencing information alone.
-:::
-::::
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on: zoom in on BRCA2
-
-Drag a box with the mouse around the BRCA2 transcripts, then choose
-**Jump to region** from the pop-up menu.
-:::
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on: add the LTR repeat track
-
-1. Click **Configure this page** in the side menu, or the cog wheel icon at the
-   top left of the lower image.
-2. Go to **Repeats** in the left-hand menu and select **LTR**.
-3. Click the (i) button to read the track information.
-4. Save and close with ✓, or by clicking outside the pop-up.
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-1. Which tool was used to annotate the LTRs?
-2. How many LTRs fall within BRCA2, and do any overlap exons?
-
-::: {.callout-note collapse="true" title="Show answer"}
-1. RepeatMasker.
-2. Ten LTRs overlap BRCA2, and none of them overlaps an exon.
-:::
-::::
+### Export the gene/transcript sequence
 
 ::: {.callout-tip icon=false}
 ## 🔬 Hands on: export the sequence
 
-1. Click **Export data** in the side menu.
-2. Leave the defaults (FASTA sequence should already be selected) and click
-   **Next**.
-3. Click **Text**.
+1. In the Feature explorer, click  the transcript of interest, and next click the **Download** arrow. 
+2. Notice that when you select the box next to **cDNA** or **CDS**, or any of the options, the cartoon gene highlights which parts of the sequence will be present in the download file.
+3. Select **cDNA** and click **Download**.
+4. Save the file and open it to look at it. This file format is called: FASTA format.
+5. Navigate to the AI search engine provider [Perplexity](https://www.perplexity.ai/), and query it to learn about what a FASTA format is by asking: *"In the context of bioinformatics, what is a FASTA file? Explain it using clear, scientific tone, for postgradute students."*
+6. Read the answer and use your critical thought to check if what it is telling you makes sense.
+7. Compare your answer to the answers from your neighbouring computer classemates.  
 :::
 
 :::: {.callout-warning icon=false}
@@ -380,301 +192,168 @@ Drag a box with the mouse around the BRCA2 transcripts, then choose
 What information does the FASTA header carry?
 
 ::: {.callout-note collapse="true" title="Show answer"}
-The assembly, the sequence type, the chromosome, the start and end
-coordinates, and the strand. For example:
+A FASTA header starts with a `>` symbol, and it provides information related to the sequence starting in th next line. This information should include a stable and unique identifier. For example:
 
 ```
->13_dna:chromosome_chromosome:GRCh38:13:32311910:32405865:1
+>ENST00000335137.4|TP53|Homo_sapiens
 ```
-
-This is worth dwelling on: coordinates are meaningless without an assembly
-version, and a FASTA file that does not record one is a liability in any
-project.
 :::
 ::::
 
-::: {.callout-tip icon=false}
-## 🔬 Hands on: tidy up
+## Using BLAST to find sequence homologues
 
-Click **Configure this page**, then **Reset configuration**, then ✓. This turns
-off every track you added, so the next exercise starts from the default view.
+Are there other similar genes, homologues, in the human genome?
+To answer this we can use the BLAST tool to search the database for similar sequences. 
+
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on: BLAST app
+
+1. Click the **BLAST** icon on top (thunderbolt).
+2. Click the help button (`?`) and read the instructions on how to run a BLAST search.
+3. Paste the fasta sequence download above, or drag the file to upload the sequence.
+4. Leave the default parameters, and click **Run**.
+5. Wait until complete, and click **Results**.
 :::
+
+:::: {.callout-warning icon=false}
+## ❓ Questions
+
+1. How many hits did you obtain?
+2. Is it easy to interpret the results? 
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. [Could not run. The app is down!]
+2. [Could not run. The app is down!]
+:::
+::::
+
+
+## Exploring a genomic region {#sec-region}
+
+This exercise moves from gene-centric to coordinate-centric browsing.
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on: navigate to the region
+
+1. Go to the genome browser view of the **PCSK9** gene. 
+2. Type the following coordinates in the search box and click **Go**:
+
+   ```
+   Y:1-57227415
+   ```
+3. Notice that you are seeing the complete human reference Y chromosome. 
+4. Zoom in (using the plus sign or the mouse wheel) and scroll horizontally to choose a region that is enriched with protein coding genes.
+5. Briefly explore the genes present in that region, their sizes, and their annotated functions.
+:::
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. What is the size of the whole Y chromosome? (Hint: The size of a genomic region calculated from an interval is: final coordinate - start coordinate + 1)
+2. How many coding genes are in your selected region?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. 57227415 (In this case, the size is the same as the final coordinate of the genomic region.)
+2. I chose the following coordinates: **Y:1084826-6714927**. Here, there are **10 genes in the forward strand**, and **7 genes in the reverse strand**. I just counted them by eye (since this new Ensembl interface is not yet fully developed to explore a genomic region.)
+
+:::
+::::
+
 
 ## Population genetics and phenotype data {#sec-snp}
 
 The SNP `rs1738074`, in the 5' UTR of the human `TAGAP` gene, has been reported
 as a genetic risk factor for several diseases.
 
+[Please add a "Remember" callout explaining what are genetic variants and why they are important for pharmaceutical sciences professionals. Be brief, clear, short, and pedagogical.]
+
+
 ::: {.callout-tip icon=false}
 ## 🔬 Hands on: find the variant
 
-There is more than one route. Either:
-
-- open the **Variation table** for the human TAGAP gene and use the
-  **Consequence** filter to keep only 5' UTR variants, or
-- search Ensembl directly for `rs1738074`.
-
-Once you are on the **Variant** tab, click **Genes and regulation** in the menu.
+1. Start by searching Ensembl directly for `rs1738074`.
+2. Click in the genome browser view and inspect the information related to this genetic variant. 
 :::
+
+[Include a call out with this information (clarify and correct please): "Notice that if you click the `...` in the topright of the variation tab next to the **rs1738074** name you can find more info related to this variant, namely the population genetics associated with the variant (which will not be explored further in this class, but now you know that the dbSNP database that is linked will provide all the details needed if you ever need to further explore genetic variants for their risk phenotype associassociation, or diseases, etc.)"]
+
 
 :::: {.callout-warning icon=false}
 ## ❓ Question
 
-In which transcripts is this SNP found?
+1. In which gene is this Single Nucleotide Variant (SNV) found?
+2. In which chromosome is the gene located?
+3. In how many transcripts is the variant found?
+4. In which region of the transcript is the variant located?
+5. What are the coordinates of the variant location?
+
 
 ::: {.callout-note collapse="true" title="Show answer"}
-In four transcripts of TAGAP. It is also an intron variant of one lncRNA
-transcript of TAGAP-AS1.
+1. This SNP is in the *TAGAP* gene.
+2. This gene is in chromosome 6 (6:159034481-159044991).
+3. It is present in 7 transcripts of TAGAP. It is also an intron variant of one long non-coding RNA (lncRNA) transcript of TAGAP-AS1 in the forward strand.
+4. In the 5-prime-UTR. 
+5. rs1738074 variant is located in `6:159044945`.
+
 :::
 ::::
 
-::: {.callout-tip icon=false}
-## 🔬 Hands on: allele frequencies
-
-Click **Population genetics** in the left-hand panel (or click **Explore this
-variant** and then the Population genetics icon).
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-What is the least frequent genotype in the Yoruba (YRI) population from
-1000 Genomes phase 3?
-
-::: {.callout-note collapse="true" title="Show answer"}
-CC, at a frequency of 5.6%.
-:::
-::::
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on: conservation
-
-1. Click **Phylogenetic context** in the left-hand panel.
-2. Click **Select an alignment**, open **Multiple alignments**, choose
-   **91 eutherian mammals EPO-Extended**, and click **Apply**.
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-1. What is the ancestral allele, and how was it determined?
-2. Is it conserved across the eutherian mammals?
-
-::: {.callout-note collapse="true" title="Show answer"}
-1. The ancestral allele is T, inferred from the alignment in primates.
-2. The view centres the SNP (highlighted in red) with its flanking sequence.
-   The T allele is conserved in all but two of the eutherian mammals shown.
-:::
-::::
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on: phenotype associations
-
-Click **Phenotype data** in the left-hand panel.
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-Which diseases is this SNP associated with, and are risk alleles reported?
-
-::: {.callout-note collapse="true" title="Show answer"}
-Multiple sclerosis, celiac disease, and white blood cell count. Risk alleles
-and the corresponding P values are given for all three.
-
-Watch the strand. The allele A is reported as associated with celiac disease,
-and G appears for multiple sclerosis, yet Ensembl lists the alleles for this
-variant as T/C. Ensembl always reports alleles on the forward strand, so the
-original publications must have reported theirs on the reverse strand. This is
-a common and easily missed source of error when combining variant data from
-different sources.
-:::
-::::
 
 ## VEP analysis of a structural variant {#sec-vep}
 
-A breast cancer sample carries a genomic deletion, described here in VCF
-format:
+A breast cancer sample from a patient presents a genomic deletion, described here in VCF format:
 
 ```default
 13	32307062	sv1	.	<DEL>	.	.	SVTYPE=DEL;END=32908738
 ```
 
+We now want to know if this variant is relevant for the disease... [Explain what is VEP and why it is important for students: clear, concise, simple, pedagogical and informative.]
+
+
 ::: {.callout-tip icon=false}
 ## 🔬 Hands on: run VEP
 
-1. Click **VEP** at the top of any Ensembl page and open the web interface.
-2. Check that the species is **Human**.
+1. Click **Ensebl VEP** at the top of any Ensembl page.
+2. Read the help page (click the `?` sign).
+2. Add the **Human** genome (`+` sign in the **Genome** row).
 3. Give the job a descriptive name, for example `Patient deletion exercise`.
    Naming jobs is a good habit: it is how you tell results apart later, and the
    name is what appears in the browser when you view the data.
-4. Paste the variant into the **Paste data** field and click **Run**.
+4. Click the `+` sign in the variant row, and paste the text `13	32307062	sv1	.	<DEL>	.	.	SVTYPE=DEL;END=32908738`.
+5. Click `Add`.
+6. Leave the default job options (by default, the results will name the genes and transcripts the variants fall in, and report the predicted molecular consequence for each), and click `Run`.
 :::
 
 :::: {.callout-warning icon=false}
 ## ❓ Question
 
-How many genes are affected?
+1. How many genes are affected?
+2. What are the **predicted** molecular consequences of this variant? 
 
 ::: {.callout-note collapse="true" title="Show answer"}
-Twelve.
+1. 7 genes are affected: *N4BP2L2*, *PDS5B*, *N4BP2L1*, *BRCA2*, *ZAR1L*, *IFIT1P1*, and *ATP8A2P2.*
+2. Mostly *transcript ablation*, but also *coding_sequence_variant*, *5_prime_UTR_variant*, and *intron_variant* for the *ZAR1L* gene.
+	
 :::
 ::::
 
-::: {.callout-tip icon=false}
-## 🔬 Hands on: filter the results
+**Critical thought exercise: **
+Use the AI chatbot [Perplexity](https://www.perplexity.ai) to learn what is the meaning of the most common predicted molecular consequence: "In the context of variant effect predictor for genomic variant analysis, what is the meaning of "[insert most common value here]"? Explain using clear, concise, scientific yet simple tone for postgraduate students."
 
-At the top of the results table, add the filter **Consequence is
-transcript_ablation** and click **Add**.
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-Does the deletion remove any complete transcripts?
-
-::: {.callout-note collapse="true" title="Show answer"}
-Yes. Complete transcripts are lost for PDS5B, N4BP2L1, BRCA2, RNY1P4, IFIT1P1,
-ATP8A2P2, N4BP2L2, and N4BP2L2-IT2, plus one gene with no official symbol,
-ENSG00000212293.
-:::
-::::
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on: view it in the browser
-
-Click the location link in the results table, `13:32307062-32908738`. This opens
-**Region in detail** in a new tab. If you named the job, the data appears
-automatically in red. If not, use **Configure this page** and add it under the
-**Personal data** tab.
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-You saw part of this region already in @sec-region. What does the deletion do to
-BRCA2, and why might that matter in a breast cancer sample?
-
-::: {.callout-note collapse="true" title="Show answer"}
-The deletion spans the whole of BRCA2, so the gene is lost entirely rather than
-altered. BRCA2 is a tumour suppressor involved in homologous recombination
-repair, so complete loss is a far more consequential event than a single
-missense change, and it is the kind of variant that a SNV-focused pipeline can
-easily miss.
-
-This question is an addition to the original exercise set; drop it if you are
-short of time.
-:::
-::::
-
-## Optional: the same queries without the browser {#sec-api}
-
-::: {.callout-note collapse="true"}
-## Ensembl REST API and biomaRt
-
-Everything above is clickable, but none of it has to be. The same annotation is
-available programmatically, which is how you would do this for 500 genes rather
-than one.
-
-```bash
-# gene record, with transcripts expanded
-curl -s 'https://rest.ensembl.org/lookup/symbol/homo_sapiens/MYH9?expand=1' \
-  -H 'Content-type:application/json'
-
-# consequences of a known variant
-curl -s 'https://rest.ensembl.org/vep/human/id/rs1738074' \
-  -H 'Content-type:application/json'
-```
-
-```{r}
-#| eval: false
-#| label: biomart-example
-library(biomaRt)
-
-mart <- useEnsembl(biomart = "genes", dataset = "hsapiens_gene_ensembl")
-
-getBM(
-  attributes = c("ensembl_transcript_id", "transcript_biotype",
-                 "transcript_length", "transcript_mane_select"),
-  filters    = "hgnc_symbol",
-  values     = "PCSK9",
-  mart       = mart
-)
-```
-
-```{python}
-#| eval: false
-#| label: rest-example-python
-import requests
-
-r = requests.get(
-    "https://rest.ensembl.org/lookup/symbol/homo_sapiens/PCSK9",
-    params={"expand": 1},
-    headers={"Content-Type": "application/json"},
-    timeout=30,
-)
-r.raise_for_status()
-gene = r.json()
-
-print(gene["seq_region_name"], gene["strand"])
-print(len(gene["Transcript"]), "transcripts")
-```
-
-Both chunks are set to `eval: false` so the site renders without a network
-connection. Set them to `true` if you want live output, and be aware that the
-numbers may then disagree with the answers above whenever Ensembl updates.
-:::
 
 ## Key points {.unnumbered}
 
 ::: {.callout-tip icon=false}
 ## Take home messages
 
-- Ensembl can be entered from three directions: a gene name, a phenotype, or a
-  set of coordinates. All three converge on the same annotation.
+- Ensembl can be entered from a gene name, or a
+  set of coordinates.
 - A gene usually has many transcripts. Pick one deliberately, and prefer MANE
-  Select where it exists.
-- Left-hand panel links (Phenotypes, GO, Exons, General identifiers, Oligo
-  probes) are where the cross-references live.
-- Genomic coordinates mean nothing without an assembly version, and alleles mean
-  nothing without a strand.
-- VEP scales the same reasoning up from single bases to structural variants, and
-  its consequence filters are how you find the events that matter.
+- Genomic coordinates mean nothing without an assembly version, and alleles mean nothing without a strand.
+- VEP scales the same reasoning up from single bases to structural variants, and  its consequence filters are how you find the events that matter.
 :::
 
-## Exercises to extend the session {.unnumbered}
-
-::: {.callout-note icon=false}
-## Suggested follow-up (edit or remove these for your own course)
-
-1. Repeat the first exercise for a gene of your own choosing and report the
-   transcript you would take forward, with reasons.
-2. Take P35579 from the PCSK9 General identifiers page into the UniProt lesson
-   and compare what each database tells you about the same molecule.
-3. Use BioMart to export the exon coordinates of all protein-coding transcripts
-   of PAH as a TSV file.
-4. Construct a VCF line for a deletion of your own and predict, before running
-   VEP, which consequence terms it should return.
-:::
-
-## Adapting this document {.unnumbered}
-
-::: {.callout-note collapse="true"}
-## Notes for the instructor
-
-- Render with `quarto render ensembl-tutorial.qmd`, or build the site with
-  `quarto render` if `_quarto.yml` sits alongside it.
-- This file reuses `styles.css` from the UniProt lesson, so the two pages look
-  the same. No extra setup is needed if both live in the same project.
-- To hide solutions from the student build, wrap the answer callouts in
-  `::: {.content-visible when-profile="instructor"}` and render with
-  `quarto render --profile instructor`.
-- There are no screenshots in this lesson. If you add them, put them in an
-  `images/` folder and credit the source in the caption.
-- Answers were taken from the exercise set as supplied. Before each teaching
-  session it is worth clicking through exercise 1 yourself to check the counts
-  against the current Ensembl release.
-:::
 
 ## References {.unnumbered}
 
