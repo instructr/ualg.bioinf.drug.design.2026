@@ -6,7 +6,7 @@ author:
 date: today
 date-format: "D MMMM YYYY"
 abstract: |
-  First parte of five short practicals on the Ensembl genome browser. You will explore a
+  First part of five short practicals on the Ensembl genome browser. You will explore a
   human gene and its transcripts, navigate and configure a genomic region, 
   interpret population and phenotype data for a SNP, and predict the consequences of a
   structural variant with the Variant Effect Predictor.
@@ -145,5 +145,3 @@ where you will explore more information present on the Ensembl browser: gene fun
 
 > Ensembl genome browser. <https://www.ensembl.org/>
 
-> McLaren, W. *et al.* (2016). The Ensembl Variant Effect Predictor.
-> *Genome Biology* 17: 122. <https://doi.org/10.1186/s13059-016-0974-4>
