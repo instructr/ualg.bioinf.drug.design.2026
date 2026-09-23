@@ -5,7 +5,7 @@ author:
   - name: "Isabel Duarte"
     affiliation: "Universidade do Algarve"
 date: today
-date-format: "D MMMM YYYY"
+date-format: "MMMM YYYY"
 abstract: |
   A hands-on walk through a single UniProtKB entry (P04000, OPSR_HUMAN).
   You will learn how to search the database, read every section of an entry
@@ -28,8 +28,6 @@ format:
     link-external-icon: true
     fig-cap-location: bottom
 license: "CC BY SA 4.0"
-citation: true
-bibliography: references.bib
 ---
 
 ::: {.callout-important appearance="minimal"}
