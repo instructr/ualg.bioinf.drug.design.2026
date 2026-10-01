@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Isabel Duarte">
+
+<title>One structure along the RCSB PDB page – Bioinformatics and Drug Design</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-3afdf904ffd723d7893bcc04cd19f421.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Bioinformatics and Drug Design</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tp-activities" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">TP Activities</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tp-activities">    
+        <li>
+    <a class="dropdown-item" href="./1.bioinf-intro-tutorial.html">
+ <span class="dropdown-text">Introduction to Bioinformatics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./2.ensembl-tutorial-part1.html">
+ <span class="dropdown-text">Ensembl genes and transcripts | Part 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./2.ensembl-tutorial-part2.html">
+ <span class="dropdown-text">Ensembl genes and transcripts | Part 2</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-house-heart-fill"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://www.ualg.pt/">
+            Universidade do Algarve
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#sec-intro" id="toc-sec-intro" class="nav-link" data-scroll-target="#sec-intro"><span class="header-section-number">1</span> Why is the PDB relevant for pharmaceutical sciences?</a></li>
+  <li><a href="#sec-about" id="toc-sec-about" class="nav-link" data-scroll-target="#sec-about"><span class="header-section-number">2</span> About this tutorial</a></li>
+  <li><a href="#sec-search" id="toc-sec-search" class="nav-link" data-scroll-target="#sec-search"><span class="header-section-number">3</span> Finding the right entry</a></li>
+  <li><a href="#sec-summary" id="toc-sec-summary" class="nav-link" data-scroll-target="#sec-summary"><span class="header-section-number">4</span> Reading the Structure Summary page</a>
+  <ul class="collapse">
+  <li><a href="#sec-idcard" id="toc-sec-idcard" class="nav-link" data-scroll-target="#sec-idcard"><span class="header-section-number">4.1</span> The ID card</a></li>
+  <li><a href="#sec-quality" id="toc-sec-quality" class="nav-link" data-scroll-target="#sec-quality"><span class="header-section-number">4.2</span> Experimental snapshot: how good is this structure?</a></li>
+  <li><a href="#sec-literature" id="toc-sec-literature" class="nav-link" data-scroll-target="#sec-literature"><span class="header-section-number">4.3</span> Literature</a></li>
+  <li><a href="#sec-macromolecules" id="toc-sec-macromolecules" class="nav-link" data-scroll-target="#sec-macromolecules"><span class="header-section-number">4.4</span> Macromolecules and assembly</a></li>
+  <li><a href="#sec-ligands" id="toc-sec-ligands" class="nav-link" data-scroll-target="#sec-ligands"><span class="header-section-number">4.5</span> Small molecules</a></li>
+  </ul></li>
+  <li><a href="#sec-3d" id="toc-sec-3d" class="nav-link" data-scroll-target="#sec-3d"><span class="header-section-number">5</span> Exploring in 3D with Mol*</a></li>
+  <li><a href="#sec-ligand-page" id="toc-sec-ligand-page" class="nav-link" data-scroll-target="#sec-ligand-page"><span class="header-section-number">6</span> The ligand page</a></li>
+  <li><a href="#sec-annotations" id="toc-sec-annotations" class="nav-link" data-scroll-target="#sec-annotations"><span class="header-section-number">7</span> Annotations</a></li>
+  <li><a href="#sec-sequence" id="toc-sec-sequence" class="nav-link" data-scroll-target="#sec-sequence"><span class="header-section-number">8</span> Sequence and Genome</a></li>
+  <li><a href="#sec-experiment" id="toc-sec-experiment" class="nav-link" data-scroll-target="#sec-experiment"><span class="header-section-number">9</span> Experiment and validation</a></li>
+  <li><a href="#sec-versions" id="toc-sec-versions" class="nav-link" data-scroll-target="#sec-versions"><span class="header-section-number">10</span> Versions</a></li>
+  <li><a href="#sec-further" id="toc-sec-further" class="nav-link" data-scroll-target="#sec-further"><span class="header-section-number">11</span> Going further (optional)</a></li>
+  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key points</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">One structure along the RCSB PDB page</h1>
+<p class="subtitle lead">Exploring a Protein Data Bank entry using cyclooxygenase-2 bound to aspirin as an example</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Isabel Duarte </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Universidade do Algarve
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>A hands-on walk through a single RCSB PDB entry (5F1A, human cyclooxygenase-2 bound to salicylate). You will learn how to search the database, read the Structure Summary page, explore the molecule and its ligand in 3D, follow the links to ligand, annotation, sequence and experiment pages, judge the quality of a structure, and inspect the version history of an entry.</p>
+  </div>
+</div>
+
+
+</header>
+
+
+<section id="overview" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Questions this tutorial answers
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>How do you search the PDB by free text, protein name, UniProt accession, or PDB ID?</li>
+<li>What does the “ID card” at the top of a Structure Summary page tell you?</li>
+<li>How good is a structure? What do resolution and R-values mean?</li>
+<li>Which molecules are in the entry, and which of them actually matter biologically?</li>
+<li>How do you see, in 3D, where a drug sits and which residues it touches?</li>
+<li>What do the <em>Ligand</em>, <em>Annotations</em>, <em>Sequence</em>, <em>Genome</em>, <em>Experiment</em> and <em>Versions</em> pages add?</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Learning objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this session you should be able to:</p>
+<ol type="1">
+<li>Find and interpret a PDB entry: experiment, quality, molecules, ligands, and assembly.</li>
+<li>Explore a protein-ligand complex in 3D with the Mol* viewer.</li>
+<li>Use identifiers (PDB ID, UniProt accession, ligand ID, DrugBank ID) to move between databases.</li>
+<li>Critically judge whether a structure is reliable enough for the question you want to ask.</li>
+</ol>
+</div>
+</div>
+<table class="caption-top table">
+<caption>Practical details</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Time estimate</strong></td>
+<td>~1.5 hours</td>
+</tr>
+<tr class="even">
+<td><strong>Level</strong></td>
+<td>Introductory</td>
+</tr>
+<tr class="odd">
+<td><strong>Prerequisites</strong></td>
+<td>The UniProt tutorial; basic knowledge of amino acids and protein structure</td>
+</tr>
+<tr class="even">
+<td><strong>Software needed</strong></td>
+<td>A web browser only</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-simple callout-caution">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Numbers reported in the solutions below (search hits, number of entries containing a ligand, and so on) were correct when the tutorial was written. The PDB releases new structures <strong>every week</strong>, so your numbers may differ.</p>
+<p>Ask yourself: Why would an old entry, deposited in 2015, still receive new versions today?</p>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-intro" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="sec-intro"><span class="header-section-number">1</span> Why is the PDB relevant for pharmaceutical sciences?</h2>
+<p>In the UniProt tutorial you learned <em>what</em> a protein is and <em>what</em> it does. The <a href="https://www.rcsb.org">Protein Data Bank (PDB)</a> shows you what it <strong>looks like</strong>, atom by atom, often with a drug sitting in its binding pocket.</p>
+<p>That view is the foundation of <strong>structure-based drug design</strong>: once you can see the pocket, you can explain why a drug binds, why a mutation causes resistance, or why a molecule hits one target but not a closely related one. Many modern drugs, such as the HIV protease inhibitors and many kinase inhibitors, were designed or optimised with the help of PDB structures. And structures of COX-2, the enzyme in this tutorial, explained why “coxib” drugs can block COX-2 while sparing COX-1.</p>
+<p>The PDB is a single worldwide archive run by the <strong>wwPDB</strong> partners. <a href="https://www.rcsb.org">RCSB PDB (USA)</a> is one of its portals; <a href="https://www.ebi.ac.uk/pdbe/">PDBe (Europe)</a> and <a href="https://pdbj.org/">PDBj (Japan)</a> serve the <em>same</em> data with different tools. The archive holds structures solved experimentally (X-ray crystallography, cryo-electron microscopy, NMR), and RCSB also displays computed models (for example from AlphaFold), clearly labelled as such.</p>
+</section>
+<section id="sec-about" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="sec-about"><span class="header-section-number">2</span> About this tutorial</h2>
+<p>Aspirin and other non-steroidal anti-inflammatory drugs (NSAIDs) block the <strong>cyclooxygenase</strong> enzymes, COX-1 and COX-2, which start the production of prostaglandins (the local messengers behind pain, fever and inflammation). Aspirin is unusual: it does not just sit in the enzyme, it <strong>transfers an acetyl group</strong> onto a serine in the active site (Ser-530) and then leaves as <strong>salicylate</strong>.</p>
+<p>The PDB entry used shows human COX-2 with salicylate bound. Its UniProt protein is Human <em>Prostaglandin G/H synthase 2</em> (the UniProt page complements the information on PDB, so it is useful to have both pages open side by side.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Background reading
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>PDB-101 <em>Molecule of the Month</em> on <a href="https://pdb101.rcsb.org/motm/17">Cyclooxygenase</a> (D. Goodsell, 2001): a short, beautifully illustrated introduction to aspirin’s target.</li>
+<li>The RCSB <a href="https://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/introduction">Guide to understanding PDB data</a>: short pages on resolution, R-values, biological assemblies and more.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-search" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="sec-search"><span class="header-section-number">3</span> Finding the right entry</h2>
+<p>The search bar sits at the top of every RCSB page. Like UniProt, it accepts free text, but it also accepts identifiers from other databases.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: a broad search
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Open <a href="https://www.rcsb.org" class="uri">https://www.rcsb.org</a>.</li>
+<li>Type <code>cyclooxygenase-2</code> in the search bar and run the search (click the magnifying glass icon or hit enter).</li>
+<li>Look at the left-hand panel of the results page (the <em>refinements</em>).</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>How many structures come back? Write the number down.</li>
+<li>Which categories can you use to narrow the list on the left-hand side?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><strong>184</strong> structures are matched by this query (the exact number grows every week). Too many to browse by hand, and they include COX-2 from several species and with many different inhibitors.</li>
+<li>Among others: <em>Organism</em>, <em>Experimental Method</em>, <em>Refinement Resolution</em>, <em>Release Date</em>, <em>Protein modifications</em>, and more. Refinements are the quickest way to cut a large result set down to what you need.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>As with UniProt, a <strong>unique identifier</strong> is a much sharper tool than free text.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: search by UniProt accession and refine
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Search for <code>Human Prostaglandin G/H synthase 2</code> in <a href="https://www.uniprot.org/">UniProt</a>.</li>
+<li>Select the entry from <em>PTGS2</em> gene. Note the UniProt id number.</li>
+<li>In <a href="https://www.rcsb.org">RCSB PDB</a> search with the UniProt accession number.</li>
+<li>In the refinements, tick <em>Experimental Method: X-RAY DIFFRACTION</em>.</li>
+<li>Sort the results in the right-hand box by <em>Resolution</em> (best to worst).</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>What is the UniProt accession of human COX-2?</li>
+<li>Why does searching by UniProt accession give a cleaner list than <code>cyclooxygenase-2</code>?</li>
+<li>Find <strong>5F1A</strong> in the list (or simply type <code>5F1A</code> in the search bar). What happens when you search for an exact PDB ID?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>P35354</li>
+<li>The accession points to exactly one protein from one organism. Every hit is human COX-2, whereas the free text also matches mouse COX-2, COX-1, and papers that merely mention the name.</li>
+<li>You land directly on the Structure Summary page of that entry. A PDB ID is unique, so there is nothing to choose between.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>PDB IDs are getting longer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Classic PDB IDs have four characters (a digit plus three letters or digits). Because the archive is running out of combinations, the wwPDB is introducing <strong>extended IDs</strong>. The page header already shows both forms: <code>5F1A</code> and <code>pdb_00005f1a</code>. They refer to the same entry.</p>
+</div>
+</div>
+</section>
+<section id="sec-summary" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="sec-summary"><span class="header-section-number">4</span> Reading the Structure Summary page</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: open the entry
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Go to <a href="https://www.rcsb.org/structure/5F1A" class="uri">https://www.rcsb.org/structure/5F1A</a>.</p>
+</div>
+</div>
+<div id="fig-assembly" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-assembly-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/pdb_cox2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-assembly-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Biological assembly of 5F1A: two copies of COX-2 forming a dimer. Image from RCSB PDB.
+</figcaption>
+</figure>
+</div>
+<p>Along the top there is a row of tabs:</p>
+<ul>
+<li><em>Structure Summary</em></li>
+<li><em>Structure</em></li>
+<li><em>Annotations</em></li>
+<li><em>Experiment</em></li>
+<li><em>Sequence</em></li>
+<li><em>Genome</em></li>
+<li><em>Ligands</em></li>
+<li><em>Versions</em></li>
+</ul>
+<p>On the right, the <em>Download Files</em> menu gives you the FASTA sequence, the coordinates files (PDBx/mmCIF or legacy PDB format), the experimental data, and the validation report.</p>
+<p>We will start now on the <strong>Structure Summary</strong> tab and scroll down.</p>
+<section id="sec-idcard" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="sec-idcard"><span class="header-section-number">4.1</span> The ID card</h3>
+<p>The header tells you, in a few lines, what was studied and how: title, DOI, classification, organism, expression system, mutations, deposition and release dates, and authors.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>In which organism was the protein made (expression system)? Why not simply use the bacterial system <em>E. coli</em>? <em>(Hint: look at the Macromolecules section and the sugars listed further down the page.)</em></li>
+<li>How long did it take from deposition to release? Why is there a delay at all?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><em>Spodoptera frugiperda</em>, insect cells (the baculovirus system). COX-2 is a eukaryotic, glycosylated, membrane-associated enzyme. Bacteria cannot add sugars (N-glycosylation) and often fail to fold such proteins correctly. Insect cells do both.</li>
+<li>Deposited 2015-11-30, released 2016-03-16: about three and a half months. Entries are processed and validated by wwPDB biocurators, and authors can hold release until their paper is published.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-quality" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="sec-quality"><span class="header-section-number">4.2</span> Experimental snapshot: how good is this structure?</h3>
+<p>Every structure is a <strong>model</strong> built to explain experimental data. Before you trust it, check two things.</p>
+<ul>
+<li><strong>Resolution</strong> (in Å) describes the level of detail in the data. <em>Smaller is better</em>: at around 1.5 Å you can see individual atoms; at around 3.5 Å you see the shape of side chains but not their fine detail.</li>
+<li><strong>R-values</strong> measure how well the model agrees with the data. <strong>R-work</strong> uses the data the model was built on. <strong>R-free</strong> uses a small set (around 5%) of data kept aside as a test. <em>Lower is better</em>, and R-free should not be much higher than R-work.</li>
+</ul>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>What method was used, and what are the resolution, R-work and R-free?</li>
+<li>Look at the coloured <strong>wwPDB validation slider</strong>. What metrics are shown, and what is their meaning? (<em>Hint: Click the <code>?</code> icon to obtain more information</em>).</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>X-ray diffraction, 2.38 Å, R-work 0.174, R-free 0.218. This is a good, typical-quality structure: detailed enough to place a small ligand like salicylate, and the gap between R-work and R-free (about 0.04) is normal.</li>
+<li>Each bar compares one quality metric (such as R-free, clashscore, Ramachandran outliers and side-chain outliers) with all other X-ray structures in the PDB, and with structures of similar resolution. Markers towards the blue end are better than most; towards the red end, are worse.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Critical thinking question</strong></p>
+<p>Use your favourite Large Language Model (LLM) AI chat to ask:</p>
+<p><em>“Explain what R-free is in X-ray crystallography, why it was introduced, and what values indicate a reliable structure. Answer briefly, for postgraduate pharmaceutical sciences students.”</em></p>
+<p>Compare answers with your colleagues. Do they agree on the “good” values? How could you check them? <em>(Hint: the PDB-101 guide has a page on R-values <a href="https://pdb101.rcsb.org/learn/guide-to-understanding-pdb-data/crystallographic-structure-factors-and-electron-density-resolution-and-r-value">here</a>.</em></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>R-free is calculated with a random subset of the data (typically 5 to 10%) that is excluded from refinement. Because the model never “saw” those data, R-free cannot be improved by over-fitting, so it is an honest test of the model. As a rough rule, R-free values near or below 0.25 are typical of well-refined structures at medium resolution, and the gap to R-work is usually below about 0.05. Always compare with structures of similar resolution rather than trusting one fixed threshold.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-literature" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="sec-literature"><span class="header-section-number">4.3</span> Literature</h3>
+<p>Each entry is linked to its <strong>primary citation</strong>, with its abstract.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Which paper describes this structure, and which other PDB entries were published with it?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Lucido <em>et al.</em> (2016) Crystal Structure of Aspirin-Acetylated Human Cyclooxygenase-2: Insight into the Formation of Products with Reversed Stereochemistry. <em>Biochemistry</em> 55: 1226-1238. Related structures: <strong>5F19</strong> (aspirin-acetylated human COX-2) and <strong>5FDQ</strong> (a mouse COX-2 mutant, S530T).</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-macromolecules" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="sec-macromolecules"><span class="header-section-number">4.4</span> Macromolecules and assembly</h3>
+<p>The <em>Macromolecules</em> table lists every polymer chain: its name, chains, length, organism, gene and EC number, with links out to UniProt, PHAROS and GTEx. Just above it, the page describes the <strong>biological assembly</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Asymmetric unit versus biological assembly
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A crystal is built from a small repeating box, the <strong>asymmetric unit</strong>: what the crystallographer actually modelled. It may contain one copy of the protein, several, or half of a functional complex. The <strong>biological assembly</strong> is the form believed to exist in the cell. They are not always the same, so check which one you are looking at.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>How many protein chains are there, and how many residues long is each?</li>
+<li>What is the global stoichiometry and symmetry of the biological assembly?</li>
+<li>How many glycosylation sites are annotated?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Two chains (A and B) of the same protein, Prostaglandin G/H synthase 2, 553 residues each. Only one residue of the 1,106 deposited is missing from the model.</li>
+<li>Homo 2-mer (A2), with cyclic C2 symmetry: COX-2 works as a <strong>dimer</strong> of two identical subunits (<a href="#fig-assembly" class="quarto-xref">Figure&nbsp;1</a>).</li>
+<li>Two. The sugar chains (N-acetylglucosamine and mannose) appear in the <em>Oligosaccharides</em> section, confirming the protein was glycosylated by the insect cells.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-ligands" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="sec-ligands"><span class="header-section-number">4.5</span> Small molecules</h3>
+<p>Now scroll to the <em>Small Molecules</em> table. Each ligand has a short <strong>three-character ID</strong> (its “chemical component” code), a name, a formula and links to its 3D interactions.</p>
+<!-- ::: {.callout-warning icon=false} -->
+<!-- ## ❓ Question -->
+<!-- 1. Six different small molecules are listed. Sort them into three groups: **the drug**, **natural partners** of the enzyme, and **leftovers from the experiment**. -->
+<!-- 2. The enzyme normally carries heme (iron protoporphyrin IX). What is found instead? -->
+<!-- 3. The *Binding Affinity* table reports a Ki of 1.00e+4 nM for salicylate. Convert it to µM. Is salicylate a potent COX-2 inhibitor? -->
+<!-- ::: {.callout-note collapse="true"} -->
+<!-- ## Show answer -->
+<!-- 1. - Drug: **SAL**, 2-hydroxybenzoic acid (salicylic acid). -->
+<!--    - Natural partners: **COH** (in place of heme) and **NAG**, the glycosylation sugar. -->
+<!--    - Experimental leftovers: **BOG** (octyl glucoside, a detergent used to keep the membrane protein soluble), **AKR** (acrylic acid) and **EDO** (ethylene glycol), from the crystallization and cryo-protection solutions. -->
+<!-- 2. **COH**, protoporphyrin IX containing **cobalt**. Replacing iron with cobalt gives a catalytically inactive enzyme that keeps its shape, a common trick in COX crystallography to capture complexes without the reaction taking place. -->
+<!-- 3. 10 µM (IC50 is 40 µM). That is weak: potent drugs typically bind in the nanomolar range. Salicylate's effect depends on the high doses reached in the body, and aspirin's power comes from **permanently** acetylating the enzyme, not from tight binding. -->
+<!-- ::: -->
+<!-- ::: -->
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Not every ligand is biology
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A structure faithfully records <em>everything</em> in the crystal, including buffers, detergents and cryoprotectants. Before you draw conclusions about a “ligand”, check whether it makes sense biologically, and check the <em>Experiment</em> page (<a href="#sec-experiment" class="quarto-xref">Section&nbsp;9</a>) for what was in the crystallization drop.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-3d" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="sec-3d"><span class="header-section-number">5</span> Exploring in 3D with Mol*</h2>
+<p>The <strong>Mol*</strong> (MolStar) viewer is built into the RCSB site. You do not need to install anything.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: look at the whole protein
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Click the <strong>Structure</strong> tab (or <em>Explore in 3D: Structure</em> under Biological Assembly 1).</li>
+<li>Rotate (left-click and drag), zoom (scroll wheel) and move (right-click and drag).</li>
+<li>In the right-hand panel, open <em>Components</em> and turn on and off the visibility (<code>eye</code> icon) of the polymer, the ligands, the carbohydrates and the water.</li>
+<li>Notice the tool bar on the right side the viewport. Click the <em>Expanded viewport</em> icon (looks like a square) to expand the viewer to full screen. You must leave the expanded viewer to access the panel options again.</li>
+<li>Hover over any part of the molecule and read the label at the bottom right: chain, residue name and number.</li>
+<li>Explore the viewer window header and its options (select a molecule from the box, and then click on its components to zoom-in to it).</li>
+<li>Reload the page to reset the viewing parameters.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>How many copies of the ligands salicylate (<em>2-HYDROXYBENZOIC ACID</em>) and cobalt porphyrin (<em>PROTOPORPHYRIN IX CONTAINING CO</em>) can you find, and in which chains? <em>(Hint: In the right-hand panel you can hide from view the molecules that are not ligands).</em> What does that tell you about the active sites?</li>
+<li>What secondary structure dominates COX-2: helices or sheets (cartoon arrows)?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Two of each: one salicylate and one porphyrin per chain. Each subunit of the dimer carries its own complete set of active sites.</li>
+<li>Mainly <strong>alpha helices</strong>. The small beta-sheet regions belong mostly to the EGF-like domain.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Now zoom in on the drug.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: the salicylate binding site
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Go back to the <em>Structure Summary</em> tab. In the <em>Small Molecules</em> table, find the <strong>SAL</strong> row and click <em>Interactions: Focus chain E [auth A]</em>.</li>
+<li>The view zooms in on salicylate, shows the surrounding residues as sticks, and draws <strong>dashed lines for non-covalent interactions</strong> (hydrogen bonds, ionic, pi-stacking, hydrophobic).</li>
+<li>Hover over the neighbouring residues and over the dashed lines to identify them.</li>
+<li>Measure a distance: switch on <em>selection mode</em> (arrow icon on the right of the viewer), click the salicylate hydroxyl oxygen and then the side-chain oxygen (OG) of <strong>Ser-499</strong> (they become highlighted in green), and then in the <em>Measurements</em> section of right-hand panel click <code>Add</code> <em>Distances</em>.</li>
+<li>Repeat steps 1 to 4 for the salicylate in chain B (<em>Focus chain L [auth B]</em>).</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Which residues surround salicylate? Which of them form hydrogen bonds or ionic interactions with it?</li>
+<li>What distance did you measure between salicylate and <strong>Ser-499</strong>, the residue that aspirin acetylates?</li>
+<li>Does salicylate bind in the same way in both chains?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<!-- INSTRUCTOR: fill in the exact contact list and the Ser-530 distance from Mol* before class. -->
+<ol type="1">
+<li>Salicylate sits inside the long, mostly hydrophobic <strong>cyclooxygenase channel</strong>, the same channel where the natural substrate, arachidonic acid, binds. Useful landmarks in this channel are <strong>Arg-80</strong> and <strong>Tyr-324</strong> (the “constriction” near the entrance), <strong>Tyr-354</strong> (the catalytic tyrosine) and <strong>Ser-499</strong> (aspirin’s acetylation target). Your list of contacts should include residues from this set plus hydrophobic neighbours; the polar interactions involve salicylate’s carboxylate and hydroxyl groups.</li>
+<li>Chain A: 6.03 Å. Chain B: 5.67 Å.</li>
+<li>The pose is very similar in the two chains (remember that 1 Å = 10⁻¹⁰ meters). Small differences between chains are common: each copy in the crystal is an independent observation.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: is the ligand really there?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Back on the Structure Summary page, click <strong>Interactions &amp; Density</strong> for SAL (chain E).</li>
+<li>The mesh around the atoms is the <strong>electron density</strong>: the experimental evidence for where the atoms are.</li>
+<li>Compare the density around salicylate with the density around a well-ordered residue next to it.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why is it worth checking the electron density for a ligand, rather than simply trusting its coordinates?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The coordinates of a ligand are placed by the crystallographer. If the density does not clearly cover the ligand, its position (or even its presence) may be doubtful. For drug design this matters a lot: a wrongly placed ligand leads to wrong conclusions about which interactions drive binding. The <em>Ligands</em> tab of the entry summarises this with <strong>ligand quality scores</strong> (fit to density and geometry). More information on this subject will be approached in the Drug modelling module.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-ligand-page" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="sec-ligand-page"><span class="header-section-number">6</span> The ligand page</h2>
+<p>Every chemical component in the PDB has its own page.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the <em>Small Molecules</em> table, click the ligand ID <strong>SAL</strong>, or go to <a href="https://www.rcsb.org/ligand/SAL" class="uri">https://www.rcsb.org/ligand/SAL</a>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>In how many PDB entries is SAL found as a standalone ligand? And covalently linked?</li>
+<li>What is its DrugBank ID? What is salicylic acid used for?</li>
+<li>Look at the <code>Drug Targets</code> table. Besides <em>Prostaglandin G/H synthase 1</em> (COX-1) and <em>Prostaglandin G/H synthase 2</em> (COX-2), which other human proteins are listed? Why could this matter for a patient?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-34" class="callout-34-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>73 entries as a standalone ligand and 2 where it is covalently linked (at the time of writing).</li>
+<li><strong>DB00936</strong>. It is widely used in dermatology (acne, psoriasis, warts, corns), and its salts, the salicylates, are used as analgesics and anti-inflammatories.</li>
+<li>Several <strong>carbonic anhydrases</strong>, an aldo-keto reductase, <strong>cytochrome P450 2C9</strong> (as a substrate), albumin, and organic anion transporters (OAT1, OAT3). These are potential <strong>off-targets</strong> and routes of metabolism and transport: they help explain side effects and drug-drug interactions.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Ligand IDs are another universal key
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Just as <code>P35354</code> identifies a protein, <code>SAL</code> identifies a chemical component across the whole archive. From the ligand page you can also run a <strong>chemical similarity search</strong> to find structures with related molecules: a first step in exploring structure-activity relationships.</p>
+</div>
+</div>
+</section>
+<section id="sec-annotations" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="sec-annotations"><span class="header-section-number">7</span> Annotations</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Click the <strong>Annotations</strong> tab.</p>
+</div>
+</div>
+<p>This page gathers what <em>other</em> resources say about the protein chains: structural domain classifications (SCOP2, ECOD, CATH), protein families (Pfam, InterPro), Gene Ontology terms, and disease associations (Pharos).</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Which two kinds of domain do CATH and InterPro identify in COX-2?</li>
+<li>What is the Pfam family? What does it tell you about COX-2’s evolutionary relatives?</li>
+<li>Name three diseases associated with COX-2 in the Pharos section. Why would a drug target be linked to so many diseases?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-38" class="callout-38-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>An <strong>EGF-like</strong> (laminin-type) domain, and a large <strong>haem peroxidase</strong> domain (animal type), which holds both the peroxidase and cyclooxygenase active sites.</li>
+<li>PF03098, <em>Animal haem peroxidase</em>. COX-2 belongs to the same family as enzymes like myeloperoxidase (SCOP2 calls it <em>Myeloperoxidase-like</em>): its peroxidase function is ancient; the cyclooxygenase activity is its specialisation.</li>
+<li>For example rheumatoid arthritis, colorectal cancer, familial adenomatous polyposis, gastric ulcer, cardiovascular disease. Prostaglandins act in almost every tissue, so COX-2 is involved in inflammation, cancer, the cardiovascular system and more. This is also why COX inhibitors have both wide uses and wide side effects.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-sequence" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="sec-sequence"><span class="header-section-number">8</span> Sequence and Genome</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Click the <strong>Sequence</strong> tab. Look at the tracks aligned along the sequence of chain A: the UniProt sequence, the modelled regions, secondary structure, domains and binding sites.</li>
+<li>Click the <code>Explore Sequence Annotations in 3D</code> link on top of the sequence viewer and highlight, for example, the <code>secondary structure</code> domains to see their 3D location compared to their 2D linear sequence.</li>
+<li>Then click the <strong>Genome</strong> tab.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>The crystallized chain is 553 residues long. How long is the full human COX-2 in UniProt (P35354)? Which parts are missing, and why might that be? <em>(Hint: In the <code>Feature viewer</code> tab of <code>UniProt</code> explore the <code>PDBe coverage</code> and the <code>Molecule processing</code> tracks to check which regions are not solved in 3D).</em></li>
+<li>On which chromosome is the <em>PTGS2</em> gene located?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-41-contents" aria-controls="callout-41" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-41" class="callout-41-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>604 residues. The N-terminal <strong>signal peptide</strong> (cleaved off naturally when the protein enters the endoplasmic reticulum) is not part of the crystallized chain, and the chain stops before the flexible <strong>C-terminal tail</strong>. Flexible, disordered regions are often removed or simply not visible in crystal structures: a structure rarely shows the whole protein.</li>
+<li>Chromosome 1 (1q31). The Genome view maps the protein back onto its gene, exons and transcripts, connecting to what you did in the Ensembl tutorials.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-experiment" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="sec-experiment"><span class="header-section-number">9</span> Experiment and validation</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Click the <strong>Experiment</strong> tab. Observe the rich standardized description of the experimental settings used to obtain this data record.</li>
+<li>From the <code>Structure Summary</code> page, open the <strong>Full Report</strong> (wwPDB validation report, PDF). This is the document that sustains this database entry.</li>
+</ol>
+</div>
+</div>
+<p>The <em>Experiment</em> tab records how the structure was obtained, from crystal to final model. You do not need to understand every number, but three points are worth noticing for 5F1A.</p>
+<p><strong>Crystallization.</strong> The protein was crystallized by sitting-drop vapour diffusion at pH 7.5 and 23 °C (296 K). The solution contained polyacrylic acid, HEPES buffer, magnesium chloride and 0.6% octyl glucoside, a detergent that keeps this membrane-associated protein soluble. This explains two of the “leftover” ligands present in the <code>Small Molecules</code> section: <strong>BOG</strong> is the octyl glucoside itself, and <strong>AKR</strong> (acrylic acid) most likely comes from the polyacrylic acid.</p>
+<p><strong>Data collection.</strong> The diffraction data were collected at a <strong>synchrotron</strong> (the Advanced Photon Source, beamline 17-ID), at the temperature of 100 K. Crystals are routinely frozen like this to limit damage from the very intense X-ray beam.</p>
+<p><strong>Structure solution.</strong> The structure was solved by <strong>molecular replacement</strong>: a previously known, similar COX-2 structure was used as the starting model. For well-studied proteins like COX-2, this is the quickest route to a new structure, for example a new drug complex.</p>
+</section>
+<section id="sec-versions" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="sec-versions"><span class="header-section-number">10</span> Versions</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Click the <strong>Versions</strong> tab.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>How many versions of this entry exist?</li>
+<li>Two updates are labelled <em>Remediation</em>. What was fixed in each?</li>
+<li>Did the authors’ experimental data change in any of these versions?</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-45-contents" aria-controls="callout-45" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-45" class="callout-45-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Seven (version 1.0 in March 2016 up to version 2.2 in August 2026).</li>
+<li><strong>Carbohydrate remediation</strong> (version 2.0, 2020): the archive-wide re-description of sugar chains. <strong>Metalloprotein remediation</strong> (version 2.2, 2026): a re-description of metal sites, relevant here because of the cobalt porphyrin.</li>
+<li>No.&nbsp;Updates concern annotation, derived calculations, and how the data are represented. As in UniProt, the knowledge <em>around</em> an entry keeps improving, even when the experiment stays the same.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-further" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="sec-further"><span class="header-section-number">11</span> Going further (optional)</h2>
+<p>If you finish early, try one of these.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>🔬 Hands on: before and after aspirin
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Navigate to the main page of <a href="https://www.rcsb.org">RCSB PDB</a>, click the <em>All tools</em> button, and select <em>Analysis</em>. Open the <em>Pairwise Structure Alignment</em> tool (click <em>Go to Tool</em>).</li>
+<li>Align chain A of <strong>5F1A</strong> (salicylate) with chain A of <strong>5F19</strong> (aspirin-acetylated COX-2). Leave the default alignment method, and click <em>Compare</em>.</li>
+<li>In 5F19, find Ser-530 and look at its side chain. In 5F1A, compare it with where salicylate sits.</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="key-points" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="key-points">Key points</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Take home messages
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>A PDB entry is an <strong>experimental model</strong>: always check method, resolution and R-values before trusting details.</li>
+<li>Search with <strong>identifiers</strong> (PDB ID, UniProt accession, ligand ID) rather than free text whenever you can.</li>
+<li>The <strong>biological assembly</strong> may differ from what was modelled in the crystal.</li>
+<li>Not every small molecule in a structure is biologically relevant: detergents, buffers and cryoprotectants are recorded too.</li>
+<li><strong>Mol*</strong> lets you see exactly where a drug binds and which residues it touches; the <strong>electron density</strong> tells you whether to believe it.</li>
+<li>Ligand, annotation, sequence and genome pages connect the structure to DrugBank, UniProt, Pfam, GO and the genome.</li>
+<li>The <em>Versions</em> tab shows that even an archived structure keeps being curated.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<p>Primary citation for 5F1A:</p>
+<blockquote class="blockquote">
+<p>Lucido, M.J., Orlando, B.J., Vecchio, A.J. and Malkowski, M.G. (2016) Crystal structure of aspirin-acetylated human cyclooxygenase-2: insight into the formation of products with reversed stereochemistry. <em>Biochemistry</em> 55: 1226-1238. <a href="https://doi.org/10.1021/acs.biochem.5b01378" class="uri">https://doi.org/10.1021/acs.biochem.5b01378</a></p>
+</blockquote>
+<p>Primary resource:</p>
+<blockquote class="blockquote">
+<p>Burley, S.K. <em>et al.</em> RCSB Protein Data Bank. <a href="https://www.rcsb.org/" class="uri">https://www.rcsb.org/</a>. Entry 5F1A: <a href="https://doi.org/10.2210/pdb5F1A/pdb" class="uri">https://doi.org/10.2210/pdb5F1A/pdb</a></p>
+</blockquote>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/SA/">CC BY SA</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright 2026, Isabel Duarte</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/instructr/ualg.bioinf.drug.design.2026">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
