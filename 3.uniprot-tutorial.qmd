@@ -532,7 +532,7 @@ clustering at 100%, 90%, and 50% identity thresholds, and the Homologs section p
 
 : Cluster membership {.striped}
 
-2. 6 paralogous genes in human.
+2. 11 paralogous genes in human.
 
 :::
 ::::
