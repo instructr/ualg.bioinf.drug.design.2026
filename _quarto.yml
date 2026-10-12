@@ -23,10 +23,10 @@ website:
           - 2.ensembl-tutorial-part1.qmd
           - 2.ensembl-tutorial-part2.qmd
           - 3.uniprot-tutorial.qmd
-          # - 4.pdb-tutorial.qmd
-          # - 5.brugbank-tutorial.qmd
-          # - 6.clinpgx-tutorial.qmd
-          # - 7.opentargets-tutorial.qmd
+          - 4.pdb-tutorial.qmd
+          # - 5.brugbank-tutorial-part1.qmd
+          # - 5.brugbank-tutorial-part2.qmd
+          # - 6.opentargets-tutorial.qmd
       # - text: "Calendar"
       #   menu:
       #     - calendar.qmd
