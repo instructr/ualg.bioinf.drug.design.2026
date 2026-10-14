@@ -1,0 +1,447 @@
+---
+title: "One drug along the DrugBank page"
+subtitle: "Exploring a DrugBank entry using atorvastatin as an example"
+author:
+  - name: "Isabel Duarte"
+    affiliation: "Universidade do Algarve"
+date: today
+date-format: "MMMM YYYY"
+abstract: |
+  A hands-on walk through a single DrugBank entry (DB01076, atorvastatin).
+  You will learn how to find a drug, read its mechanism, pharmacokinetics,
+  interactions and properties, and follow its links to UniProt and the PDB.
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-expand: 2
+    number-sections: true
+    code-copy: true
+    code-overflow: wrap
+    anchor-sections: true
+    smooth-scroll: true
+    theme:
+      - cosmo
+    css: styles.css
+    link-external-newwindow: true
+    link-external-icon: true
+    fig-cap-location: bottom
+license: "CC BY SA 4.0"
+---
+
+::: {.callout-important}
+## Before class: create your free DrugBank account
+
+Without an account, DrugBank shows only a short summary of each entry. Please
+create a **free account** before the session, so we can start on time.
+
+1. Go to <https://go.drugbank.com/public_users/sign_up>.
+2. Register and confirm the email you receive.
+3. Log in once to check that it works.
+:::
+
+## Overview {.unnumbered}
+
+::: {.callout-note}
+## Questions this lesson answers
+
+- How do you find a drug in DrugBank quickly?
+- How are a drug's mechanism, targets and pharmacokinetics described?
+- How can DrugBank help you anticipate interactions and differences between patients?
+- How do you move from a drug to its target protein and to its 3D structure?
+:::
+
+::: {.callout-tip}
+## Learning objectives
+
+By the end of this session you should be able to:
+
+1. Interpret a DrugBank entry: mechanism, targets, pharmacokinetics, interactions and classification.
+2. Explain a clinically relevant interaction using the enzymes and transporters listed for a drug.
+3. Use shared identifiers (UniProt accession, PDB ID) to move between databases.
+:::
+
+| | |
+|---|---|
+| **Time estimate** | ~1.5 hours |
+| **Level** | Introductory |
+| **Prerequisites** | The UniProt session; basic pharmacology (targets, CYP enzymes, pharmacokinetics) |
+| **Software needed** | A web browser and a free DrugBank account |
+
+: Practical details {.striped .hover tbl-colwidths="[25,75]"}
+
+::: {.callout-caution appearance="simple" collapse="true"}
+Numbers in the solutions below were taken on 12 October 2026. DrugBank is
+updated continuously, so your numbers may differ.
+
+**Please note** | You do not need to follow every link in this tutorial. Links are provided for additional information and reference. Whenever you are expected to follow a link, you will be explicitly instructed to do so.
+:::
+
+## Why is DrugBank relevant for pharmaceutical sciences? {#sec-intro}
+
+In the UniProt session you started from a **protein**. Today you start from the
+**molecule** that acts on it.
+
+[DrugBank](https://go.drugbank.com) gathers in one entry what a pharmacist or
+drug developer needs to know about a drug: its chemistry, what it binds, how
+the body absorbs, transforms and eliminates it, what it interacts with, and how
+it is marketed. Each piece links to other databases (UniProt, PubChem, ChEMBL,
+the PDB) through shared identifiers.
+
+## About this lesson
+
+This lesson uses **atorvastatin** (Lipitor) as a worked example. Atorvastatin is
+a statin: it lowers blood cholesterol and reduces the risk of heart attack and
+stroke. For many years it was the best-selling medicine in the world, and it is
+still one of the most prescribed.
+
+## Finding the entry {#sec-search}
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on: find atorvastatin
+
+1. Open <https://go.drugbank.com> and **log in**.
+2. Search for `atorvastatin` and open the first hit (or go directly to <https://go.drugbank.com/drugs/DB01076>).
+:::
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. What is the DrugBank accession number of atorvastatin?
+2. Search for the brand name `Lipitor`. Where do you land?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. `DB01076`. Every DrugBank drug has a stable accession: `DB` + 5 digits.
+2. On the same entry. DrugBank indexes brand names and synonyms, but the
+   entry is always the **active substance**, not a commercial product.
+:::
+::::
+
+## Reading the entry page {#sec-entry}
+
+<!-- Optional: add a screenshot of the entry header, as in the UniProt lesson -->
+<!-- ![The header of a DrugBank entry.](images/drugbank_atorvastatin_1.png){#fig-drugbank fig-alt="Screenshot of the DrugBank entry header for DB01076."} -->
+
+As in UniProt, the **left-hand menu** stays fixed as you scroll and shows what
+the entry holds. We will follow it from top to bottom:
+
+::: {.grid}
+::: {.g-col-6}
+- Identification
+- Pharmacology
+- Interactions
+- Products
+- Categories
+- Chemical Identifiers
+- References
+:::
+::: {.g-col-6}
+- Clinical Trials
+- Pharmacoeconomics
+- Properties
+- Spectra
+- Targets, Enzymes
+- Carriers, Transporters
+:::
+:::
+
+We will skip *Clinical Trials*, *Pharmacoeconomics* and *Spectra* today.
+
+### The summary card {#sec-card}
+
+At the top of the page is the **"ID card"** of the drug: structure,
+description, DrugBank ID, modality, number of indicated conditions, clinical
+trials by phase, therapeutic categories and mechanism of action.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. What is the modality of atorvastatin?
+2. How many clinical trials are listed in Phase 4? Why is an approved drug still being tested?
+3. In the *Identification* section, which **Groups** is atorvastatin in?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. Small molecule (as opposed to, for example, an antibody).
+2. 367. Phase 4 trials take place *after* approval: they monitor long-term
+   safety, compare treatments, or test new uses.
+3. *Approved* and *Investigational*: it is marketed, and still under study.
+:::
+::::
+
+### Identification {#sec-identification}
+
+Read the *Background* paragraph.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. When was atorvastatin first synthesised, and when was it approved by the FDA?
+2. Unlike some other statins, atorvastatin does not need activation. What does that mean?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. Synthesised in 1985, approved by the FDA in 1996.
+2. It is given in its **active** form. Some statins (for example lovastatin
+   and simvastatin) are **prodrugs** that must be converted in the body
+   before they can inhibit the enzyme.
+:::
+::::
+
+### Pharmacology {#sec-pharmacology}
+
+This is the core of the entry. Read *Mechanism of action* and the small
+**target table** below it.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. Which enzyme does atorvastatin inhibit, and which reaction does that enzyme catalyse?
+2. Atorvastatin blocks cholesterol *synthesis* in the liver. Why does that lower cholesterol in the *blood*?
+3. The target table lists five proteins, each with a letter badge, **A** or **U**. Which one has an **A**, and what do you think the letters mean? (Hint: Look at the *Targets* cards at the bottom of the page and compare this table with its *Pharmacological action* field.)
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. Competitive inhibitor of HMG-CoA (3-hydroxy-3-methylglutaryl coenzyme A) reductase. It converts HMG-CoA to mevalonate, the rate-limiting step of cholesterol synthesis.
+2. Liver cells with less cholesterol produce more LDL receptors, which pull
+   LDL (sometimes called the "bad cholesterol") out of the blood.
+3. Only HMG-CoA reductase has an **A**: binding to it is known to cause the
+   drug's effect (Pharmacological **A**ction: *yes*). The other four (DPP4, AHR,
+   HDAC2, NR1I3) have **U**: the drug binds them, but whether that matters
+   is **U**nknown.
+:::
+::::
+
+Now read carefully in the **Pharmacology** section the fields related to pharmacokinetic characteristics of the drug: 
+
+- *Absorption*, 
+- *Protein binding*,
+- *Metabolism*, 
+- *Route of elimination* and 
+- *Half-life*.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. What is the absolute oral bioavailability, and why is it so low?
+2. Which enzyme is mainly responsible for the metabolism? Are the metabolites active? *(Look at the metabolite tree.)*
+3. The half-life of atorvastatin is 14 hours, yet the effect lasts longer. Why?
+4. How is atorvastatin mainly eliminated?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. 14%, because of extensive **first-pass metabolism** in the gut wall and liver.
+2. Cytochrome P450 3A4 (**CYP3A4** gene), producing ortho- and para-hydroxylated metabolites. Yes, the metabolites are **active**: they account for about 70% of the circulating HMG-CoA reductase inhibition.
+3. The active metabolites have half-lives of up to 30 hours.
+4. In the **bile**. Less than 1% is eliminated by the kidneys.
+:::
+::::
+
+Genes can change how a patient handles a drug. Re-read the end of the
+**Absorption** section, then scroll to the **Pharmacogenomic Effects/ADRs** table.
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. Patients homozygous for the *SLCO1B1* c.521T>C variant have a 2.45-fold higher atorvastatin AUC. *SLCO1B1* gene encodes OATP1B1 protein, which carries the drug from the blood into liver cells. Why would these patients be at greater risk of muscle toxicity? (Hint: See the *Myopathy/Rhabdomyolysis* description in the **Pharmacodynamics** section.)
+2. Which three genes are listed in the *Pharmacogenomic Effects/ADRs* table? Do they change the drug's **efficacy** or its **safety**?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. Less uptake into the liver means more drug stays in the blood and reaches
+   muscle, where statins can cause myopathy (see *Pharmacodynamics*). The
+   higher dose in the wrong tissue is the problem, not a stronger effect.
+2. *HMGCR* and *CYP3A4* (`CYP3A4*1B`)describe **efficacy**:
+   a greater or smaller reduction in LDL cholesterol; while *KIF6* describes a **safety** related finding (reduced risk of major cardiovascular event).
+:::
+::::
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+**Critical thinking question**
+
+Ask your favourite Large Language Model (LLM) AI chat:
+
+*"What is the half-life of atorvastatin, which enzyme metabolises it, and what
+is your source? Answer briefly."*
+
+Compare the answer with DrugBank. Does it match? Does the source exist and say
+what the model claims? Which would you cite in a report, and why?
+
+::: {.callout-note collapse="true" title="Show answer"}
+LLMs usually get well-known facts like these right, but they can mix up values
+(for example, the half-life of the drug and of its metabolites), and the
+references they give may be inaccurate or invented. DrugBank attaches a
+numbered reference to each statement, which you can open and check.
+:::
+::::
+
+### Interactions {#sec-interactions}
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on
+
+1. In **Drug Interactions**, note the number of entries under the default **APPROVED** tab, then click **ALL DRUGS**.
+2. Type `clarithromycin` in the table's search box.
+3. Read the **Food Interactions**.
+:::
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. How many interactions with approved drugs are listed? Why does the number grow under *ALL DRUGS*?
+2. What does DrugBank say about clarithromycin? Explain it using what you learnt in the Pharmacology section.
+3. Can Atorvastatin be taken with food? Which food should patients avoid, and why? 
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. 929. *ALL DRUGS* () also includes investigational, experimental,
+   nutraceutical and other substances.
+2. "The risk or severity of rhabdomyolysis can be increased when Clarithromycin is combined with Atorvastatin." This is because Clarithromycin **decreases the metabolism** of atorvastatin. It is a strong CYP3A4 inhibitor, so atorvastatin levels rise, and with them the risk of myopathy and rhabdomyolysis.
+3. Atorvastatin can be taken with or without food. **Grapefruit** should be avoided because it increases the risk of myopathy (since it inhibits CYP3A4 in the gut wall). 
+:::
+::::
+
+### Products and Categories {#sec-products}
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. In *Products*, look at **International/Other Brands**. Under which brand name is atorvastatin sold in **Portugal**? By which pharmaceutical company?
+2. How many generic prescription products are listed? Can you propose why so many?
+3. Look at **Unapproved/Other Products**. Does anything surprise you? In which country are they sold?
+4. In *Categories*, decode the ATC code `C10AA05` level by level. The other ATC codes are combination products: with which kinds of drugs is atorvastatin combined?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. **Sortis** is the brand name in Portugal, sold by Pfizer.
+2. 909 generics. Since the patent has expired, many companies sell generics, in several strengths and pack sizes.
+3. Two oral liquids, including a "coffee", list atorvastatin as an ingredient.
+   A database faithfully records what has been registered somewhere, not only
+   what makes medical sense. Always check the source.
+4. `C` cardiovascular system › `C10` lipid modifying agents › `C10A` lipid
+   modifying agents, plain › `C10AA` HMG CoA reductase inhibitors ›
+   `C10AA05` atorvastatin. The combinations add other cardiovascular drugs:
+   ezetimibe (another lipid-lowering drug), antihypertensives (amlodipine,
+   perindopril, ramipril, candesartan) and acetylsalicylic acid. Several of
+   them are "polypills" for cardiovascular prevention.
+:::
+::::
+
+### Chemical Identifiers and Properties {#sec-chemistry}
+
+The **Chemical Identifiers** section provides standardized names and machine-readable representations that uniquely identify a drug’s chemical structure and allow it to be linked across databases.
+
+| Identifier | What it is | Typical use     |
+| -----------| ---------- | ----------------|
+| UNII        | FDA Unique Ingredient Identifier | Standardized identification of substances in FDA-related data.|
+| CAS Registry Number | A unique numeric identifier assigned by Chemical Abstracts Service | Searching and matching chemicals across regulatory and chemical databases. |
+| InChIKey | Fixed 27-character hash derived from InChI | Compact, searchable identifier for web and database searches. |
+| InChI  | IUPAC International Chemical Identifier; a standardized structural text identifier | Precise structure-based database linking. |
+| IUPAC name  | Systematic chemical name following IUPAC rules  | Unambiguous human-readable description of the molecule. |
+| SMILES      | Text string encoding the 2D molecular structure | Input for cheminformatics tools, structure drawing, and computational analysis.  | 
+
+SMILES and InChI describe the structure, while CAS, UNII, and DrugBank IDs are database identifiers used to retrieve and cross-reference the same compound. DrugBank also provides structure downloads in formats such as SDF, SMILES, and InChI for computational workflows.
+
+
+The **Properties** lists experimental and predicted physicochemical values.
+
+Note | A classic first check in drug design is **Lipinski's Rule of Five** (Ro5): a rule of thumb in medicinal chemistry used to estimate whether a small molecule is likely to be orally bioavailable in humans (i.e., absorbed well enough after ingestion to reach its target). 
+It was introduced by Christopher Lipinski in 1997 and is a screening guideline, not proof that a compound will be an effective drug. 
+
+According to this rule, an active drug usually has **no more than one violation** of these rules: 
+
+| Property | Preferred limit | Why it matters |
+| -------- | --------------- | -------------- |
+| Molecular weight           | ≤ 500 Da | Very large molecules often have poor membrane permeability                              |
+| Calculated log P (ClogP)   | ≤ 5      | Measures lipophilicity; too high can reduce solubility and increase nonspecific binding |
+| Hydrogen-bond donors       | ≤ 5      | Mainly OH and NH groups; too many can impede passage through membranes                  |
+| Hydrogen-bond acceptors    | ≤ 10     | Mainly O and N atoms; excessive polarity can reduce permeability                        |
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. In the **Properties** section, sub-section *Predicted Properties*, what does DrugBank say about the **Rule of Five**? Using the molecular weight (shown in the *Identification* section), logP, donor and acceptor counts, which rules are broken?
+2. You will find three different logP values on the **Properties** section. Why do they differ?
+3. Atorvastatin fails the Rule of Five, yet it is one of the most used oral drugs. What does that tell you about such rules?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. Rule of Five: **No**. Molecular weight 558.6 > 500, and logP 5.39
+   (Chemaxon) > 5. Donors (4) and Acceptors (5) are fine.
+2. One is experimental (6.36) and two are predicted by different programs
+   (ALOGPS 4.24, Chemaxon 5.39). Predictions depend on the method; always
+   check which value you are using.
+3. They are quick filters, not laws. Atorvastatin is well absorbed (the
+   predicted ADMET table also says so); its low bioavailability comes from
+   first-pass metabolism, which these rules do not capture.
+:::
+::::
+
+### Targets, Enzymes, Carriers and Transporters {#sec-targets}
+
+The last part of the page has one card per protein associated with this drug (targets, metabolizing enzymes, carriers, and transporters), each with its **UniProt ID**, **Pharmacological action** and **Actions** (inhibitor, substrate, inducer, binder...).
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. How many enzymes, carriers and transporters are listed? (Hint: Look at the left-hand menu.)
+2. Which carrier is listed? How does it relate to the *Protein binding* percentage you read earlier in the **Pharmacology** section?
+3. In the HMG-CoA reductase card, click the UniProt ID `P04035`. What is the UniProt entry name, and where is the protein located in the cell?
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. 10 enzymes, 1 carrier, 10 transporters.
+2. **Albumin** (action: binder). Since the carrier protein is albumin, the drug is transported in the blood bound to albumin, which explains why more than 98% of atorvastatin in plasma is protein-bound.
+3. The protein name in UniProt is `HMDH_HUMAN`. It is a membrane protein located in the **endoplasmic reticulum** and in the **peroxisome**. Note that the DrugBank and
+UniProt databases are linked by the shared accession number `P04035`.
+:::
+::::
+
+## From drug to structure {#sec-structure}
+
+DrugBank tells you *that* atorvastatin binds HMG-CoA reductase. The
+[Protein Data Bank (PDB)](https://www.rcsb.org) shows you *how*, atom by atom.
+
+::: {.callout-tip icon=false}
+## 🔬 Hands on
+
+1. In DrugBank, copy the **InChIKey** of atorvastatin (*Chemical Identifiers*).
+2. Go to *References* › *External Links*. Note the **PDBe Ligand** ID and click the entry under **PDB Entries** (1hwk).
+3. You are now on the RCSB PDB page. Scroll to **Small Molecules**.
+:::
+
+:::: {.callout-warning icon=false}
+## ❓ Question
+
+1. Compare the InChIKey of the ligand with the one you copied (Hint: You can use CTRL + f to search for the InChIKey). What do you conclude?
+2. Which experimental method was used, and at what resolution?
+3. The protein in this structure has four chains. How many copies of atorvastatin are bound? (Hint: You can hide the *Polymer* and the *Water* in the right-hand side menu, and keep visible only the *Ligands*. If you hover the mouse over the ligands you can see their name in the bottom right corner (id 117)).
+
+::: {.callout-note collapse="true" title="Show answer"}
+1. In the PDB entry `1HWK`, ligand `117` has the same InChIKey (`XUKUURHRXDUEBC-KAYWLYCHSA-N`) as atorvastatin in the DrugBank entry, so ligand `117` in PDB **is** atorvastatin, even though the two databases use different identifiers for it.
+2. X-ray diffraction, 2.22 Å (Istvan and Deisenhofer, *Science*, 2001).
+3. Four, one in each chain.
+:::
+::::
+
+## Key points {.unnumbered}
+
+::: {.callout-tip icon=false}
+## Take home messages
+
+- A DrugBank entry gathers chemistry, mechanism, pharmacokinetics,
+  interactions and products of a drug in one place.
+- *Targets* explain the effect; *enzymes* and *transporters* explain most
+  interactions and much of the variability between patients.
+- Not every listed target matters: check the pharmacological action.
+- Predictions (logP, Rule of Five, ADMET) are useful filters, not facts.
+- Shared identifiers (UniProt ID, InChIKey, PDB ID) connect drug, protein and
+  structure databases.
+:::
+
+## References {.unnumbered}
+
+Primary resource:
+
+> Knox C, Wilson M, Klinger CM, *et al.* DrugBank 6.0: the DrugBank
+> Knowledgebase for 2024. *Nucleic Acids Res.* 2024;52(D1):D1265-D1275.
+> <https://doi.org/10.1093/nar/gkad976>
+
+Structure used in the last section:
+
+> Istvan ES, Deisenhofer J. Structural mechanism for statin inhibition of
+> HMG-CoA reductase. *Science.* 2001;292:1160-1164.
+> <https://doi.org/10.1126/science.1059344>
