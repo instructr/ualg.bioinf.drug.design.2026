@@ -25,7 +25,7 @@ website:
           - 3.uniprot-tutorial.qmd
           - 4.rcsb-pdb-tutorial.qmd
           - 5.drugbank-tutorial-part1.qmd
-          # - 5.brugbank-tutorial-part2.qmd
+          - 5.escape-room-tp1.qmd
           # - 6.opentargets-tutorial.qmd
       # - text: "Calendar"
       #   menu:

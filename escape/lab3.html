@@ -1,0 +1,380 @@
+<title>Lab 3 Lockdown</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@600;800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a security console. Sticky status bar (timer, doors), one room card at a time, collected fragments below. Single dark look by design. */
+:root{
+  color-scheme: dark;
+  --bg:#0e1822;
+  --panel:#15232f;
+  --panel-2:#1b2c3a;
+  --line:#2a3e4f;
+  --ink:#e4ecf1;
+  --muted:#93a7b6;
+  --amber:#f0b23c;
+  --amber-ink:#1a1306;
+  --ok:#47c1a3;
+  --bad:#ee6b5c;
+  --link:#8cc8ff;
+  --f-display:"Big Shoulders Stencil Display","Arial Narrow",Impact,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--panel)}
+a{color:var(--link)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--panel);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding-block:10px}
+.brand{font-family:var(--f-display);font-weight:800;font-size:1.35rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);margin-right:auto}
+.timer{font-family:var(--f-mono);font-weight:600;font-size:1.45rem;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.timer.low{color:var(--amber)}
+.timer.over{color:var(--bad)}
+.stats{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);display:flex;gap:14px}
+.doors{display:flex;gap:6px;width:100%}
+.door{flex:1;height:8px;border-radius:2px;background:var(--line)}
+.door.open{background:var(--ok)}
+.door.here{background:var(--amber)}
+main{padding-block:24px 48px}
+.hazard{height:10px;background:repeating-linear-gradient(-45deg,var(--amber) 0 14px,var(--bg) 14px 28px);border-radius:2px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.card .inner{padding:22px 22px 24px;display:grid;gap:16px}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1,h2{font-family:var(--f-display);font-weight:800;text-transform:uppercase;letter-spacing:.03em;line-height:1.02;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.4rem,7vw,3.8rem)}
+h2{font-size:clamp(1.9rem,5vw,2.6rem)}
+p{margin:0;max-width:65ch}
+.story{color:var(--ink)}
+.task{background:var(--panel-2);border-left:3px solid var(--amber);padding:14px 16px;border-radius:0 4px 4px 0;display:grid;gap:8px}
+.task strong{color:var(--amber)}
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+.tool{font-family:var(--f-mono);font-size:.82rem;text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:5px 10px;color:var(--link);background:var(--bg)}
+.tool:hover{border-color:var(--link)}
+form.lock{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
+.lock label{width:100%;font-family:var(--f-mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lock input{flex:1 1 220px;min-width:0;font-family:var(--f-mono);font-size:1.3rem;letter-spacing:.12em;text-transform:uppercase;padding:12px 14px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:4px}
+.lock input::placeholder{color:var(--muted);letter-spacing:.04em;text-transform:none;font-size:1rem}
+.btn{font-family:var(--f-body);font-weight:600;font-size:1rem;border-radius:4px;padding:12px 18px;cursor:pointer;border:1px solid var(--line);background:var(--panel-2);color:var(--ink)}
+.btn.primary{background:var(--amber);color:var(--amber-ink);border-color:var(--amber)}
+.btn.ghost{background:transparent;color:var(--muted)}
+.btn:disabled{opacity:.5;cursor:default}
+.msg{font-family:var(--f-mono);font-size:.92rem;min-height:1.4em}
+.msg.bad{color:var(--bad)}
+.msg.warn{color:var(--amber)}
+.msg.ok{color:var(--ok)}
+.hint{border:1px dashed var(--line);border-radius:4px;padding:12px 14px;color:var(--muted)}
+.hint b{color:var(--ink)}
+.hints{display:grid;gap:10px}
+.riddle{font-style:italic;max-width:65ch}
+.task .eyebrow{color:var(--amber)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.note{background:var(--bg);border:1px solid var(--ok);border-radius:4px;padding:14px 16px;display:grid;gap:6px}
+.note .eyebrow{color:var(--ok)}
+.frag{display:flex;flex-wrap:wrap;gap:8px}
+.tile{width:46px;height:56px;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:2rem;border-radius:4px;background:var(--panel-2);border:1px solid var(--line);color:var(--muted)}
+.tile.got{background:var(--amber);color:var(--amber-ink);border-color:var(--amber)}
+.section{margin-top:22px;display:grid;gap:10px}
+.shake{animation:shake .35s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.unlock{animation:unlock .5s ease-out}
+@keyframes unlock{from{transform:scale(.98);opacity:.6}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.shake,.unlock{animation:none}}
+.lessons{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.big{font-family:var(--f-mono);font-size:clamp(2rem,8vw,3.2rem);font-weight:600;font-variant-numeric:tabular-nums;color:var(--amber)}
+.confirm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.9rem;color:var(--muted)}
+footer{color:var(--muted);font-size:.8rem;padding-block:0 32px}
+</style>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="brand">Lab 3 Lockdown</div>
+    <div class="stats" aria-live="off"><span id="st-team"></span><span id="st-hints">Hints 0</span><span id="st-wrong">Wrong 0</span></div>
+    <div class="timer" id="timer" aria-label="Time remaining">60:00</div>
+    <div class="doors" id="doors" aria-hidden="true"></div>
+  </div>
+</div>
+
+<main class="wrap">
+  <div id="view"></div>
+
+  <div class="section" id="fragments-box" hidden>
+    <div class="eyebrow">Fragments of the exit code</div>
+    <div class="frag" id="fragments"></div>
+  </div>
+</main>
+
+<footer class="wrap">
+  <div class="row" id="reset-row">
+    <button class="btn ghost" type="button" id="reset">Restart the game</button>
+    <span class="confirm" id="reset-confirm" hidden>Erase this team's progress?
+      <button class="btn" type="button" id="reset-yes">Yes, restart</button>
+      <button class="btn ghost" type="button" id="reset-no">Cancel</button>
+    </span>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- SHA-256 (fallback when crypto.subtle is unavailable) ---------- */
+function sha256Fallback(str){
+  function rotr(n,x){return (x>>>n)|(x<<(32-n));}
+  var K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  var bytes=new TextEncoder().encode(str),l=bytes.length,bitLen=l*8;
+  var withPad=((l+9+63)>>6)<<6,m=new Uint8Array(withPad);
+  m.set(bytes);m[l]=0x80;
+  var dv=new DataView(m.buffer);
+  dv.setUint32(withPad-4,bitLen>>>0);dv.setUint32(withPad-8,Math.floor(bitLen/4294967296));
+  var H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19],W=new Array(64);
+  for(var o=0;o<withPad;o+=64){
+    for(var t=0;t<16;t++)W[t]=dv.getUint32(o+t*4);
+    for(t=16;t<64;t++){var s0=rotr(7,W[t-15])^rotr(18,W[t-15])^(W[t-15]>>>3),s1=rotr(17,W[t-2])^rotr(19,W[t-2])^(W[t-2]>>>10);W[t]=(W[t-16]+s0+W[t-7]+s1)|0;}
+    var a=H[0],b=H[1],c=H[2],d=H[3],e=H[4],f=H[5],g=H[6],h=H[7];
+    for(t=0;t<64;t++){
+      var S1=rotr(6,e)^rotr(11,e)^rotr(25,e),ch=(e&f)^(~e&g),t1=(h+S1+ch+K[t]+W[t])|0;
+      var S0=rotr(2,a)^rotr(13,a)^rotr(22,a),mj=(a&b)^(a&c)^(b&c),t2=(S0+mj)|0;
+      h=g;g=f;f=e;e=(d+t1)|0;d=c;c=b;b=a;a=(t1+t2)|0;
+    }
+    H[0]=(H[0]+a)|0;H[1]=(H[1]+b)|0;H[2]=(H[2]+c)|0;H[3]=(H[3]+d)|0;H[4]=(H[4]+e)|0;H[5]=(H[5]+f)|0;H[6]=(H[6]+g)|0;H[7]=(H[7]+h)|0;
+  }
+  return H.map(function(x){return (x>>>0).toString(16).padStart(8,"0");}).join("");
+}
+async function sha256(str){
+  try{
+    if(window.crypto&&crypto.subtle){
+      var buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,"0");}).join("");
+    }
+  }catch(e){}
+  return sha256Fallback(str);
+}
+function norm(s){return String(s||"").toUpperCase().replace(/[\s.\-_:/,;'"]/g,"");}
+function hexToBytes(hx){var b=new Uint8Array(hx.length/2);for(var i=0;i<b.length;i++)b[i]=parseInt(hx.substr(i*2,2),16);return b;}
+async function unseal(b64,key){
+  var bin=atob(b64),c=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)c[i]=bin.charCodeAt(i);
+  var out=new Uint8Array(c.length);
+  for(var j=0;j*32<c.length;j++){
+    var ks=hexToBytes(await sha256(key+":"+j));
+    for(var k=0;k<32&&j*32+k<c.length;k++)out[j*32+k]=c[j*32+k]^ks[k];
+  }
+  return JSON.parse(new TextDecoder().decode(out));
+}
+
+/* ---------- Game data (answers are stored only as salted hashes) ---------- */
+var LIMIT_MIN=70, HINT_PENALTY_MIN=5;
+var ROOMS=[{"name": "The Medicine Cabinet", "story": "A glass cabinet holds three medicine boxes, labelled only with brand names: <b>Coumadin</b>, <b>Plavix</b> and <b>Diflucan</b>.", "riddle": "Two of us prevent blood clots. The third treats an infection. In DrugBank each of us has an accession number. Give me the accession number of the odd one out.", "prompt": "DrugBank accession number", "hints": ["Look up each brand name in DrugBank. Two of them prevent blood clots; the third does something else.", "The lock wants the DrugBank accession number of the odd one out: DB followed by 5 digits."], "lesson": "Search by brand name; the entry is always the active substance.", "salt": "lab3v2:r1:", "key": "lab3v2:key:r1:", "answers": [{"h": "7a4fb5b41a002757482059571784d6bf85dc160cca80324798dd609676db7d90", "d": "bLzxe42SecYV2vvXFgWFAVA8Bvt1uTRfMYFebr+j05G4wHAadhpf2LD0pf1cU4QYal414WwZzBDRCWCxiIo7vREyS9eO1YzohKttDyQHtF4k0NTw5bLD6MoXHpXmIqOD/KxLmD4+k65Kvi+/cGmQ1clRQRG2kWWCfeYdS09+S9y6mSyIbOMXgICu2P8EP408pa6op1NV9kjt2Rqv9/RaOVylAQch4LLyNOmlRWhQMiKvToeiL4wmunlt8nvpnJTipSvAeXMEFlqxEimfaJ5aIOFHVmC7Wf1732Wke9hwg09KC4PrhX2umXUVKddbILI0"}, {"h": "c59048b92aa763d96bd76d696b237d3d814f6b48d3bb01d85ab4ca94e79a8783", "d": "ic63/nhY+gaH9cm+4JpkYd+vfMoG5ZPXeaxJZmhb/cqS5HNhlGb+nZs18+jfmSwT3iMXE31gNoCYx0sjM1v7ZI+LZ99dsuFAx0B/pQvXBdPrIcTruQetaxwGpLC9LNR6cTfhn54Lacx1SvQe29iEQrs0PjOglETx48lBZpmKm8F0SYaaz38/yyrxFVotLpW9eOop4qjbWeD3CdO72WBfm4GXCjyukccxUM6KXkRoIFezRuo+lvpI6B+PgxXJVKIQDWqkDDjwEI7EOSNYN5H3cKPptvVD8Q6C/xEsV0JLbdBOzvctGoFZ/qZ/aUoacuqU"}], "near": [{"h": "58bdb6168cb8a3a553db137cfac528e205d476640f72576e06325b40388a567d", "msg": "That one keeps the blood flowing (warfarin). Look for the odd one out."}, {"h": "8cd57109ab31bc6627b9a3fab03c0f83319a547768a29548e01b901eb8430150", "msg": "That one keeps the blood flowing (clopidogrel). Look for the odd one out."}, {"h": "293a22e0bcf2ea77b69757b13a79deccb5d4c77803bd04bf02f2c8584ec28380", "msg": "Right molecule! The lock wants its DrugBank accession number."}, {"h": "a724f38a373df796b2cc5c97e788e0b403218fd09c4909ea496b16d9dfbc3029", "msg": "That is the brand name. The lock wants the DrugBank accession number of its active substance."}]}, {"name": "The Classification Drawers", "story": "A wall of steel drawers, each stencilled with a code: <b>A02B</b>, <b>B01A</b>, <b>C10A</b>, <b>D01A</b>, <b>J02A</b>.", "riddle": "The two clot-preventers from the cabinet are filed in the same drawer of the ATC classification, but their full ATC codes are not identical. The drawer is labelled with the characters their two ATC codes have in common, counted from the start.", "prompt": "Common start of the two ATC codes", "hints": ["Find the ATC codes of warfarin and clopidogrel in DrugBank (Categories section).", "Write both codes one under the other. The drawer is the first 4 characters they share."], "lesson": "ATC codes group drugs by organ and use, one level at a time.", "salt": "lab3v2:r2:", "key": "lab3v2:key:r2:", "answers": [{"h": "8d79160799219f1ec6367285ef6fc5df26930b4122a0d654f50e8436c398e188", "d": "stLfiAXrEuhyPem9t/nvGZIobZ085WziApkGEF3AbOwfCCDgEuWWxOPaSb3hVvFlMdvVgvlFOEh4ljXvAOWQoot7AbgyLXyIixR4VCUGD1u+6n8Se03QHtzYxHgpU1ami6t7BrHwUQb9mc4JKahUXlptXIQWOw3GIBealFpoJp9ak3Kz8nQRMDYTLkK4TYN5pulJ6J5AFRimcM6sBE/LMLtqFlYygelGp8FaASvnSxhEXpt7Qzm4ZuLcZ3mgJO0bZmpdYgOAQiy6Du3CPwcqXU1hInGgwPCN8JF/YL6OuxvFRz4eU7lELyyDvTNIBZryJQQVj4xLY8LlYZ7YM6zZDPARf3WFPrOrs3M2bPs4JQj14GCEbuo0bRQpMQ=="}], "near": [{"h": "b824a70f32b12611d579bfb15313c22987661436cc6125e1318c8e0abfe6ec6c", "msg": "Too specific: from the fifth character on, the two ATC codes differ."}, {"h": "a714790bfd8e85348ed807c812c9aee0eecd5e8473f508eb140d1abf2a6ee991", "msg": "Too specific: from the fifth character on, the two ATC codes differ."}, {"h": "d7abd286e268c35fc02185bdff31479613cb2833e9e730e88c2f0140a9309af4", "msg": "That is warfarin's full ATC code. The lock wants only the part both codes share."}, {"h": "27e55fddd27a9e77fbcf25bdc6cde0de1a77264c6b5336f850e831c9dfd648c0", "msg": "That is clopidogrel's full ATC code. The lock wants only the part both codes share."}, {"h": "e12e2c41b508d7f855769af84c770c65efc4676cc644bd686e3c6d34ed5afe1e", "msg": "Too short: the two ATC codes share more characters than that."}, {"h": "77a7bf3af1ab77a18564bc41f6d56b0a2d5e6393e07c24adbebb54b29a9adce2", "msg": "Too short: the two ATC codes share more characters than that."}, {"h": "d84ffb4c6c17107e790e77e0725d45291467b8b4fec7626ced20844e5135d083", "msg": "That drawer is for acid-related disorders, not for blood."}, {"h": "9568fc4ded8a7717e30607d64d25fa83b7d7780bd7885d5fa664813e5650e199", "msg": "That is the statins' drawer from part 1."}, {"h": "f0e9b757c069b44a6ef6233a6e4361201a6cdd19268b4da66433a7e519d09938", "msg": "That drawer holds antifungals for the skin."}, {"h": "1771e4c4fc75bf283d4b9116cccf2920cdef7a16b3901c7891c0c4a8b7e03f5e", "msg": "That drawer holds antifungals for systemic use."}]}, {"name": "The Quarantine Freezer", "story": "A freezer marked <b>BIOHAZARD: PATHOGEN SAMPLES</b> hums in the corner.", "riddle": "The odd one from the cabinet does not target your proteins. Its target is one of my enzymes, which I need to build my cell membranes. Which organism am I? The genus (the first word of my scientific name) opens this door.", "prompt": "Genus of the organism", "hints": ["In DrugBank, find fluconazole's target and follow its UniProt ID.", "In UniProt P10613, read the Organism line. The lock wants the genus (the first word)."], "lesson": "A drug's target can belong to another organism: check it in UniProt.", "salt": "lab3v2:r3:", "key": "lab3v2:key:r3:", "answers": [{"h": "9fdebe7b0d36af723201e62bf2fc3a6e92ca27fe914c292018186fd0b3cc4927", "d": "bt81mRGXGMKGy7lszGORRyFJFk5M4S/F9bQ3PqWyprN00SUvN7IXO7eypHKb8GC+/GCQrcVuc2Ps77tPGiuJZRzlirOF9RR21Qqw2xlOzNQHQBaz1PzL5q5t84IVmLnu2KGygWsDBMJQaZQoKly+PawPJzKK3/OSvN/XheMg5+xchLDTJtNapw2b9ioh3JeEHO5BpWvW3LeCInQMa03lbOpK4LvutunBmZmHYB76Fhgv5gDIYSmsASlB3lHiyeYsNklg28dupRk07qxb9BFhl71Khn8aBUQPR5KLOht6zeTgMNi6bg45goWHXWo4m+IhpwKveBqy0rSZI7Gcomb+7kNl1LcDjENBUh8G4iwOaA=="}, {"h": "afc1af84606bf5d687760d4ca7684e9fbec8b0b8802a98d0c1d6ec4223b4b295", "d": "vZFLv1Sytwgv1y6JjL4KWiIbDXnjODVxOGbX+/CfUjJwdIu2CU7YYwBCdXF6EZpMyHLAMn2rXv3pBJxmskvWMfepIu5TJPMVyjkjvZdosPIt7hTKnjGH+WQ/PPeonCUkNj9ptJZtSHnslSDG9GtgqsJ3jayltwq9MARwYoeNeImxTF3wMAAjazHuNAaKtAHsN2m8qfLKGj+v2NKBYUJ4Iw/67b5R4aEJMNdmsfujJUP9jC2fAf3iBNO06RvHUiZ1BejfBVNfZvnro/JtlhtO0ouzc1oe0ugkv7wTP6xh/AJNZnDYdusUs/YMBJLk1KBzGGZyZ37vfyr/ffi8G2obKLEkbXUbt+2q/H/wPxF1jg=="}], "near": [{"h": "2bca6b63c63522a8520d42c224c51ae19a043f4cf152530064ce95589b26d35d", "msg": "The target is not one of your proteins. Who makes it?"}, {"h": "941c187ca32a749b5cd01dfac042d532022c021c6b02d604c9eb8ed065e764ac", "msg": "The target is not one of your proteins. Who makes it?"}, {"h": "17d369e0e8bfcfd21f9933dd1efe72775444df4ece07dcfbab352d0ecc57f628", "msg": "The target is not one of your proteins. Who makes it?"}, {"h": "159fdd4493c4b61dca5d7916a800f1ccb271ea1559fe3bb003168e094be55226", "msg": "That is the second word. The freezer wants the first."}, {"h": "d10ec8ab9016e488c7c865fd62f7f69780488c83e2a51e0e474583a09b7fac9e", "msg": "That is the enzyme's gene. Which organism makes it?"}, {"h": "0d6b9a4cb23852fabad7bf799aa2ac3e54961f7ceae4b54aa8725a0d9d61f8ad", "msg": "That is the enzyme's UniProt ID. Open it and see who makes it."}]}, {"name": "The Transport Hub", "story": "Four bottles stand on the bench: <b>atorvastatin</b>, <b>clopidogrel</b>, <b>omeprazole</b> and <b>fluconazole</b>.", "riddle": "We treat different diseases and have different targets. But one transporter, a membrane protein that moves drugs across cell membranes, carries all four of us. Give the gene name of that transporter.", "prompt": "Gene name of the transporter", "hints": ["Compare the Transporters listed for the four drugs in DrugBank. Only one transporter is in all four lists.", "Start with the shortest list: fluconazole has a single transporter. Check that the other three have it too."], "lesson": "Transporters, like enzymes, are shared by many drugs: a common route for interactions.", "salt": "lab3v2:r4:", "key": "lab3v2:key:r4:", "answers": [{"h": "a165be3b470930ad826e41c35604439c49973e422b6349fda4378ea664e1a9ad", "d": "3ozbF1G2ML794E9AGvIJCGpXqjmikOHswnh7xMPX84JMGFLuxxVoRZxJqT/m8CHuch+/STfBKnCMGqbOI/fjb3mRtIvpQR5WFTdaKAd1r7eXPLEkJLiFeXbKERR5kOorWp1RQmB+Ha7pnzl1kaPfJ14FIIy5nwlcPlmIphmvzGnsK+L8CmDhzrwrP5OYgzgV6N2Lqaw0gjfUNLYHEAALl9Cgz3bBlTx+o+uUdleUcqwboI8JcbMpukxw/BXvNPtPEITQmtaTX1F1pbD5SE5g2nEvP1l4Q94dyOxCoj1+Xru2RPim36t2nor8lzl8XIv9IktEXnIWHLHQKCbdxROWzOVjv9Ei"}, {"h": "ca0dacd6441f2c5eedf0317b6de05ccf79380e684f184aec65c6e88ce3e6359d", "d": "sFTadER4MCFWTPk50zhCsfaFzlrw2EpsQu1u5tkhKuAjW7ix7uOCr8N4Ldq2aIYR12q+oEHrTVbHdq848xVnX2dA9q2Z9HbVChKFzSDLSzfiPIofYgesjiKQ0QuhvPQ68ASS2D2A/+fpn5S9JDbK3rYUJsE12wYxB1zniuvBzPnV6qGhX14JfxITeyu20d9BB+7hJbrffxRB8a9KKl8ifCYY4KJnk1UtQvGNgjgQvdT6HIkX/v0N7SDtRoFNqo6RYIGYclFiGXxCFFvH/RHvzW0ZQtUHK6jQq4GiesQmpxOgkx3lCZ4CSb4iH4NeMBHuaUkipyyDH7gex8lq7CmDUKIV8wPu"}], "near": [{"h": "622782fa9a8c1b5ddaa50236e3b7113e142caf0d921a10a1c75b04aa796931f2", "msg": "That transporter carries atorvastatin, but not all four drugs."}, {"h": "8cc3f8cfdc2e1d97ef436a67bdebd59953ccc7d979e955e56c3ebef50a98cdad", "msg": "That transporter carries clopidogrel, but not all four drugs."}, {"h": "a1087e9bb19489b0144b29ea189c2308213f71a6a6e29066fa4434692abbec45", "msg": "That transporter carries clopidogrel, but not all four drugs."}, {"h": "fa08dddf48e2f2b3e635c3e79b58f7a21ac1fb0801d9b63da508b6a965d121fc", "msg": "That transporter carries omeprazole, but not all four drugs."}, {"h": "857ffceb33737623bde366e05717ea2d82fbe83e923bda8148b1a8cc45fdcd29", "msg": "That transporter carries omeprazole, but not all four drugs."}, {"h": "d7d3b7d4e1338ba83cc05a7566794e64f7a1264c9e175ab9035849da2151dac5", "msg": "That is an enzyme. The lock wants a transporter."}, {"h": "d28bb01d1f15ab73003d34f00f94885d7388b0bedb129d772af3e7a9499d4ae8", "msg": "Right transporter! The lock wants its gene name."}, {"h": "f0f5b9334ab48782a1efc4f979d534878b0a31bd247319722296ae178698c781", "msg": "Right transporter! The lock wants its gene name."}]}, {"name": "The Unexpected Link", "story": "Two patient files lie on the desk: one about <b>atorvastatin</b> (cholesterol), one about <b>omeprazole</b> (stomach acid).", "riddle": "We treat different organs, yet DrugBank says we both target the same protein, although nobody knows whether this matters for our effect. The lock wants that protein's universal protein number: its UniProt ID.", "prompt": "UniProt ID", "hints": ["Compare the Targets of atorvastatin and omeprazole in DrugBank. One protein is in both lists.", "Look for the same gene name in both lists, then give its UniProt ID."], "lesson": "A listed target shows binding; the pharmacological action says whether it matters.", "salt": "lab3v2:r5:", "key": "lab3v2:key:r5:", "answers": [{"h": "a1443604a90bd2bf7d9d22a81c73f31fe2b9a2eef30abd70f361d7845d0e98ef", "d": "NJw4oXBNOe1n5dSd/Ts+aihZ55QjZS1Efhtd3PtmNCMDCbD4kHgfGDnBPGpRq/ULzxfrlThi6+PdMqh4jMZyTEmU/VBlFUOvv3tu43zNfHPV8s0FtNmZtNZvA1++/vAF03sySjFJLC1dpn6sL8LmNkmMnGf30UyR8rpW4rQS9DaGgueuJM94dyl+wAA78iwfSunHFxx+XpXLVE83OGo5N4WsHoQsIn8APNLt5kxkP2oPCL6D+N8NjgZ1tMeThy0Xe0a9b6+aWEyGaTHdOhAQDZ5HNuiYX9sre1N5l8jafR9thJOQL8MFdR7pBPC8NldNHMV23zeZ5+7XfzhIS8x8YGkeU4FbCHBlG/gG3ywWFMo0ddIAYvsU1CZM6DcT/lsiWb722EyohkJqOBQDW5i1rDk8VEWjxP7psHj23o7PH2t46cY="}], "near": [{"h": "009ae4fa28123c2770111e640df967e4c4c732c8d029cb03c282dbebfc610027", "msg": "Right protein! The lock wants its UniProt ID."}, {"h": "ff7a1543570be67b0a7580c10553830724a472ac777e9b653a28825bccacaf6b", "msg": "Right protein! The lock wants its UniProt ID."}, {"h": "cf635cacaa04c05094980fb1161846bcee428d4c6353635a4f6c0267bbb10723", "msg": "That is atorvastatin's main target. Omeprazole does not target it."}, {"h": "3f86bc57580243e5e42a33c12afb4f823a2d577b921d7614dcc21501a83badda", "msg": "That is atorvastatin's main target. Omeprazole does not target it."}, {"h": "f3c8f12718f1671382d0229b972f6048c6278caac50577bdc6b5fa541b496d01", "msg": "That is part of the proton pump, omeprazole's main target. Atorvastatin does not target it."}, {"h": "a94c0e487d06511e87d50809e5657cec1a96f3ab44e323c60f7b41665238e388", "msg": "That is part of the proton pump, omeprazole's main target. Atorvastatin does not target it."}]}, {"name": "The Clock on the Wall", "story": "A wall clock with the name <b>atorvastatin</b> on its face. Its hands are stuck at the moment of the last dose.", "riddle": "A patient stops taking atorvastatin this morning. How many hours until only one quarter (1/4) of the atorvastatin is left in the plasma? Use the half-life of atorvastatin itself, not the half-life of its metabolites.", "prompt": "Hours", "hints": ["Find atorvastatin's half-life in DrugBank (Pharmacology section; you must be logged in).", "Each half-life halves what is left: 1, then 1/2, then 1/4. How many half-lives is that?"], "lesson": "Each half-life halves the amount: two half-lives leave one quarter.", "salt": "lab3v2:r6:", "key": "lab3v2:key:r6:", "answers": [{"h": "5dabc26cec93da5151c435c6f132810338096cc82b64172877b2895b491b98a8", "d": "z+UBtkCwzydAWDnwtEh+axr93Uw3jziWxo9cVGebtNSBQChPQZs2fuOalKrFyjoNba6IGm/0Lmf8DhSOE7ybvK25luky4d56DlrMknN/B7MDTOuZ6E/7haDphQzh9Xl6izshIUSMTRceDjDPWlBsPt/dfg+typO0DkEU/dgNAaT6InMTIZbYTL3wzeejj1tKYRTYuBYkMpfFMZvh3qkQM3DGTQhRJteRrg+zmjRxTvWKoDzPB3L2UdDG3vIKQV/+IXs4sN/N84FBqLtB2jr4PiO93l8wodtVH3i1T+u8ch0nc5XO/0cpKbmMyjMauLKeIuwIDJIBbGrFaqDKxJJY0gFYLMwMSKQpxNdtEpIHT3YxDtB8nuzebNIYkqSyr9+zv5POEH+C5LkZ6MeHcOnHDbvywLxoidMI"}, {"h": "6ecf1f8e7f81059ad20ebf594a51c48ba424c7cb095ebe058217233fa86b00f1", "d": "AUhjuAMDRLz2J5PpM5Tj5OLH4b9SPwpAKdFQe/vXh9K8FHx2YR8GdccwuJWym2DFcKynFrm6Ujoi3JZhvguhQifnG5cBhViGxYGs2RF8fetHMOqQHigwECCu3dtEPESGvjooyLwBOaEzWVIQQmcWKOd+yPDS1oow+AB6mf8Ho2nL6dwt1L+qlyTXtW8nieJPb2Q57CvbB2yHoecRkbBkd3ejZm1V1zmt2fjiABbz/cA5euTyDKzmXmNvPIpMnC2vGXDdZ1ZZMNK9BjPGe1NjO6UYp8LHlguDzzZbfTCIbnjB6Cu7Ged8MVZq8p4IjzFJchXxtIRtPbqaPXtXOOAVcXwf0fe8sVO2vQb3JgM3779Hvh1KWCAcfgiiZx++RMh4OHST9Y2lRWEV9v/lY9FTVYaHHVMpwy3B"}, {"h": "932f7c7415d0553bdf6670226600748531be762e20e7e345f95d4e3b82be1a88", "d": "p94NUh3p+P7BoAqld5bisoUzoE/5fnp/JObrhaZo4m1qQV/qqC1JcgHLmpSdxN7eX/cPyqszOhL5y2v6sHLIrJ3msGVi2wGdRH5tZ3gexU3P12QQVgmpK7RAa7b8uO2a5KZ6DHomVkY6I8xEAb0MpeXsKYTP0rw3iakGxPQ4OeHbluWGbGICZZ38iTOtGniZO+gMtL89j+nMFV1Zjk3ArpjeraJQgzlPNI/1maWEgoqnPmJZSyIBK2E9ISgI3kNPOBUW+2qHqGD8x5wQKwPCz82MAPrrEkyWuWnwCLHfDu8ZHbsmAVfOkBceMUZxenFvkott/EcLWJn/09NXKt63H35UrGp15VgwC8bgv1hbbYC2a+gKYjBifAqbfzJ6palP5kVy2PSE1TsXhLfG5iyLvl8EcuQtgb5k"}], "near": [{"h": "c699a6587b685500c090e4cf428e839912ad19e62ed6e916ee94c4cc111e6801", "msg": "That is one half-life: half is still there. You need one quarter."}, {"h": "1d1669d775e7126f244b2073cb72fead43bb3c30d9e8b4aac6ba24597d74b041", "msg": "Three half-lives leave one eighth. You need one quarter."}, {"h": "7a168754063d1e88dad4937378136f406858b78729680b02e65ca83811055042", "msg": "Four half-lives leave one sixteenth. You need one quarter."}, {"h": "e60e72e8b694989db92ebd900d9f73c591ffd580a57b6de8673911faccefce4c", "msg": "You used the metabolites' half-life. Use the half-life of atorvastatin itself."}, {"h": "3b7f837f3632e26e80cc732a04970c6ba2f6d10fccd12ddd081d3a669d6d2759", "msg": "That is the metabolites' half-life. Use the half-life of atorvastatin itself."}, {"h": "0421b5cdd2408e80dfc875f36d16ff04a348b3737398e06c46d66a1350091e1c", "msg": "Each half-life halves what is left: count whole half-lives."}]}, {"name": "The Receptor Room", "story": "A sealed door with a platelet painted on it.", "riddle": "I am the target of clopidogrel, the clot-preventer that the liver must first activate. When clopidogrel blocks me, I no longer respond to ADP. How many amino acids is my protein made of?", "prompt": "Number of amino acids", "hints": ["Find clopidogrel's target in DrugBank and open it in UniProt.", "The lock wants the length of the protein: the number of amino acids, shown at the top of the UniProt entry."], "lesson": "From a DrugBank target to UniProt: what the protein is and where it is made.", "salt": "lab3v2:r7:", "key": "lab3v2:key:r7:", "answers": [{"h": "52b99b5a3e31c4ed2d4c3015cdbed13f9139c2e01ff04646366fb969939d78a8", "d": "3QZUvlz8imsADW/eO/Pe0hwQQCZ13jK0G0FDBfpw6ptlTtBVqIRObE3SViiPyU6xcXXj0oKXljsMPH6xIMIPoIQKt/54d2/O4vdiXYY2DhiadpdP6cspxa91o9w78xbX/hg5YLuDZHKRgToZKwcEHsEW9BU1SiTlpZw6GaRyvL11Da1pBA8nYc3IfcW1ldc57I+ajgqnzMZInTD+jyUV9aAxXmFtPM8KRkCLrwyKbMjR4gwBNT1IIT/Ku0CfcWZSrnxSFgdKt9tqckmCVHKe91VCD6bzN+SOovIhpdJaqjICvfOuDAn158KEZWXK0hyWsg6HQkfjUCKuDN035524QqhJzeWdMS1p4dsFyYk9MILX7/lSN+wQc4UyRnmy"}, {"h": "fcc4d593fdeda63fd83d830c50cb9f20aedc955695341d65146697aca0a2d483", "d": "Uy6feGItSjoLFma3fZLEoJxM4Nr4ehf0XYYoIP4FaTI6Y9uRnJlvPimImcYoUm+QK7MtWyXShtaYksbjcTbT2cP0nRydFAslv3hqWUylQBdWfemrbkqkcaIEChj6Nha9cqBKnmeOIOHFJFqN0dFyoogUbyNHVt1QdzMOH0OvrKspePvA66BhRDuT3emjYaLKXJEVk41Y65fa4SjiA/YfojXuSP8jterUfpoQCUqQ90XOs/Avr7bYy1G8mgRzszyVGVAF4oJbrtyN1qRLyXEY2lKFGijp6yBCmJoQNldNvnpruVAfNjUz6K6/TimXovn3gDA/AtqRcCYoCDKWTwzSVPvb0Mjo9e1CbezICOsmF++Zg1L5bKZr/LuFArQt"}], "near": [{"h": "049726e6f8fe38ff8c17230f8c3a9dac1c4028526a703a525234f25fdf259084", "msg": "That is my UniProt ID. The lock wants my number of amino acids."}, {"h": "b518a6dcc7d9df07cad9dfafeae2ef5000b466515a5f6047fe11db0af37424a8", "msg": "That is my gene. Open my UniProt entry and read my length."}, {"h": "967c523b6866de8107fdd9034bf99d6cd155825d1d8f360333bc24f8993e6120", "msg": "That is my name. Open my UniProt entry and read my length."}]}, {"name": "The Crystal Vault", "story": "Behind glass, rows of tiny protein crystals, each labelled with four characters.", "riddle": "Each crystal is a 3D structure of P2Y12, the receptor from the last room, and its UniProt entry lists them all. Only the X-ray structure with the best resolution opens the vault. Remember: the best resolution is the smallest number in ångströms.", "prompt": "PDB ID", "hints": ["Open the UniProt entry of the platelet receptor (P2Y12) and go to its Structure section. Compare only the X-ray entries.", "Resolution is given in ångströms (Å): the lower the number, the sharper the structure. The lock wants the PDB ID."], "lesson": "Resolution: the smaller the number in Å, the more detailed the structure.", "salt": "lab3v2:r8:", "key": "lab3v2:key:r8:", "answers": [{"h": "6d5783f415cc3ba4abf624fc8e71933079927ae7724b0bb829bd5608f1e3cb2c", "d": "hLeFflnNoCinOI8ayw2MjKSIte6wh4Jd16YGmvQBiMAB9CHfpvEKaXIjJjoip/Z45XwWJqGmLD4QYFrE9cksv2V+n0yn0OeRopd+7/Nopht1UvMcgn29uilBndIhxTfQ+yM34EJhVmq6c1n/ww96WQK1Nuhr2jmXRzlBgjfW9nyB2R5xmeZeQDEnAh3/oTq8Nuafh+sNbr5/qzmUgdHxcNlP/W1v621yG8Qfbwq8co5SAouqAThxDY3GW8Sbtnx4tNSouHjGXSaemJrgyO4Ggdpb41ttPA=="}], "near": [{"h": "101314df13185a5d695700ba34b0448ae9207de490fe1155fe89863a91933623", "msg": "A good structure (2.62 Å), but not the best resolution."}, {"h": "3178ac2e4424bdd9d8cd6a1efdadbe176302440a3702a0ae26b2a34c9f26e8aa", "msg": "That is the worst X-ray resolution (3.10 Å). The best is the smallest number."}, {"h": "6f391d1309d28924f64dd8e3d4a876e2f3cc0a44dd833330d56a2615f478225f", "msg": "Close, but not the best resolution."}, {"h": "134db276515d1213ca7f03d3c1be253260fbbd8a6b67507aba65cb3fe0d99e9d", "msg": "That structure was solved by electron microscopy, not X-ray diffraction."}, {"h": "3a356d1d0e9d48b4e50897c36d463652c04b19672f409ea0f873ecb8cdc6a4f3", "msg": "That is the resolution. The vault wants the PDB ID."}, {"h": "77824cec1ce2aeef453bccc499e8b91b8695ad2d37c47e04cc9f0441bf4ea232", "msg": "That is the receptor's UniProt ID. The vault wants a PDB ID."}]}, {"name": "The Mirror Room", "story": "A room full of mirrors. On a pedestal, a crystal labelled <b>6WV3</b>.", "riddle": "PDB entry 6WV3 holds warfarin bound to its target. DrugBank describes warfarin too, yet the two molecules are not quite the same: same skeleton, different stereochemistry (mirror images). Their InChIKeys show it. Give the 8 letters of the PDB ligand's InChIKey that differ from DrugBank's.", "prompt": "8 letters", "hints": ["Open PDB entry 6WV3 and find the warfarin ligand in Small Molecules. Compare its InChIKey with warfarin's InChIKey in DrugBank (Chemical Identifiers).", "An InChIKey looks like AAAAAAAAAAAAAA-BBBBBBBBSA-N. The first block is identical; the lock wants the first 8 letters of the PDB ligand's second block."], "lesson": "InChIKey: the first block is the skeleton, the second the stereochemistry.", "salt": "lab3v2:r9:", "key": "lab3v2:key:r9:", "answers": [{"h": "71ecb0f3c0d9c26b3eda41bcb38215ae693a98ac411a6eeb863880d96e2b18b8", "d": "pt83o/c+JPTpTglC10CN7gUMcoAORZgJvibJhe0ySCq86f6ID81d6GmJDbXN657aKwr3I3l8suVXtSUpAYdDoIDtvty7/44+ugOvC53YY9zXCDjwNActmEBfikYYo9jakOAB86apt9qEoN0y8EVip5bpnPxu7N+XbKOOe/cy/xsiKBPNDGbqPq01mN3JwjQL9ifmxX1mJSUgitLkv/LTfAq2FP1V/r8KLfKzVVh0PAtqLDeKC5PO3MqcgbtqOqY4vhCQmxcWe2uFe7oEMTHa+30t6xEZBWqfourB+taPxefg6QG30G6fsLr2awrbqGDDe33VZxUvHcERqqi5idCaWcFh/vii25E1DzWHXSRNKGCRUYpLLmSkvSXo1cxLHhozS0OpuQxFWQKlUHKRkHRknmNvttJjAg=="}, {"h": "775559ed0551066cccbb854fd9c7542638f91d69ba20e7e54355df5eb7758572", "d": "bKYteQkxj4WxF5UBleozXgB261sxrh0c2Gjqgku1BJOfBDqObEF0tPXf2/pRxQjjxpAlhM5ABM7okLNiWSk1MeW0lp5h5Iup50iIrZzFJFRC1V9fMVdH43S/+T9OriSr/8zAeLI1evWHSxaEnRhZug7m5HvTfk889Y57248spm78MpILASthJsQxH+qbham3z6kG5hYgReS/20W70aYDUbsKh6h14gg89XTPDmov3EwtMk7k5Frn/q0UZ2ZETSpgp4hs+Qwsbw9b7iq9p1pIcbrLQrckbdKF+OZz8rd2Z9sAGCmvA7lAgKb8+9FfI9mvmKMwDnyn7xErQfwPX04s58qWpEjaxI6kOEf+1H+y4vf3rJZpNRS4c92PWtWYgtJ1QsMK7pCUS7lANzzDM7JesqF7jUfDZQ=="}, {"h": "d11e400a0397891e25aedb9a5e8f65c39ccb81e28408cbcc53d49664ece5e5e6", "d": "GJyv2PrVv/U6PEDzGd9aYhI1u69Dz0EV7VUlRo6GDOAKK4ZI66Lyh5FKXjaadaYYT7C/IA3Aj8U2W/j6Q0Hm1iHOhoPqkTjeaHxH/eyTlfxXnXPjie9UogwIGvHich2hg0LR+EqZP/Ltzowo5R39QI2coBZ7kmzn0tIUi1EhTOJUcsbO2LTnUhCxExJV+cCBWy8kwzUW+QL+V5EGARgvyzLZuxNBT8GAb/UzLrwHvQm8cx8POusUL8qwtM6kTaFw1Y8br1d7sNcg8dXSHetj+kG+9hiI9OqZjUTJ87U/oz3jPPcQWk1wAWpbDGVUYg6t+1/xmoW3kjRLWJ/mhDGrUiEk8XtVJhXHJaD5MVwAvbi8QPZoccOM81JKZ2gQikx7gSIcZOmC1otEjW7ORFgqU0hHonlZpA=="}], "near": [{"h": "773c16c1cf542ff859557b8a9e4f3f5b1f5bf192c3c5c47f499d1a2f263a76b9", "msg": "That is DrugBank's block. The lock wants the block of the PDB ligand."}, {"h": "5c0b819baa48cd3d5e3eb52aa56be73eed57bb261705136373d6ad7bd8595b6d", "msg": "That is DrugBank's block. The lock wants the block of the PDB ligand."}, {"h": "225b452bc3e3ed5e46f0674b650ff253427c74c6236bf61bec259b0513d05c31", "msg": "That is DrugBank's block. The lock wants the block of the PDB ligand."}, {"h": "34e4fe9997e4dccd8f6f68ce5264bca8609a5fc29b2f13fdb3cab1f64cde54af", "msg": "That is the first block (the skeleton), which both share. The lock wants the part that differs."}, {"h": "e3b180f426c1e2e377ee47ee3f8266b1b62e576b29c42bbd72b369860df9d8ed", "msg": "That is the whole InChIKey. The lock wants only the 8 letters that differ."}, {"h": "5a7341ba24f639fd13ea42e07e7afc29d8b1225ca4c47751a3226a358f412e4b", "msg": "That is DrugBank's whole InChIKey. The lock wants 8 letters from the PDB ligand's InChIKey."}, {"h": "c9194456c8e0a0a61aba5183df1eb5606d94f8143462817b14ab328db4a92e9a", "msg": "Right ligand! Now read its InChIKey."}, {"h": "18ff1ffc48a1611c15e5033d459d2b4f3f0ab814212e5b58597dfbf831eeb240", "msg": "Right molecule! The lock wants 8 letters from its InChIKey in the PDB."}]}, {"name": "The Emergency Cabinet", "story": "A red cabinet beside bed 4. The patient in bed 4 takes <b>warfarin</b>, and she is bleeding.", "riddle": "Warfarin blocks the recycling of a vitamin that her liver needs to activate clotting factors. Giving her that vitamin reverses warfarin's effect, though not at once. Which vitamin does this cabinet keep?", "prompt": "Vitamin", "hints": ["Read warfarin's Mechanism of action in DrugBank: which enzyme does it block, and which vitamin can no longer be recycled?", "Type the vitamin with its letter, for example “vitamin X”."], "lesson": "The mechanism points to the antidote: give back what the drug blocks.", "salt": "lab3v2:r10:", "key": "lab3v2:key:r10:", "answers": [{"h": "63c789f960b0a4ab4d70138219b64eefb8bad8ec31f36332035ada2a65643040", "d": "Kh5h8w9Gyw2LQGiz9JWiRj1Z1TMM/Ea9d+H0qkHHoBTHV7J6nFV51Bw4/wA+fTZALFxmzDgNo4q8i45YXiv6WNrmlKAl85kX4fj1+l1DRpeQGAH/VYKqW2qZ/XtmVIlqXgj5yMp3unNFUDUnNU2dS3IwPHv179rg3rBEtp9q5S/Br87lj2gWsdQgcugvdlc4ZF5idMF0lPP3XarrAooaiUTGyqgqZmRmPoas/rRT0tMZSNWC6O9YPel80n5gKFZjMMsOHw2U7hXIyK1WucGs/GmOi9TObMcTZPOjMqXBc4Owb0PMrQBIjPR8zD4gQYZOKSpwl/JsaGQnL2wycMBQhvFQexeg42RHbVbU6ERjZEEOZlOq9FwAp3zi"}, {"h": "886d0fe7da995ed666cfff621143eec77cc2222e27bb71d03994dac054a356d6", "d": "RN2tH0iZmFsaSLmVNhvXubG2tnrWrMOShPD+ELinGQCyW2DX4m+QjQD2UaqKyxY7eVkAvt2NPq6p0Hewwp89VsJhBzqPAAjZA6vsMHXmd0OlnBavK8CDQkzFKwrhhxHlsGaVDXpAG7pefT1NtizII5zb0g8D+zHy2Gzwx1Tug4AxaB7cdqGYkR3FRg8oyF5yHEUj2BY6FnqBHhWL3pMO/VUO2ze/EeWGdlfy/nnnUsrQMLfQfAUgSH9OS9PI7LDtYRc2+wcYwAyzE7ToDOnL6oeomXbOCSZ2pzj8auX7Ae2Sgv2rSjh723CRolfi6JVF4dXN76X6NpP2Lg35PBV6Egtu3ZaYvdCC1rcvZ9977k2WZ6wNiG/bY2kX"}, {"h": "9f66a759c68b065e53e119926419aa2740a0ead0f03ac585492b053403779f35", "d": "ak7JN+O4ASrowtjNI1enyNSI6YjkKmS/T1AiI+Rty+IfsAnYPU0RVIcrz0clWnq38PyGb81GC+TQZmTQlIAQlKH3YgZQ9tnE89EGJoChbZTGv8SdRN9x6I+rnUeCkRioecy5S4BRvky7kDLlQPVthHXpbqeQWVXqISrlizuVI3TMfjqEAmiQ6mgsoOD30NYbzRQFwb9CVdNobgZeiwvGSkW8Mp9JyQxeIzc9OOHJ7DRfIAVZ8bZwBs/gIHY0KXK6NBjoE9wwCj8r0V0yF++VGmyVSEb2/LwcDlLgbb0BSKhoj/oAUx4ZbqJZIixXJWP4Q1BJuEVTwxoKQikWsVyn+PAZIL2ctEVWzLrbyV+mSiiC+4AARNSUwaVn"}, {"h": "a9898e9342d7346248c7a2e3a679e34b9bc7b935ac06dc0f4f593475683cff86", "d": "H3i2Wx405EwgNSxpDvbxr2FdacIDMB2C8Bd6Lelr6VzajxcUKLwX3cbMCz+QnOCXeKcw4yLYYO1JvP6sDCA1btFL/29Y/SG8awRS7zxHer4hRBwG10ap+CQQkNK5AGOSICJ29dJjfT5eCQfMEtYcPHGOp+LtIs9wHUBnw/NQTQgh+gs4z2qGZuXoQ3+Xu+RyJSiYIC+EpkPYm/nMKLMf8StvYBqJyDwEtOF+l12Mxul+MZ94RpIt/CGwJxmtW44ef7bb7ukg10HNw2zgGrI2MEc47yM5wmTalCfCdEaY8U0CXzYuWZTBNw1dqoI6Lx2VRLOnp1Ic1IgBJNmSnDp2K0ybZeK1PZziGRzUKy18UHydr5cBRnKlicT7"}, {"h": "b74a11c716f891b1a7bef5cb8a8b2686b6c4d527b7634773c8a05bb0432a0029", "d": "jdFeUX64eZyKS7G44DkBCWvJW9sdkBfN21441/sojwbbU9lVd2Bfb7zxGCTom65l3jTT9jsfk3XBV5aSEQAct8ddB3qjt5MK08dfuMmiMtjT0ZiP08CvNQyKSXt+PKMrC+vmuFNAqHmSEfX/Tlqh+Z8qlxqbbsPTupuNZG/JxlFU6rG6D0NK4jMAS8c50v5gOQRI1Dw/FYYyNMdrMsYKd34ukP2Ik5vvkHSA2UdRkbo762Ab2S8rwZONUKvdJVyTZvYWVUQLStYndKYl29Zn03kENaHl0iaooZ82zyVj0QaYYzDzvvtWQ+LjS043ScvEoMfQEaK9sUVebNFpKhWEK2YzxKTbELVfePMRF+qkpn6c7Sc548fTQpv4"}, {"h": "dc29bd37e91560d445d77633b42f664ee89b14689e7b32c3e6e270fbb3b197c8", "d": "C+4rB03EQuXkvdXz/D//QuPp91rnQEdOXnKD0Enf0dX6v9WNDIVHVAnAUsoflXHHJh12pgKMFYYTiVDNiCKWMu6XBBl9hSdtI11NWMpbiCNtYUj2OPaFW/NGxjKOsFHeIck5Ik8HL23jIJI+eJnb6F2f6uaW+pV7QcQVY2dTFg38hDYu/id7ThuK4Tmu1B9zWNDWU1zrHEiJ3OQ5KXPn9VFQsO0P6GSuHfHdjRJhwWrREocSwJCRah5Dn0lNmQ6b4jgw39wejQCO/q6fJTN+OYFlXTDxIXWj4dfDnhUH6XCO2VbTl2plP0mMbLh8T30Ebb/TDF4cDaqdMiVaiB7C1+JDTqPo15PWmCP59XZHKKvgjiBqtkcVVpdk"}, {"h": "fc9d08bc69be246f40c69c72b91e922f901a46a9503322b6f66923a872694bd3", "d": "X9fpfLwQiNilV8Fy4w6lXk+qrjZ0Oc3gmID47EGResZ1iOasL0N8EExWNGRow5rzl1jjwYCyMTvAv78LRJDZXSOynwJ97N7TTCooaiiCafIfOcj0WFUjj28v02r3cGYA8HhFf2jGud9JxrDceVOF4tP4hBHEyrcAAJGSc/wfmXjJpogJ8gBdKjmGtyIPG2rGpUWjigj7Dav7+Wqocdd6dhjRkIghBMrXFBXq6HGH1wjPo5Elwz2iFduAtw8s1K8vkpb2wLpfoRU5Gmc2k64QJ5FFEAKl6lN9rEfPvn8mUAicLxrvd2ZN8YVczeLP9BUkEAV+sfFacNgQm/1cmhT/L9aIHLuMrGqcKLrUNpQEcFxnbrUSMIAjF5jI"}], "near": [{"h": "c4c3d4fa6a52bb28c98c135f0bd52843bf4c04afc5acedb8834376e5bef1f829", "msg": "That is the enzyme warfarin blocks. Which vitamin can it no longer recycle?"}, {"h": "757a3d9a01b7ca6a3d94813d413d00cc4651d35943592fe0c714f200bbb348f0", "msg": "That is the enzyme warfarin blocks. Which vitamin can it no longer recycle?"}, {"h": "1152d5e4c5b78343568656d5547667c4428ba080c65c0a82da67d995bcae5c9f", "msg": "That is the enzyme warfarin blocks. Which vitamin can it no longer recycle?"}, {"h": "50697729a8c1cfe1556ca8c3da314ec742d113eaacb0ca373668c72249a6d40e", "msg": "Protamine reverses heparin, not warfarin."}, {"h": "ef4e16f863bc1492a752fc1320de8404655aacc759c7ba37e6319e4e5d4ea3a5", "msg": "That is her medicine, not the vitamin."}, {"h": "e2c481a91f84a2bc902054ce83b885ab09ec87666a522c73573ad4b1c5d0cc34", "msg": "Wrong vitamin. Which one can no longer be recycled?"}, {"h": "d31adb615e52a1e9ddf80f5fc6f163ec3675a42e971dd35efb2500eb2bb7f14b", "msg": "Wrong vitamin. Which one can no longer be recycled?"}, {"h": "b44200b6a988810ea231ecf07bf92b9fcedfe5087c68519fe8e427c728afa7cc", "msg": "Wrong vitamin. Which one can no longer be recycled?"}, {"h": "0122111c8a7097be8fb128e1b4aa788a461d22d3d2953257508566b1682beb48", "msg": "Wrong vitamin. Which one can no longer be recycled?"}]}];
+var EXIT={"salt": "lab3v2:exit:", "answers": ["91ec816edff51cb79bab087444af47d6991fa9fdfc4f89f37c931a87cea33c18"], "near": ["436897f6efc695012c62f8f6e4c205b80260f91cea9394a34d8380b32620f163"]};
+var TOOLS=[{label:"DrugBank",url:"https://go.drugbank.com"},{label:"UniProt",url:"https://www.uniprot.org"},{label:"RCSB PDB",url:"https://www.rcsb.org"}];
+
+/* ---------- State ---------- */
+var KEY="lab3-lockdown-v2";
+var S=load()||{team:"",start:null,room:0,hints:[],wrong:0,done:null,found:[]};
+if(!S.found)S.found=[];
+function load(){try{var raw=localStorage.getItem(KEY);return raw?JSON.parse(raw):null;}catch(e){return null;}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+var $=function(id){return document.getElementById(id);};
+var view=$("view");
+
+function el(tag,attrs,html){var n=document.createElement(tag);if(attrs)for(var k in attrs)n.setAttribute(k,attrs[k]);if(html!=null)n.innerHTML=html;return n;}
+
+function elapsedMs(){
+  if(!S.start)return 0;
+  var end=S.done||Date.now();
+  return end-S.start+S.hints.length*HINT_PENALTY_MIN*60000;
+}
+function fmt(ms){var neg=ms<0;ms=Math.abs(ms);var s=Math.floor(ms/1000),m=Math.floor(s/60);s%=60;return (neg?"+":"")+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");}
+
+function renderBar(){
+  var t=$("timer"),rem=LIMIT_MIN*60000-elapsedMs();
+  if(!S.start){t.textContent=fmt(LIMIT_MIN*60000);t.className="timer";}
+  else if(S.done){t.textContent=fmt(elapsedMs()).replace("+","");t.className="timer";t.setAttribute("aria-label","Escape time");}
+  else if(rem>=0){t.textContent=fmt(rem);t.className="timer"+(rem<10*60000?" low":"");}
+  else{t.textContent=fmt(rem);t.className="timer over";t.setAttribute("aria-label","Overtime");}
+  $("st-team").textContent=S.team?("Team "+S.team):"";
+  $("st-hints").textContent="Hints "+S.hints.length;
+  $("st-wrong").textContent="Wrong "+S.wrong;
+  var d=$("doors");d.innerHTML="";
+  for(var i=0;i<=ROOMS.length;i++){
+    var cls="door";
+    if(S.start&&(i<S.room||(S.done&&i===ROOMS.length)))cls+=" open";
+    else if(S.start&&i===S.room&&!S.done)cls+=" here";
+    d.appendChild(el("div",{class:cls}));
+  }
+}
+function renderFragments(){
+  var box=$("fragments-box"),f=$("fragments");
+  box.hidden=!S.start;
+  f.innerHTML="";
+  for(var i=0;i<ROOMS.length;i++){
+    var fd=S.found[i],got=!!fd;
+    f.appendChild(el("div",{class:"tile"+(got?" got":""),"aria-label":got?("Fragment "+(i+1)+": "+fd.letter):("Fragment "+(i+1)+" locked")},got?escapeHtml(fd.letter):"?"));
+  }
+}
+
+function renderStart(){
+  view.innerHTML="";
+  var c=el("section",{class:"card"});
+  c.appendChild(el("div",{class:"hazard"}));
+  var inner=el("div",{class:"inner"});
+  inner.innerHTML=
+    '<div class="eyebrow">Faculty of Pharmacy &middot; Lab 3 &middot; 16:59</div>'+
+    '<h1>The doors are sealed</h1>'+
+    '<p class="story">You stayed late in Lab 3 to finish an experiment. At 17:00 the building’s security system reports a <b>database integrity alarm</b> and locks every door. The only way out is to prove to the system that you know how to use <b>DrugBank</b>, <b>UniProt</b> and the <b>PDB</b>.</p>'+
+    '<p class="story">Ten locked rooms stand between you and the exit. Each lock carries a riddle, and each answer can only be found, or worked out, with those databases. Every opened lock gives you one letter of the <b>exit code</b>.</p>'+
+    '<div class="task"><div><strong>Rules.</strong> You have 70 minutes. Each room has two hints, and each hint you open adds 5 minutes to your time. Wrong codes are counted. AI chatbots are switched off by the security system: use only the databases. Keep DrugBank (logged in), UniProt and the PDB open in other tabs.</div></div>';
+  var form=el("form",{class:"lock",id:"start-form"});
+  form.innerHTML='<label for="team-name">Team name</label><input id="team-name" name="team" maxlength="24" autocomplete="off" placeholder="For example: The Ligands"><button class="btn primary" type="submit">Start the clock</button><div class="msg" id="start-msg" role="status"></div>';
+  inner.appendChild(form);
+  c.appendChild(inner);view.appendChild(c);
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    var name=$("team-name").value.trim();
+    if(!name){$("start-msg").textContent="Type a team name to start.";$("start-msg").className="msg warn";return;}
+    S={team:name,start:Date.now(),room:0,hints:[],wrong:0,done:null,found:[]};save();render();
+  });
+}
+
+function renderRoom(){
+  var r=ROOMS[S.room];
+  view.innerHTML="";
+  var c=el("section",{class:"card unlock"});
+  c.appendChild(el("div",{class:"hazard"}));
+  var inner=el("div",{class:"inner"});
+  var links=TOOLS.map(function(l){return '<a class="tool" href="'+l.url+'" target="_blank" rel="noopener">'+l.label+' &#8599;</a>';}).join("");
+  inner.innerHTML=
+    '<div class="eyebrow">Room '+(S.room+1)+' of '+ROOMS.length+'</div>'+
+    '<h2>'+r.name+'</h2>'+
+    '<p class="story">'+r.story+'</p>'+
+    '<div class="task"><div class="eyebrow">Engraved on the lock</div><div class="riddle">'+r.riddle+'</div></div>'+
+    '<div class="tools">'+links+'</div>';
+  var form=el("form",{class:"lock",id:"lock-form"});
+  form.innerHTML='<label for="code">'+r.prompt+'</label><input id="code" name="code" autocomplete="off" spellcheck="false" placeholder="Type the code"><button class="btn primary" type="submit">Unlock</button><div class="msg" id="msg" role="status" aria-live="polite"></div>';
+  inner.appendChild(form);
+  var hintBox=el("div",{class:"hints"});
+  var shown=0;
+  for(var hi=0;hi<r.hints.length;hi++){
+    if(S.hints.indexOf(S.room+"."+hi)>=0){hintBox.appendChild(el("div",{class:"hint"},"<b>Hint "+(hi+1)+".</b> "+r.hints[hi]));shown=hi+1;}
+  }
+  if(shown<r.hints.length){
+    var level=shown;
+    var hintRow=el("div",{class:"row"});
+    var hb=el("button",{class:"btn ghost",type:"button",id:"hint-btn"},"Open hint "+(level+1)+" of "+r.hints.length+" (+"+HINT_PENALTY_MIN+" min)");
+    var conf=el("span",{class:"confirm",hidden:""});
+    conf.innerHTML='Add '+HINT_PENALTY_MIN+' minutes to your time? <button class="btn" type="button" id="hint-yes">Yes, open it</button> <button class="btn ghost" type="button" id="hint-no">Cancel</button>';
+    hintRow.appendChild(hb);hintRow.appendChild(conf);
+    hb.addEventListener("click",function(){hb.hidden=true;conf.hidden=false;});
+    conf.querySelector("#hint-no").addEventListener("click",function(){conf.hidden=true;hb.hidden=false;});
+    conf.querySelector("#hint-yes").addEventListener("click",function(){S.hints.push(S.room+"."+level);save();renderRoom();renderBar();});
+    hintBox.appendChild(hintRow);
+  }
+  inner.appendChild(hintBox);
+  c.appendChild(inner);view.appendChild(c);
+  var input=$("code");
+  try{input.focus({preventScroll:true});}catch(e){}
+  form.addEventListener("submit",async function(e){
+    e.preventDefault();
+    var v=norm(input.value),msg=$("msg");
+    if(!v){msg.textContent="Type a code first.";msg.className="msg warn";return;}
+    var h=await sha256(r.salt+v);
+    for(var a=0;a<r.answers.length;a++){
+      if(r.answers[a].h===h){var data=await unseal(r.answers[a].d,r.key+v);solved(data);return;}
+    }
+    for(var i=0;i<r.near.length;i++){
+      if(r.near[i].h===h){msg.textContent=r.near[i].msg;msg.className="msg warn";S.wrong++;save();renderBar();return;}
+    }
+    S.wrong++;save();renderBar();
+    msg.textContent="ACCESS DENIED. That code does not open this door.";msg.className="msg bad";
+    form.classList.remove("shake");void form.offsetWidth;form.classList.add("shake");
+  });
+}
+
+function solved(data){
+  var r=ROOMS[S.room];
+  S.found[S.room]=data;S.room++;save();
+  view.innerHTML="";
+  var c=el("section",{class:"card unlock"});
+  c.appendChild(el("div",{class:"hazard"}));
+  var inner=el("div",{class:"inner"});
+  inner.innerHTML=
+    '<div class="eyebrow">Room '+S.room+' unlocked</div>'+
+    '<h2>Door open</h2>'+
+    '<div class="row"><span>Fragment found:</span><div class="tile got">'+escapeHtml(data.letter)+'</div></div>'+
+    '<div class="note"><div class="eyebrow">Lab note</div><p>'+data.note+'</p></div>';
+  var next=el("button",{class:"btn primary",type:"button",id:"next-btn"},S.room<ROOMS.length?"Go to room "+(S.room+1):"Go to the exit door");
+  next.addEventListener("click",render);
+  inner.appendChild(next);
+  c.appendChild(inner);view.appendChild(c);
+  try{next.focus({preventScroll:true});}catch(e){}
+  renderBar();renderFragments();
+}
+
+function renderExit(){
+  view.innerHTML="";
+  var c=el("section",{class:"card unlock"});
+  c.appendChild(el("div",{class:"hazard"}));
+  var inner=el("div",{class:"inner"});
+  inner.innerHTML=
+    '<div class="eyebrow">Exit door</div>'+
+    '<h2>One last lock</h2>'+
+    '<p class="story">The exit keypad wants one word. You hold all ten letters, but not in the right order.</p>'+
+    '<div class="task"><div class="eyebrow">Engraved on the exit</div><div class="riddle">I am the process that activates prodrugs such as clopidogrel. Together with elimination, I set the half-life you used on the clock. I happen mostly in the liver, for example through CYP enzymes. Rearrange the ten letters you collected to name me.</div></div>';
+  var form=el("form",{class:"lock",id:"exit-form"});
+  form.innerHTML='<label for="exit-code">Exit code (10 letters)</label><input id="exit-code" autocomplete="off" spellcheck="false" maxlength="14" placeholder="Rearranged word"><button class="btn primary" type="submit">Open the exit</button><div class="msg" id="exit-msg" role="status" aria-live="polite"></div>';
+  inner.appendChild(form);c.appendChild(inner);view.appendChild(c);
+  form.addEventListener("submit",async function(e){
+    e.preventDefault();
+    var v=norm($("exit-code").value),msg=$("exit-msg");
+    if(!v){msg.textContent="Type the word first.";msg.className="msg warn";return;}
+    var h=await sha256(EXIT.salt+v);
+    if(EXIT.answers.indexOf(h)>=0){S.done=Date.now();save();render();return;}
+    if(EXIT.near.indexOf(h)>=0){msg.textContent="So close. Use exactly the ten letters you hold.";msg.className="msg warn";S.wrong++;save();renderBar();return;}
+    S.wrong++;save();renderBar();
+    msg.textContent="ACCESS DENIED. Try another order of the letters.";msg.className="msg bad";
+    form.classList.remove("shake");void form.offsetWidth;form.classList.add("shake");
+  });
+}
+
+function renderDone(){
+  view.innerHTML="";
+  var c=el("section",{class:"card unlock"});
+  c.appendChild(el("div",{class:"hazard"}));
+  var inner=el("div",{class:"inner"});
+  var t=elapsedMs(),inTime=t<=LIMIT_MIN*60000;
+  var lessons=ROOMS.map(function(r,i){return "<li><b>"+r.name+".</b> "+r.lesson+"</li>";}).join("");
+  inner.innerHTML=
+    '<div class="eyebrow">Exit open &middot; Team '+escapeHtml(S.team)+'</div>'+
+    '<h1>'+(inTime?"You escaped":"You escaped, in overtime")+'</h1>'+
+    '<div class="big">'+fmt(t).replace("+","")+'</div>'+
+    '<p>'+S.hints.length+' hint'+(S.hints.length===1?"":"s")+' (included in the time) &middot; '+S.wrong+' wrong code'+(S.wrong===1?"":"s")+'. Show this screen to your teacher.</p>'+
+    '<div class="note"><div class="eyebrow">What the ten rooms taught you</div><ol class="lessons">'+lessons+'</ol></div>';
+  c.appendChild(inner);view.appendChild(c);
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];});}
+
+function render(){
+  renderBar();renderFragments();
+  if(!S.start)renderStart();
+  else if(S.done)renderDone();
+  else if(S.room<ROOMS.length)renderRoom();
+  else renderExit();
+}
+
+$("reset").addEventListener("click",function(){$("reset").hidden=true;$("reset-confirm").hidden=false;});
+$("reset-no").addEventListener("click",function(){$("reset-confirm").hidden=true;$("reset").hidden=false;});
+$("reset-yes").addEventListener("click",function(){
+  S={team:"",start:null,room:0,hints:[],wrong:0,done:null,found:[]};
+  try{localStorage.removeItem(KEY);}catch(e){}
+  $("reset-confirm").hidden=true;$("reset").hidden=false;render();
+});
+
+setInterval(function(){if(S.start&&!S.done)renderBar();},1000);
+render();
+})();
+</script>

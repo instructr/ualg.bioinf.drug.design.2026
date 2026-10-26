@@ -1,0 +1,35 @@
+---
+title: "DrugBank Escape Room | TP1"
+subtitle: "Lab 3 Lockdown"
+author:
+  - name: "Isabel Duarte"
+    affiliation: "Universidade do Algarve"
+date: today
+date-format: "MMMM YYYY"
+format:
+  html:
+    toc: false
+    number-sections: false
+    theme:
+      - cosmo
+license: "CC BY SA 4.0"
+---
+
+You are locked in Lab 3. Use **DrugBank**, **UniProt** and the **PDB** to get out.
+
+## Rules
+
+- Teams of 4. **One laptop** runs the game; the others search.
+- **Log in to DrugBank** before you start.
+- **70 minutes**, **10 rooms**. Each room opens with one code.
+- Each room has **2 hints**. Every hint adds **5 minutes**.
+- **No AI chatbots.** Databases only.
+- Every room gives you **one letter**. Together they make the **exit word**.
+- Write the exit word on your **group sheet** and bring it to the teacher.
+
+## Winning
+
+- Ranking: **time** (hints included), then **fewest wrong codes**.
+- The **first 4 teams** win: 1.00 point, 0.75, 0.50, and 0.25, respectively. Every other team gets a **bonus mission**.
+
+[Start the escape room](escape/lab3.html){.btn .btn-primary .btn-lg role="button" target="_blank"}
