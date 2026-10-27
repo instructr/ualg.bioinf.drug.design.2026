@@ -26,7 +26,8 @@ website:
           - 4.rcsb-pdb-tutorial.qmd
           - 5.drugbank-tutorial-part1.qmd
           - 5.escape-room-tp1.qmd
-          # - 6.opentargets-tutorial.qmd
+          # - 5.escape-room-tp2.qmd
+          # - 6.clinpgx-tutorial.qmd
       # - text: "Calendar"
       #   menu:
       #     - calendar.qmd
