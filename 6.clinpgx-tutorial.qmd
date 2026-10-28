@@ -1,5 +1,5 @@
 ---
-title: "ClinPGx | From genotype to prescription"
+title: "From genotype to prescription with ClinPGx"
 subtitle: "A pharmacogenomics walk-through using CYP2C19 and clopidogrel as an example"
 author:
   - name: "Isabel Duarte"
@@ -10,9 +10,9 @@ abstract: |
   A hands-on introduction to ClinPGx (the successor of PharmGKB), the
   reference knowledgebase for pharmacogenomics. Following one gene (CYP2C19)
   and one drug (clopidogrel), you will learn the core concepts of
-  pharmacogenomics (star alleles, diplotypes, metabolizer phenotypes), read a
-  CPIC dosing guideline, interpret drug labels and levels of evidence, and
-  connect ClinPGx to Ensembl, UniProt, PDB and DrugBank.
+  pharmacogenomics (star alleles, diplotypes, metabolizer phenotypes) and then
+  use ClinPGx as a hospital pharmacist would, to review the medication of a
+  patient with a known genotype.
 format:
   html:
     toc: true
@@ -49,9 +49,8 @@ guidelines, the approved drug label, and the judgement of the clinical team.
 - What are ClinPGx, PharmGKB, CPIC and PharmCAT, and how do they relate?
 - What do *star allele*, *diplotype*, *allele function* and *metabolizer phenotype* mean?
 - How do you go from a patient's genotype to a prescribing recommendation?
-- How strong is the evidence behind a gene-drug association, and how is that graded?
-- What do regulatory drug labels say about pharmacogenomics?
-- How does ClinPGx connect to Ensembl, UniProt, PDB and DrugBank?
+- How do you judge how strong a recommendation, a drug label or a piece of evidence is?
+- How do co-medications change the picture?
 :::
 
 ::: {.callout-tip}
@@ -60,9 +59,8 @@ guidelines, the approved drug label, and the judgement of the clinical team.
 By the end of this session you should be able to:
 
 1. Explain the chain *genotype → diplotype → phenotype → recommendation*.
-2. Find and interpret a CPIC guideline, a drug label annotation and a summary annotation in ClinPGx.
-3. Judge the strength of pharmacogenomic evidence using ClinPGx levels of evidence.
-4. Use shared identifiers to move between ClinPGx and the other databases of this course.
+2. Find the CPIC guideline, drug labels and summary annotations for a gene-drug pair in ClinPGx.
+3. Apply them to a patient case, including co-medications.
 :::
 
 | | |
@@ -76,12 +74,11 @@ By the end of this session you should be able to:
 
 | Part | Topic | Minutes |
 |---|---|---|
-| 1 | Key concepts and the ClinPGx homepage | 10 |
-| 2 | The gene page: CYP2C19 | 10 |
-| 3 | Alleles: function and frequency | 10 |
-| 4 | The drug page and the CPIC guideline | 15 |
-| 5 | Drug labels and levels of evidence | 10 |
-| 6 | Putting it together: a patient case | 5 |
+| 1 | Key concepts and the ClinPGx homepage | 15 |
+| 2 | The gene page: CYP2C19 | 5 |
+| 3 | From alleles to phenotype | 10 |
+| 4 | The drug page: clopidogrel | 5 |
+| 5 | **The patient case** | 25 |
 
 : Suggested timing {.striped}
 
@@ -298,34 +295,30 @@ identifiers like `DB00758`.
 :::: {.callout-warning icon=false}
 ## ❓ Question
 
-1. Is CYP2C19 a pharmacokinetic or a pharmacodynamic gene? Why?
-2. CYP2C19 is labelled a **VIP**. What does that mean?
-3. List three drugs (or drug classes) for which a CPIC guideline exists for CYP2C19.
-4. In the cross-references, find the identifiers for **Ensembl** and **UniProt**. Do you recognise them from earlier classes?
+1. CYP2C19 is labelled a **VIP**. What does that mean?
+2. List three drugs (or drug classes) that have a CPIC guideline for CYP2C19.
+3. In the cross-references, find the identifiers for **Ensembl** and **UniProt**.
 
 ::: {.callout-note collapse="true" title="Show answer"}
-1. Pharmacokinetic: CYP2C19 is a liver enzyme that metabolises drugs.
-2. *Very Important Pharmacogene*: a gene with strong, well documented pharmacogenomic relevance, for which ClinPGx curators write a dedicated summary.
-3. Among others: clopidogrel, proton pump inhibitors (e.g. omeprazole, pantoprazole), voriconazole, some antidepressants (e.g. citalopram, escitalopram, sertraline) and tricyclic antidepressants.
-4. Ensembl `ENSG00000165841` (chromosome 10) and UniProt `P33261` (CP2CJ_HUMAN). The same gene and protein you could have studied in previous classes, now viewed from the clinical side.
+1. *Very Important Pharmacogene*: a gene with strong, well documented pharmacogenomic relevance, for which ClinPGx curators write a dedicated summary.
+2. Among others: clopidogrel, proton pump inhibitors (e.g. omeprazole, pantoprazole), voriconazole, and several antidepressants (e.g. citalopram, sertraline). Keep omeprazole in mind: it comes back in the patient case.
+3. Ensembl `ENSG00000165841` (chromosome 10) and UniProt `P33261` (CP2CJ_HUMAN).
 :::
 ::::
 
 ::: {.callout-tip icon=false}
 ## 🔗 Connection: UniProt and PDB
 
-Open the UniProt entry [P33261](https://www.uniprot.org/uniprotkb/P33261/entry)
-in a new tab and check the *Function* and *Subcellular location* sections. Then
-go to the *Structure* section, or search PDB for
-[4GQS](https://www.rcsb.org/structure/4GQS), a crystal structure of human
-CYP2C19.
-
-You now know *where* the enzyme is (endoplasmic reticulum membrane of liver
-cells) and *what it looks like* (a heme-containing P450 fold). ClinPGx tells
-you *what happens to patients* when its gene varies.
+The UniProt entry [P33261](https://www.uniprot.org/uniprotkb/P33261/entry) and
+the PDB structure [4GQS](https://www.rcsb.org/structure/4GQS) describe the
+*protein*: a heme-containing enzyme of the endoplasmic reticulum of liver cells.
+ClinPGx adds the clinical layer: *what happens to patients* when its gene varies.
 :::
 
-## Alleles: function and frequency {#sec-alleles}
+## From alleles to phenotype {#sec-alleles}
+
+CPIC guidelines are written **per phenotype**, not per variant. So the single
+most useful skill in ClinPGx is translating a genotype into a phenotype.
 
 ### Allele function {#sec-allele-function}
 
@@ -345,24 +338,16 @@ you *what happens to patients* when its gene varies.
    alleles (their diplotype). For each patient, work in two steps:
    a. write down the function of each of the two alleles (your answer to
       question 1);
-   b. use the rules table at the end of the section above named **Concept 4** 
-   to find the phenotype that matches that pair of functions.
+   b. use the rules table at the end of **Concept 4** to find the phenotype
+      that matches that pair of functions.
 
 | Patient diplotype | Function of allele 1 + allele 2 | Phenotype |
 |---|---|---|
 | `*1/*1` | normal + normal | ? |
 | `*1/*17` | ? | ? |
 | `*17/*17` | ? | ? |
-| `*1/*2` | ? | ? |
 | `*2/*17` | ? | ? |
-| `*2/*2` | ? | ? |
 | `*2/*3` | ? | ? |
-
-3. Check your predictions against the official source: open the CPIC guideline
-   for CYP2C19 and clopidogrel (Section @sec-cpic) and find the table that
-   assigns phenotypes to genotypes (Table 1 of the guideline article, or the
-   genotype-to-phenotype table on the guideline page). Did you get them all
-   right?
 
 ::: {.callout-note collapse="true" title="Show answer"}
 1. `*1` normal function; `*2` and `*3` no function; `*17` increased function.
@@ -373,20 +358,13 @@ you *what happens to patients* when its gene varies.
 | `*1/*1` | normal + normal | Normal metabolizer (NM) |
 | `*1/*17` | normal + increased | Rapid metabolizer (RM) |
 | `*17/*17` | increased + increased | Ultrarapid metabolizer (UM) |
-| `*1/*2` | normal + no function | Intermediate metabolizer (IM) |
 | `*2/*17` | no function + increased | Intermediate metabolizer (IM) |
-| `*2/*2` | no function + no function | Poor metabolizer (PM) |
 | `*2/*3` | no function + no function | Poor metabolizer (PM) |
 
 : CYP2C19 diplotype to phenotype {.striped}
 
 The tricky one is `*2/*17`: the increased function of `*17` does **not**
 compensate for the loss of `*2`, so CPIC classifies it as intermediate.
-
-3. Your predictions should match the CPIC table. The point of the exercise is
-   that the phenotype is not stored "inside" the patient's DNA: it is an
-   **interpretation** made by combining allele functions with agreed rules,
-   and those rules are published (and occasionally revised) by CPIC.
 :::
 ::::
 
@@ -399,7 +377,7 @@ compensate for the loss of `*2`, so CPIC classifies it as intermediate.
 2. In a new tab, open the same variant in **Ensembl**:
    <https://www.ensembl.org/Homo_sapiens/Variation/Explore?v=rs4244285>.
 3. In Ensembl, look at the predicted **consequence** of the variant on the
-   transcript, and at its **Allele frequency** tab.
+   transcript.
 :::
 
 :::: {.callout-warning icon=false}
@@ -407,7 +385,9 @@ compensate for the loss of `*2`, so CPIC classifies it as intermediate.
 
 1. Which star allele does `rs4244285` define?
 2. What consequence does Ensembl predict for the protein sequence?
-3. If the amino acid does not change, how can this be a *no function* allele? (Hint: read carefully the top **Description** in the **Overview** section of the variant `rs4244285`.)`
+3. If the amino acid does not change, how can this be a *no function* allele?
+   *(Hint: read the **Description** in the Overview section of the ClinPGx
+   variant page.)*
 
 ::: {.callout-note collapse="true" title="Show answer"}
 1. `CYP2C19*2` (c.681G>A).
@@ -416,286 +396,238 @@ compensate for the loss of `*2`, so CPIC classifies it as intermediate.
 :::
 ::::
 
-::: {.callout-note collapse="true"}
-## Knowledge keeps moving
+## The drug page: clopidogrel {#sec-drug}
 
-In August 2026, PharmVar updated the **core variant definition** of
-`CYP2C19*2`. As with the UniProt *History* tab, the definition of an allele is
-a moving target, and ClinPGx and PharmCAT follow these updates. See the ClinPGx
-blog post *CYP2C19\*2 core allele definition update*:
-<https://blog.clinpgx.org/cyp2c19-2-core-allele-definition-update/>.
-:::
-
-### Allele frequency across populations {#sec-frequency}
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on: allele frequencies
-
-1. Open the allele frequency pages: <https://www.clinpgx.org/alleleFrequency>.
-2. Select **CYP2C19** and compare the frequency of `*2`, `*3` and `*17` across
-   the biogeographical groups (e.g. European, East Asian, Sub-Saharan African).
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-1. In which group is `*2` most frequent? And `*17`?
-2. `*3` is almost absent in Europeans. Where is it found?
-3. Compare the `*2` frequency in ClinPGx with the frequency of the `A` allele of `rs4244285` in Ensembl (1000 Genomes populations). Are they similar? Why might they differ slightly?
-4. Why does this matter for a country's decision to implement genotyping?
-
-::: {.callout-note collapse="true" title="Show answer"}
-1. `*2` is most frequent in East Asian and Oceanian populations (roughly 30% or more, versus roughly 15% in Europeans). `*17` is common in Europeans and Africans (around 20%) but rare in East Asians.
-2. Mainly in East Asian populations (a few percent).
-3. They should be close. Differences come from different source studies, sample sizes, population definitions, and from the fact that a star allele is a haplotype while an rsID is a single variant.
-4. The proportion of patients who would change treatment after testing depends on allele frequencies. In populations where poor and intermediate metabolizers are common, testing changes more prescriptions.
-:::
-::::
-
-## The drug page and the CPIC guideline {#sec-drug}
+The drug page is where most clinical questions start: it gathers, in one
+place, the **guidelines** and **drug labels** for that drug (in the
+*Prescribing Info* area) and the **summary annotations** from the literature.
 
 ::: {.callout-tip icon=false}
 ## 🔬 Hands on: open the clopidogrel page
 
 1. Search for `clopidogrel` and open the **chemical** page.
-2. Look at the cross-references and find the **DrugBank** identifier.
-3. Find the **Prescribing information** or **Guidelines** area and open the
-   CPIC guideline for **CYP2C19 and clopidogrel**.
+2. In the cross-references, find the **DrugBank** identifier.
+3. Locate (do not read in detail yet) the **guidelines**, the **drug labels**
+   and the **summary annotations**. You will use all three in the patient case.
 :::
 
 :::: {.callout-warning icon=false}
 ## ❓ Question
 
 1. What is the DrugBank identifier for clopidogrel?
-2. What is clopidogrel used for, and what is its mechanism of action?
-3. Why is CYP2C19 so important for this particular drug?
+2. Why is CYP2C19 so important for this particular drug? *(Hint: Concept 5.)*
 
 ::: {.callout-note collapse="true" title="Show answer"}
-1. `DB00758`.
-2. It is an antiplatelet agent used to prevent heart attacks and strokes, particularly after acute coronary syndrome and after stent placement (PCI). Its active metabolite irreversibly blocks the platelet P2Y12 receptor.
-3. Clopidogrel is a **prodrug**. CYP2C19 performs most of its conversion to the active metabolite. Poor and intermediate metabolizers make less active drug, so their platelets are less inhibited and they have a higher risk of cardiovascular events.
-:::
-::::
-
-::: {.callout-tip icon=false}
-## 🔗 Connection: DrugBank
-
-Open [DB00758](https://go.drugbank.com/drugs/DB00758) in DrugBank. Look at
-**Enzymes** (under *Targets*) and at the **Pharmacogenomic Effects/ADRs** and
-**Drug Interactions** sections.
-
-- DrugBank tells you *which enzymes* handle the drug and *which drugs
-  interact* with it.
-- ClinPGx tells you *what to do* when the patient's genes change how those
-  enzymes work.
-:::
-
-### Reading the CPIC recommendations {#sec-cpic}
-
-A CPIC guideline does **not** tell you whether to genotype a patient. It
-assumes the genotype is already known and tells you **how to use it**. Each
-recommendation has a **strength**: *strong*, *moderate*, or *optional*.
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on: the recommendation table
-
-1. On the guideline page, find the recommendation table (or the interactive
-   tool that lets you pick a phenotype).
-2. Select the cardiovascular indication (acute coronary syndrome and/or PCI).
-3. Read the recommendation for each CYP2C19 phenotype.
-:::
-
-:::: {.callout-warning icon=false}
-## ❓ Question
-
-1. What does CPIC recommend for a **poor metabolizer**? With what strength?
-2. And for an **intermediate metabolizer**?
-3. What about normal, rapid and ultrarapid metabolizers?
-4. Why not simply give a poor metabolizer a **higher dose** of clopidogrel?
-
-::: {.callout-note collapse="true" title="Show answer"}
-Based on the 2022 CPIC update (cardiovascular indications):
-
-1. **Avoid clopidogrel** if possible, and use prasugrel or ticagrelor at standard dose if there is no contraindication. Strong recommendation.
-2. Also **avoid standard-dose clopidogrel** if possible, and use prasugrel or ticagrelor if there is no contraindication. Moderate strength (strengthened compared with the 2013 guideline).
-3. Use clopidogrel at the **standard dose**. The increased function of `*17` does not justify a change.
-4. In poor metabolizers, even higher doses do not produce enough active metabolite to reach adequate platelet inhibition. Prasugrel and ticagrelor do not depend on CYP2C19 in the same way, so they are the logical alternatives.
+1. `DB00758`. In [DrugBank](https://go.drugbank.com/drugs/DB00758) you can see its target (the platelet P2Y12 receptor), its metabolising enzymes and its drug interactions.
+2. Clopidogrel is a **prodrug**. CYP2C19 performs most of its conversion to the active metabolite. Patients with low CYP2C19 activity make less active drug, so their platelets are less inhibited and they have a higher risk of heart attack, stroke or stent thrombosis.
 :::
 ::::
 
 ::: {.callout-note icon=false}
-## 📘 Concept 7: CPIC levels for gene-drug pairs
+## 📘 Concept 7: three scales to judge what you find
 
-Before writing a guideline, CPIC assigns each gene-drug pair a level:
+Everything on the drug page comes with a grade. You will need these three
+scales in the patient case, so keep this box open.
 
-| CPIC level | Meaning |
+**1. CPIC level of the gene-drug pair** (shown in the gene-drug pairs list)
+
+| Level | Meaning |
 |---|---|
 | **A** | Genetic information **should** be used to change prescribing |
 | **B** | Genetic information **could** be used to change prescribing |
-| **C** | No prescribing action recommended (evidence or alternatives insufficient) |
-| **D** | No prescribing action recommended |
+| **C / D** | No prescribing action recommended |
 
-: CPIC levels (simplified) {.striped}
+Inside a guideline, each recommendation also has a **strength**: *strong*,
+*moderate* or *optional*.
 
-Only levels A and B lead to prescribing guidelines. CYP2C19 and clopidogrel is
-**level A**. You can check the level of any pair in the gene-drug pairs list.
-:::
+**2. Pharmacogenomic level of a drug label** (FDA, EMA, PMDA, ...)
 
-## Drug labels {#sec-labels}
-
-Regulatory agencies (FDA in the USA, EMA in Europe, PMDA in Japan, Swissmedic,
-Health Canada) sometimes include pharmacogenomic information in the official
-drug label. ClinPGx curates these labels and classifies them:
-
-| ClinPGx label level | Meaning |
+| Level | Meaning |
 |---|---|
-| **Testing required** | The label says genetic testing must be done before prescribing |
-| **Testing recommended** | The label recommends testing |
-| **Actionable PGx** | The label suggests a change (drug, dose) based on genotype, without requiring testing |
-| **Informative PGx** | The label mentions a gene-drug effect with no clinical action |
+| **Testing required** | Genetic testing must be done before prescribing |
+| **Testing recommended** | Testing is recommended |
+| **Actionable PGx** | The label suggests a change based on genotype, without requiring testing |
+| **Informative PGx** | The label mentions a gene-drug effect, with no clinical action |
 
-: Pharmacogenomic levels of drug labels {.striped tbl-colwidths="[30,70]"}
+**3. Level of evidence of a summary annotation** (one variant, one drug)
 
-::: {.callout-tip icon=false}
-## 🔬 Hands on: clopidogrel labels
+| Level | Evidence |
+|---|---|
+| **1A** | High: variant-specific guidance in a guideline or FDA label |
+| **1B** | High: strong, replicated association, but no guidance yet |
+| **2A / 2B** | Moderate |
+| **3** | Low: single or conflicting studies |
+| **4** | The evidence does not support an association |
+:::
 
-1. On the clopidogrel page, open the **drug label** annotations.
-2. Compare the FDA label with the EMA label.
+## The patient case {#sec-case}
+
+This is the core of the lesson. You will use ClinPGx the way a hospital
+pharmacist would: to answer a real prescribing question, step by step.
+
+::: {.callout-important icon=false}
+## 🩺 The patient
+
+**Mr. A.**, 62 years old, has just had a coronary stent implanted (PCI) after
+an acute coronary syndrome. The cardiologist plans to prescribe **clopidogrel**
+(with aspirin). He has no history of stroke or major bleeding.
+
+He has been taking **omeprazole** 20 mg/day for more than a year for gastric
+protection.
+
+A pharmacogenomic test reports: **CYP2C19 `*1/*2`**.
+
+You are asked to review his medication.
 :::
 
 :::: {.callout-warning icon=false}
-## ❓ Question
+## ❓ Question 1: What is his phenotype?
 
-1. Which agencies have a label annotation for clopidogrel?
-2. Which PGx level is given to the FDA label? Does it require testing?
-3. The FDA label carries a **boxed warning**. What is it about?
-4. Search for `abacavir` and look at its labels. How does its level compare with clopidogrel? Why?
+Translate Mr. A.'s diplotype into a CYP2C19 phenotype.
+
+*Where to look:* the allele function table and the rules in Concept 4 (see
+@sec-allele-function).
 
 ::: {.callout-note collapse="true" title="Show answer"}
-1. Several, including the FDA, EMA, PMDA, Swissmedic and Health Canada (the exact list may vary).
-2. *Actionable PGx* (at the time of writing). Testing is not required, but the label warns about reduced effectiveness in CYP2C19 poor metabolizers and advises considering another P2Y12 inhibitor.
-3. Diminished antiplatelet effect in patients who are CYP2C19 poor metabolizers.
-4. Abacavir labels are **Testing required**: patients must be tested for `HLA-B*57:01` before starting, because carriers are at high risk of a severe, potentially fatal hypersensitivity reaction. Here the consequence (life-threatening toxicity) and the evidence are strong enough to make testing mandatory.
+`*1` (normal function) + `*2` (no function) = **intermediate metabolizer (IM)**.
 :::
 ::::
 
-## Summary annotations and levels of evidence {#sec-evidence}
-
-Guidelines and labels exist for a few hundred gene-drug pairs. For thousands
-of other associations, ClinPGx offers **summary annotations**: a curated
-summary of all papers on one **variant-drug** pair, graded with a **level of
-evidence** computed from a scoring system (study size, replication,
-p-values, existence of guidelines, and so on).
-
-| Level | Evidence | In short |
-|---|---|---|
-| **1A** | High | Variant-specific prescribing guidance in a guideline or FDA-approved label |
-| **1B** | High | Strong, replicated association, but no variant-specific guidance yet |
-| **2A** | Moderate | Moderate evidence, in a well-known pharmacogene (VIP) |
-| **2B** | Moderate | Moderate evidence, outside the VIPs |
-| **3** | Low | Single study, not replicated, or conflicting results |
-| **4** | Unsupported | The evidence does not support an association |
-
-: ClinPGx levels of evidence for summary annotations {.striped tbl-colwidths="[12,18,70]"}
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on: grading the evidence
-
-1. Open the summary annotations: <https://www.clinpgx.org/summaryAnnotations>
-   (or the *Summary annotations* section of the clopidogrel page).
-2. Filter for `rs4244285` and `clopidogrel`.
-3. Open the annotation and read the text given for each genotype (GG, GA, AA).
-4. Scroll down to the list of supporting **variant annotations** (the individual papers).
-:::
-
 :::: {.callout-warning icon=false}
-## ❓ Question
+## ❓ Question 2: What does the guideline recommend?
 
-1. What is the level of evidence of `rs4244285` and clopidogrel? Why so high?
-2. What phenotype categories are covered (e.g. efficacy, toxicity, metabolism/PK)?
-3. Do all supporting papers agree? What does this tell you about single studies?
-4. Find a summary annotation for clopidogrel with level **3**. Would you change a prescription based on it?
+What does CPIC recommend for a CYP2C19 intermediate metabolizer who needs
+antiplatelet therapy after PCI? How strong is the recommendation? Would the
+recommendation be different if he were a poor metabolizer?
+
+*Where to look:* clopidogrel page → guidelines → **CPIC guideline for CYP2C19
+and clopidogrel**. Select the cardiovascular indication (ACS/PCI) and the
+phenotype.
 
 ::: {.callout-note collapse="true" title="Show answer"}
-1. **Level 1A**: the variant is part of a CPIC guideline and FDA label with variant-specific prescribing guidance, and it is supported by many independent studies.
-2. Typically efficacy (e.g. cardiovascular events, platelet reactivity) and metabolism/PK (active metabolite exposure).
-3. No. Some studies show an association, others do not (different populations, sample sizes, outcomes, co-medications). This is why evidence is summarised and graded instead of relying on any single paper.
-4. No. Level 3 evidence is preliminary. It is interesting for research, but it is not a basis for clinical decisions.
+Based on the 2022 CPIC update:
+
+- **Intermediate metabolizer:** avoid standard-dose clopidogrel if possible;
+  use **prasugrel or ticagrelor** at standard dose if there is no
+  contraindication. Strength: **moderate**.
+- **Poor metabolizer:** same advice, but the strength is **strong**.
+
+Increasing the clopidogrel dose is not the solution: these patients cannot
+make enough active metabolite. Prasugrel and ticagrelor do not depend on
+CYP2C19 in the same way. Mr. A. has no history of stroke (a contraindication
+for prasugrel), so both alternatives are possible.
 :::
 ::::
 
-::: {.callout-warning icon=false}
-## ❓ Critical thinking question
-
-A colleague finds a paper reporting that a variant in gene X doubles the risk
-of a side effect of drug Y. In ClinPGx the corresponding summary annotation is
-**level 3**. Your colleague wants to recommend genotyping for all patients
-starting drug Y.
-
-What would you answer? Which additional information would you look for in
-ClinPGx before deciding?
-:::
-
-## Putting it together: a patient case {#sec-case}
-
-::: {.callout-tip icon=false}
-## 🔬 Hands on: from genotype to prescription
-
-Mr. A., 62 years old, has just had a coronary stent implanted (PCI) after an
-acute coronary syndrome. The cardiologist plans to prescribe clopidogrel. A
-pharmacogenomic test reports: **CYP2C19 `*1/*2`**. He also takes
-**omeprazole** for gastric protection.
-
-1. Translate the diplotype into a phenotype (Section @sec-alleles).
-2. Find the CPIC recommendation (Section @sec-cpic).
-3. Open [PharmDOG](https://pharmdog.clinpgx.org/), the ClinPGx prescribing
-   tool. Enter the CYP2C19 result and the drug clopidogrel, and compare its
-   output with your answer.
-4. In DrugBank, check the interaction between **clopidogrel and omeprazole**.
-:::
-
 :::: {.callout-warning icon=false}
-## ❓ Question
+## ❓ Question 3: How much can we trust this?
 
-1. What is Mr. A.'s phenotype, and what do you recommend?
-2. Why does the omeprazole matter?
-3. What is **phenoconversion**?
+a. What is the **CPIC level** of the CYP2C19-clopidogrel pair?
+b. What is the **level of evidence** of the summary annotation for `rs4244285`
+   and clopidogrel?
+c. Open that summary annotation and scroll to the supporting papers. Do they
+   all agree?
+
+*Where to look:* (a) the gene-drug pairs list <https://www.clinpgx.org/pairs>;
+(b, c) the summary annotations on the clopidogrel page, filtered for
+`rs4244285`. Use Concept 7 to interpret the grades.
 
 ::: {.callout-note collapse="true" title="Show answer"}
-1. `*1/*2` is an **intermediate metabolizer**. CPIC recommends avoiding standard-dose clopidogrel if possible and using prasugrel or ticagrelor if there is no contraindication (moderate recommendation).
-2. Omeprazole **inhibits** CYP2C19. It can further reduce clopidogrel activation, and regulatory labels advise avoiding the combination with omeprazole or esomeprazole. A different gastroprotective strategy (or a different antiplatelet) should be discussed.
-3. **Phenoconversion** is when a co-administered drug (an inhibitor or inducer) makes the *observed* phenotype different from the one predicted by the genotype. A genetic normal metabolizer taking a strong inhibitor may behave like an intermediate or poor metabolizer. Genes are not the only factor: always check the whole medication list. PharmDOG can account for phenoconversion for some genes (e.g. CYP2D6).
+a. **Level A**: genetic information *should* be used to change prescribing.
+b. **Level 1A**: the variant has specific guidance in a guideline and a drug
+   label, and is supported by many independent studies.
+c. No. Some studies find an association, others do not (different
+   populations, sample sizes, outcomes). This is why ClinPGx summarises and
+   grades many papers instead of relying on any single one, and partly why the
+   recommendation for intermediate metabolizers is *moderate* rather than
+   *strong*.
 :::
 ::::
 
-## How ClinPGx connects to the other databases {#sec-connections}
-
-Across this course you followed **one biological story through different
-databases**. Shared identifiers are what make this possible.
-
-| Database | Question it answers | Identifier for our example |
-|---|---|---|
-| **Ensembl** | Where is the gene and its variants in the genome? How frequent are they? | Gene `ENSG00000165841`; variant `rs4244285` |
-| **UniProt** | What is the protein, what does it do, where is it? | `P33261` (CP2CJ_HUMAN) |
-| **PDB** | What is its 3D structure? | e.g. `4GQS` |
-| **DrugBank** | What is the drug, its targets, enzymes, interactions? | `DB00758` (clopidogrel) |
-| **ClinPGx** | How should a patient's genotype change prescribing? | Gene `PA124`, drug `PA449053` |
-
-: One story, five databases {.striped tbl-colwidths="[15,50,35]"}
-
 :::: {.callout-warning icon=false}
-## ❓ Challenge (if time allows)
+## ❓ Question 4: What do the regulators say?
 
-Repeat the reasoning chain for **CYP2D6 and codeine**.
+a. Which agencies have a pharmacogenomic label annotation for clopidogrel?
+b. Which PGx level does ClinPGx assign to the **FDA** label? Is testing required?
+c. The FDA label has a **boxed warning**. What is it about?
+d. Does the label say the same thing as CPIC about intermediate metabolizers?
 
-1. Is codeine a prodrug? What is it converted into?
-2. What does CPIC recommend for a CYP2D6 **ultrarapid** metabolizer? And for a **poor** metabolizer?
-3. Why is the risk for ultrarapid metabolizers particularly serious?
+*Where to look:* clopidogrel page → **drug labels**. Use Concept 7.
 
 ::: {.callout-note collapse="true" title="Show answer"}
-1. Yes. CYP2D6 converts codeine into **morphine**, the active opioid.
-2. For both ultrarapid and poor metabolizers, CPIC recommends **avoiding codeine** and using a non-tramadol alternative. For ultrarapid metabolizers the risk is toxicity; for poor metabolizers it is lack of pain relief.
-3. Ultrarapid metabolizers produce morphine quickly and in large amounts, which can cause life-threatening respiratory depression. Deaths have been reported in children after tonsillectomy and in breastfed infants of ultrarapid metabolizer mothers. Note the symmetry with clopidogrel: the same logic (prodrug activation) leads to opposite risks at the two ends of the phenotype scale.
+a. Several, including the FDA, EMA, PMDA, Swissmedic and Health Canada (the
+   exact list may vary).
+b. **Actionable PGx** (at the time of writing). Testing is not required.
+c. Diminished antiplatelet effect in patients who are CYP2C19 **poor**
+   metabolizers; the label advises considering another P2Y12 inhibitor.
+d. Not exactly. The FDA warning focuses on poor metabolizers, while CPIC also
+   recommends alternatives for intermediate metabolizers. Labels and
+   guidelines are written by different bodies, at different times, with
+   different purposes. That is why ClinPGx shows both side by side.
+:::
+::::
+
+:::: {.callout-warning icon=false}
+## ❓ Question 5: What about his omeprazole?
+
+Mr. A.'s genotype and his omeprazole interact in **two** ways.
+
+a. Omeprazole is itself metabolised (inactivated) by CYP2C19. What does CPIC
+   recommend for an intermediate metabolizer on **long-term** omeprazole?
+b. Omeprazole also **inhibits** CYP2C19. What does that mean for his
+   clopidogrel? What is this effect called?
+c. Compare the effect of his genotype on clopidogrel and on omeprazole. Why
+   does it go in opposite directions?
+
+*Where to look:* (a) omeprazole page → **CPIC guideline for CYP2C19 and proton
+pump inhibitors**; (b) the clopidogrel drug labels in ClinPGx, and the
+clopidogrel-omeprazole interaction in
+[DrugBank](https://go.drugbank.com/drugs/DB00758).
+
+::: {.callout-note collapse="true" title="Show answer"}
+a. Start with the standard dose. For chronic therapy (more than 12 weeks) with
+   symptoms controlled, **consider a 50% dose reduction** and monitor
+   efficacy. Intermediate metabolizers clear omeprazole more slowly, so they
+   have higher exposure, which increases the risk of long-term side effects
+   (e.g. infections, fractures).
+b. Omeprazole reduces CYP2C19 activity even further, so even less clopidogrel
+   is activated. The FDA label advises **avoiding omeprazole and esomeprazole**
+   with clopidogrel. This is **phenoconversion**: a co-administered drug
+   makes the patient behave like a lower-activity phenotype than his genotype
+   predicts (here, an intermediate metabolizer moving towards a poor
+   metabolizer). Genes are not the whole story: always check the full
+   medication list.
+c. Clopidogrel is a **prodrug** (CYP2C19 activates it): lower activity means
+   *less* effect. Omeprazole is an **active drug** (CYP2C19 inactivates it):
+   lower activity means *more* exposure. Same enzyme, same patient, opposite
+   consequences (Concept 5).
+:::
+::::
+
+:::: {.callout-warning icon=false}
+## ❓ Question 6: Your final recommendation
+
+a. Open [PharmDOG](https://pharmdog.clinpgx.org/), the ClinPGx prescribing
+   tool. Enter Mr. A.'s CYP2C19 result and his two drugs (clopidogrel and
+   omeprazole). Does the output match your answers to Questions 2 and 5?
+   Does it warn you about the omeprazole-clopidogrel interaction?
+b. Write a short note (3 to 4 sentences) to the cardiologist with your
+   recommendation.
+
+::: {.callout-note collapse="true" title="Show answer"}
+a. PharmDOG should confirm the intermediate metabolizer phenotype and the
+   CPIC recommendations for both drugs. At the time of writing, its
+   phenoconversion feature covered CYP2D6 only, so it may **not** warn you
+   that omeprazole inhibits CYP2C19. Tools help, but the pharmacist still has
+   to check drug-drug interactions (e.g. in DrugBank).
+b. Example note:
+
+> *Mr. A. is a CYP2C19 intermediate metabolizer (`*1/*2`), so he is expected
+> to activate clopidogrel poorly. According to the CPIC guideline (moderate
+> recommendation), we suggest ticagrelor or prasugrel instead of clopidogrel,
+> as he has no contraindication. This also avoids the clopidogrel-omeprazole
+> interaction. Omeprazole can be continued; given his genotype and long-term
+> use, a dose reduction could be considered if his symptoms remain controlled.*
 :::
 ::::
 
@@ -706,11 +638,11 @@ Repeat the reasoning chain for **CYP2D6 and codeine**.
 
 - **ClinPGx** (formerly PharmGKB) integrates PharmGKB, CPIC and PharmCAT into one free pharmacogenomics resource.
 - The core reasoning is **genotype → diplotype → phenotype → recommendation**.
-- **Star alleles** name haplotypes; each has a **function**, and two alleles together predict a **metabolizer phenotype**.
-- For **prodrugs** such as clopidogrel and codeine, low enzyme activity means *less* effect, not more toxicity.
-- **CPIC guidelines** tell you *how* to use a known genotype; **drug labels** show the regulatory position; **levels of evidence** tell you how much to trust an association.
-- Genes are not the whole story: **phenoconversion** by co-medications matters.
-- Stable identifiers connect ClinPGx to **Ensembl**, **UniProt**, **PDB** and **DrugBank**: one biological story, many layers of information.
+- The **drug page** is the usual starting point: it gathers guidelines, drug labels and summary annotations.
+- **CPIC guidelines** say *what to do*; **drug labels** give the regulatory position; **levels of evidence** say *how much to trust* an association.
+- For **prodrugs** such as clopidogrel, low enzyme activity means *less* effect, not more toxicity.
+- Genes are not the whole story: co-medications can cause **phenoconversion**.
+- Stable identifiers connect ClinPGx to **Ensembl**, **UniProt**, **PDB** and **DrugBank**.
 :::
 
 ## References {.unnumbered}
@@ -719,12 +651,17 @@ Primary resource:
 
 > ClinPGx. Stanford University. <https://www.clinpgx.org/>
 
-Guideline used in this lesson:
+Guidelines used in this lesson:
 
 > Lee CR, Luzum JA, Sangkuhl K, *et al.* Clinical Pharmacogenetics
 > Implementation Consortium Guideline for CYP2C19 Genotype and Clopidogrel
 > Therapy: 2022 Update. *Clin Pharmacol Ther.* 2022;112(5):959-967.
 > <https://doi.org/10.1002/cpt.2526>
+
+> Lima JJ, Thomas CD, Barbarino J, *et al.* Clinical Pharmacogenetics
+> Implementation Consortium (CPIC) Guideline for CYP2C19 and Proton Pump
+> Inhibitor Dosing. *Clin Pharmacol Ther.* 2021;109(6):1417-1423.
+> <https://doi.org/10.1002/cpt.2015>
 
 Levels of evidence:
 

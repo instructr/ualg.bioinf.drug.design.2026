@@ -8,7 +8,7 @@
 
 <meta name="author" content="Isabel Duarte">
 
-<title>ClinPGx | From genotype to prescription – Bioinformatics and Drug Design</title>
+<title>From genotype to prescription with ClinPGx – Bioinformatics and Drug Design</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -137,6 +137,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="./5.escape-room-tp1.html">
  <span class="dropdown-text">DrugBank Escape Room | TP1</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./5.escape-room-tp2.html">
+ <span class="dropdown-text">DrugBank Escape Room | TP2</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -171,20 +175,13 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#sec-concepts" id="toc-sec-concepts" class="nav-link" data-scroll-target="#sec-concepts"><span class="header-section-number">3</span> Key concepts before we start</a></li>
   <li><a href="#sec-home" id="toc-sec-home" class="nav-link" data-scroll-target="#sec-home"><span class="header-section-number">4</span> A first look at the homepage</a></li>
   <li><a href="#sec-gene" id="toc-sec-gene" class="nav-link" data-scroll-target="#sec-gene"><span class="header-section-number">5</span> The gene page: CYP2C19</a></li>
-  <li><a href="#sec-alleles" id="toc-sec-alleles" class="nav-link" data-scroll-target="#sec-alleles"><span class="header-section-number">6</span> Alleles: function and frequency</a>
+  <li><a href="#sec-alleles" id="toc-sec-alleles" class="nav-link" data-scroll-target="#sec-alleles"><span class="header-section-number">6</span> From alleles to phenotype</a>
   <ul class="collapse">
   <li><a href="#sec-allele-function" id="toc-sec-allele-function" class="nav-link" data-scroll-target="#sec-allele-function"><span class="header-section-number">6.1</span> Allele function</a></li>
   <li><a href="#sec-variant" id="toc-sec-variant" class="nav-link" data-scroll-target="#sec-variant"><span class="header-section-number">6.2</span> The variant behind CYP2C19*2</a></li>
-  <li><a href="#sec-frequency" id="toc-sec-frequency" class="nav-link" data-scroll-target="#sec-frequency"><span class="header-section-number">6.3</span> Allele frequency across populations</a></li>
   </ul></li>
-  <li><a href="#sec-drug" id="toc-sec-drug" class="nav-link" data-scroll-target="#sec-drug"><span class="header-section-number">7</span> The drug page and the CPIC guideline</a>
-  <ul class="collapse">
-  <li><a href="#sec-cpic" id="toc-sec-cpic" class="nav-link" data-scroll-target="#sec-cpic"><span class="header-section-number">7.1</span> Reading the CPIC recommendations</a></li>
-  </ul></li>
-  <li><a href="#sec-labels" id="toc-sec-labels" class="nav-link" data-scroll-target="#sec-labels"><span class="header-section-number">8</span> Drug labels</a></li>
-  <li><a href="#sec-evidence" id="toc-sec-evidence" class="nav-link" data-scroll-target="#sec-evidence"><span class="header-section-number">9</span> Summary annotations and levels of evidence</a></li>
-  <li><a href="#sec-case" id="toc-sec-case" class="nav-link" data-scroll-target="#sec-case"><span class="header-section-number">10</span> Putting it together: a patient case</a></li>
-  <li><a href="#sec-connections" id="toc-sec-connections" class="nav-link" data-scroll-target="#sec-connections"><span class="header-section-number">11</span> How ClinPGx connects to the other databases</a></li>
+  <li><a href="#sec-drug" id="toc-sec-drug" class="nav-link" data-scroll-target="#sec-drug"><span class="header-section-number">7</span> The drug page: clopidogrel</a></li>
+  <li><a href="#sec-case" id="toc-sec-case" class="nav-link" data-scroll-target="#sec-case"><span class="header-section-number">8</span> The patient case</a></li>
   <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key points</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -195,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ClinPGx | From genotype to prescription</h1>
+<h1 class="title">From genotype to prescription with ClinPGx</h1>
 <p class="subtitle lead">A pharmacogenomics walk-through using CYP2C19 and clopidogrel as an example</p>
 </div>
 
@@ -230,7 +227,7 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    <p>A hands-on introduction to ClinPGx (the successor of PharmGKB), the reference knowledgebase for pharmacogenomics. Following one gene (CYP2C19) and one drug (clopidogrel), you will learn the core concepts of pharmacogenomics (star alleles, diplotypes, metabolizer phenotypes), read a CPIC dosing guideline, interpret drug labels and levels of evidence, and connect ClinPGx to Ensembl, UniProt, PDB and DrugBank.</p>
+    <p>A hands-on introduction to ClinPGx (the successor of PharmGKB), the reference knowledgebase for pharmacogenomics. Following one gene (CYP2C19) and one drug (clopidogrel), you will learn the core concepts of pharmacogenomics (star alleles, diplotypes, metabolizer phenotypes) and then use ClinPGx as a hospital pharmacist would, to review the medication of a patient with a known genotype.</p>
   </div>
 </div>
 
@@ -271,9 +268,8 @@ ul.task-list li input[type="checkbox"] {
 <li>What are ClinPGx, PharmGKB, CPIC and PharmCAT, and how do they relate?</li>
 <li>What do <em>star allele</em>, <em>diplotype</em>, <em>allele function</em> and <em>metabolizer phenotype</em> mean?</li>
 <li>How do you go from a patient’s genotype to a prescribing recommendation?</li>
-<li>How strong is the evidence behind a gene-drug association, and how is that graded?</li>
-<li>What do regulatory drug labels say about pharmacogenomics?</li>
-<li>How does ClinPGx connect to Ensembl, UniProt, PDB and DrugBank?</li>
+<li>How do you judge how strong a recommendation, a drug label or a piece of evidence is?</li>
+<li>How do co-medications change the picture?</li>
 </ul>
 </div>
 </div>
@@ -290,9 +286,8 @@ ul.task-list li input[type="checkbox"] {
 <p>By the end of this session you should be able to:</p>
 <ol type="1">
 <li>Explain the chain <em>genotype → diplotype → phenotype → recommendation</em>.</li>
-<li>Find and interpret a CPIC guideline, a drug label annotation and a summary annotation in ClinPGx.</li>
-<li>Judge the strength of pharmacogenomic evidence using ClinPGx levels of evidence.</li>
-<li>Use shared identifiers to move between ClinPGx and the other databases of this course.</li>
+<li>Find the CPIC guideline, drug labels and summary annotations for a gene-drug pair in ClinPGx.</li>
+<li>Apply them to a patient case, including co-medications.</li>
 </ol>
 </div>
 </div>
@@ -334,32 +329,27 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td>1</td>
 <td>Key concepts and the ClinPGx homepage</td>
-<td>10</td>
+<td>15</td>
 </tr>
 <tr class="even">
 <td>2</td>
 <td>The gene page: CYP2C19</td>
-<td>10</td>
+<td>5</td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td>Alleles: function and frequency</td>
+<td>From alleles to phenotype</td>
 <td>10</td>
 </tr>
 <tr class="even">
 <td>4</td>
-<td>The drug page and the CPIC guideline</td>
-<td>15</td>
+<td>The drug page: clopidogrel</td>
+<td>5</td>
 </tr>
 <tr class="odd">
 <td>5</td>
-<td>Drug labels and levels of evidence</td>
-<td>10</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>Putting it together: a patient case</td>
-<td>5</td>
+<td><strong>The patient case</strong></td>
+<td>25</td>
 </tr>
 </tbody>
 </table>
@@ -729,10 +719,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Is CYP2C19 a pharmacokinetic or a pharmacodynamic gene? Why?</li>
 <li>CYP2C19 is labelled a <strong>VIP</strong>. What does that mean?</li>
-<li>List three drugs (or drug classes) for which a CPIC guideline exists for CYP2C19.</li>
-<li>In the cross-references, find the identifiers for <strong>Ensembl</strong> and <strong>UniProt</strong>. Do you recognise them from earlier classes?</li>
+<li>List three drugs (or drug classes) that have a CPIC guideline for CYP2C19.</li>
+<li>In the cross-references, find the identifiers for <strong>Ensembl</strong> and <strong>UniProt</strong>.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
@@ -747,10 +736,9 @@ ul.task-list li input[type="checkbox"] {
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Pharmacokinetic: CYP2C19 is a liver enzyme that metabolises drugs.</li>
 <li><em>Very Important Pharmacogene</em>: a gene with strong, well documented pharmacogenomic relevance, for which ClinPGx curators write a dedicated summary.</li>
-<li>Among others: clopidogrel, proton pump inhibitors (e.g.&nbsp;omeprazole, pantoprazole), voriconazole, some antidepressants (e.g.&nbsp;citalopram, escitalopram, sertraline) and tricyclic antidepressants.</li>
-<li>Ensembl <code>ENSG00000165841</code> (chromosome 10) and UniProt <code>P33261</code> (CP2CJ_HUMAN). The same gene and protein you could have studied in previous classes, now viewed from the clinical side.</li>
+<li>Among others: clopidogrel, proton pump inhibitors (e.g.&nbsp;omeprazole, pantoprazole), voriconazole, and several antidepressants (e.g.&nbsp;citalopram, sertraline). Keep omeprazole in mind: it comes back in the patient case.</li>
+<li>Ensembl <code>ENSG00000165841</code> (chromosome 10) and UniProt <code>P33261</code> (CP2CJ_HUMAN).</li>
 </ol>
 </div>
 </div>
@@ -767,13 +755,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Open the UniProt entry <a href="https://www.uniprot.org/uniprotkb/P33261/entry">P33261</a> in a new tab and check the <em>Function</em> and <em>Subcellular location</em> sections. Then go to the <em>Structure</em> section, or search PDB for <a href="https://www.rcsb.org/structure/4GQS">4GQS</a>, a crystal structure of human CYP2C19.</p>
-<p>You now know <em>where</em> the enzyme is (endoplasmic reticulum membrane of liver cells) and <em>what it looks like</em> (a heme-containing P450 fold). ClinPGx tells you <em>what happens to patients</em> when its gene varies.</p>
+<p>The UniProt entry <a href="https://www.uniprot.org/uniprotkb/P33261/entry">P33261</a> and the PDB structure <a href="https://www.rcsb.org/structure/4GQS">4GQS</a> describe the <em>protein</em>: a heme-containing enzyme of the endoplasmic reticulum of liver cells. ClinPGx adds the clinical layer: <em>what happens to patients</em> when its gene varies.</p>
 </div>
 </div>
 </section>
 <section id="sec-alleles" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="sec-alleles"><span class="header-section-number">6</span> Alleles: function and frequency</h2>
+<h2 data-number="6" class="anchored" data-anchor-id="sec-alleles"><span class="header-section-number">6</span> From alleles to phenotype</h2>
+<p>CPIC guidelines are written <strong>per phenotype</strong>, not per variant. So the single most useful skill in ClinPGx is translating a genotype into a phenotype.</p>
 <section id="sec-allele-function" class="level3" data-number="6.1">
 <h3 data-number="6.1" class="anchored" data-anchor-id="sec-allele-function"><span class="header-section-number">6.1</span> Allele function</h3>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
@@ -808,7 +796,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Each row of the table below is a patient, described by their two CYP2C19 alleles (their diplotype). For each patient, work in two steps:
 <ol type="a">
 <li>write down the function of each of the two alleles (your answer to question 1);</li>
-<li>use the rules table at the end of the section above named <strong>Concept 4</strong> to find the phenotype that matches that pair of functions.</li>
+<li>use the rules table at the end of <strong>Concept 4</strong> to find the phenotype that matches that pair of functions.</li>
 </ol></li>
 </ol>
 <table class="caption-top table">
@@ -836,17 +824,7 @@ ul.task-list li input[type="checkbox"] {
 <td>?</td>
 </tr>
 <tr class="even">
-<td><code>*1/*2</code></td>
-<td>?</td>
-<td>?</td>
-</tr>
-<tr class="odd">
 <td><code>*2/*17</code></td>
-<td>?</td>
-<td>?</td>
-</tr>
-<tr class="even">
-<td><code>*2/*2</code></td>
 <td>?</td>
 <td>?</td>
 </tr>
@@ -857,9 +835,6 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<ol start="3" type="1">
-<li>Check your predictions against the official source: open the CPIC guideline for CYP2C19 and clopidogrel (Section <a href="#sec-cpic" class="quarto-xref">Section&nbsp;7.1</a>) and find the table that assigns phenotypes to genotypes (Table 1 of the guideline article, or the genotype-to-phenotype table on the guideline page). Did you get them all right?</li>
-</ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -902,19 +877,9 @@ ul.task-list li input[type="checkbox"] {
 <td>Ultrarapid metabolizer (UM)</td>
 </tr>
 <tr class="even">
-<td><code>*1/*2</code></td>
-<td>normal + no function</td>
-<td>Intermediate metabolizer (IM)</td>
-</tr>
-<tr class="odd">
 <td><code>*2/*17</code></td>
 <td>no function + increased</td>
 <td>Intermediate metabolizer (IM)</td>
-</tr>
-<tr class="even">
-<td><code>*2/*2</code></td>
-<td>no function + no function</td>
-<td>Poor metabolizer (PM)</td>
 </tr>
 <tr class="odd">
 <td><code>*2/*3</code></td>
@@ -924,9 +889,6 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>The tricky one is <code>*2/*17</code>: the increased function of <code>*17</code> does <strong>not</strong> compensate for the loss of <code>*2</code>, so CPIC classifies it as intermediate.</p>
-<ol start="3" type="1">
-<li>Your predictions should match the CPIC table. The point of the exercise is that the phenotype is not stored “inside” the patient’s DNA: it is an <strong>interpretation</strong> made by combining allele functions with agreed rules, and those rules are published (and occasionally revised) by CPIC.</li>
-</ol>
 </div>
 </div>
 </div>
@@ -948,7 +910,7 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li>In ClinPGx, search for <code>rs4244285</code> and open the <strong>variant</strong> page.</li>
 <li>In a new tab, open the same variant in <strong>Ensembl</strong>: <a href="https://www.ensembl.org/Homo_sapiens/Variation/Explore?v=rs4244285" class="uri">https://www.ensembl.org/Homo_sapiens/Variation/Explore?v=rs4244285</a>.</li>
-<li>In Ensembl, look at the predicted <strong>consequence</strong> of the variant on the transcript, and at its <strong>Allele frequency</strong> tab.</li>
+<li>In Ensembl, look at the predicted <strong>consequence</strong> of the variant on the transcript.</li>
 </ol>
 </div>
 </div>
@@ -965,7 +927,7 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li>Which star allele does <code>rs4244285</code> define?</li>
 <li>What consequence does Ensembl predict for the protein sequence?</li>
-<li>If the amino acid does not change, how can this be a <em>no function</em> allele? (Hint: read carefully the top <strong>Description</strong> in the <strong>Overview</strong> section of the variant <code>rs4244285</code>.)`</li>
+<li>If the amino acid does not change, how can this be a <em>no function</em> allele? <em>(Hint: read the <strong>Description</strong> in the Overview section of the ClinPGx variant page.)</em></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
@@ -989,84 +951,11 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Knowledge keeps moving
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-24" class="callout-24-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>In August 2026, PharmVar updated the <strong>core variant definition</strong> of <code>CYP2C19*2</code>. As with the UniProt <em>History</em> tab, the definition of an allele is a moving target, and ClinPGx and PharmCAT follow these updates. See the ClinPGx blog post <em>CYP2C19*2 core allele definition update</em>: <a href="https://blog.clinpgx.org/cyp2c19-2-core-allele-definition-update/" class="uri">https://blog.clinpgx.org/cyp2c19-2-core-allele-definition-update/</a>.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="sec-frequency" class="level3" data-number="6.3">
-<h3 data-number="6.3" class="anchored" data-anchor-id="sec-frequency"><span class="header-section-number">6.3</span> Allele frequency across populations</h3>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: allele frequencies
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Open the allele frequency pages: <a href="https://www.clinpgx.org/alleleFrequency" class="uri">https://www.clinpgx.org/alleleFrequency</a>.</li>
-<li>Select <strong>CYP2C19</strong> and compare the frequency of <code>*2</code>, <code>*3</code> and <code>*17</code> across the biogeographical groups (e.g.&nbsp;European, East Asian, Sub-Saharan African).</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>In which group is <code>*2</code> most frequent? And <code>*17</code>?</li>
-<li><code>*3</code> is almost absent in Europeans. Where is it found?</li>
-<li>Compare the <code>*2</code> frequency in ClinPGx with the frequency of the <code>A</code> allele of <code>rs4244285</code> in Ensembl (1000 Genomes populations). Are they similar? Why might they differ slightly?</li>
-<li>Why does this matter for a country’s decision to implement genotyping?</li>
-</ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-26" class="callout-26-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><code>*2</code> is most frequent in East Asian and Oceanian populations (roughly 30% or more, versus roughly 15% in Europeans). <code>*17</code> is common in Europeans and Africans (around 20%) but rare in East Asians.</li>
-<li>Mainly in East Asian populations (a few percent).</li>
-<li>They should be close. Differences come from different source studies, sample sizes, population definitions, and from the fact that a star allele is a haplotype while an rsID is a single variant.</li>
-<li>The proportion of patients who would change treatment after testing depends on allele frequencies. In populations where poor and intermediate metabolizers are common, testing changes more prescriptions.</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-</div>
 </section>
 </section>
 <section id="sec-drug" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="sec-drug"><span class="header-section-number">7</span> The drug page and the CPIC guideline</h2>
+<h2 data-number="7" class="anchored" data-anchor-id="sec-drug"><span class="header-section-number">7</span> The drug page: clopidogrel</h2>
+<p>The drug page is where most clinical questions start: it gathers, in one place, the <strong>guidelines</strong> and <strong>drug labels</strong> for that drug (in the <em>Prescribing Info</em> area) and the <strong>summary annotations</strong> from the literature.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1079,8 +968,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Search for <code>clopidogrel</code> and open the <strong>chemical</strong> page.</li>
-<li>Look at the cross-references and find the <strong>DrugBank</strong> identifier.</li>
-<li>Find the <strong>Prescribing information</strong> or <strong>Guidelines</strong> area and open the CPIC guideline for <strong>CYP2C19 and clopidogrel</strong>.</li>
+<li>In the cross-references, find the <strong>DrugBank</strong> identifier.</li>
+<li>Locate (do not read in detail yet) the <strong>guidelines</strong>, the <strong>drug labels</strong> and the <strong>summary annotations</strong>. You will use all three in the patient case.</li>
 </ol>
 </div>
 </div>
@@ -1096,11 +985,10 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>What is the DrugBank identifier for clopidogrel?</li>
-<li>What is clopidogrel used for, and what is its mechanism of action?</li>
-<li>Why is CYP2C19 so important for this particular drug?</li>
+<li>Why is CYP2C19 so important for this particular drug? <em>(Hint: Concept 5.)</em></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1109,89 +997,11 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li><code>DB00758</code>.</li>
-<li>It is an antiplatelet agent used to prevent heart attacks and strokes, particularly after acute coronary syndrome and after stent placement (PCI). Its active metabolite irreversibly blocks the platelet P2Y12 receptor.</li>
-<li>Clopidogrel is a <strong>prodrug</strong>. CYP2C19 performs most of its conversion to the active metabolite. Poor and intermediate metabolizers make less active drug, so their platelets are less inhibited and they have a higher risk of cardiovascular events.</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔗 Connection: DrugBank
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Open <a href="https://go.drugbank.com/drugs/DB00758">DB00758</a> in DrugBank. Look at <strong>Enzymes</strong> (under <em>Targets</em>) and at the <strong>Pharmacogenomic Effects/ADRs</strong> and <strong>Drug Interactions</strong> sections.</p>
-<ul>
-<li>DrugBank tells you <em>which enzymes</em> handle the drug and <em>which drugs interact</em> with it.</li>
-<li>ClinPGx tells you <em>what to do</em> when the patient’s genes change how those enzymes work.</li>
-</ul>
-</div>
-</div>
-<section id="sec-cpic" class="level3" data-number="7.1">
-<h3 data-number="7.1" class="anchored" data-anchor-id="sec-cpic"><span class="header-section-number">7.1</span> Reading the CPIC recommendations</h3>
-<p>A CPIC guideline does <strong>not</strong> tell you whether to genotype a patient. It assumes the genotype is already known and tells you <strong>how to use it</strong>. Each recommendation has a <strong>strength</strong>: <em>strong</em>, <em>moderate</em>, or <em>optional</em>.</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: the recommendation table
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>On the guideline page, find the recommendation table (or the interactive tool that lets you pick a phenotype).</li>
-<li>Select the cardiovascular indication (acute coronary syndrome and/or PCI).</li>
-<li>Read the recommendation for each CYP2C19 phenotype.</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>What does CPIC recommend for a <strong>poor metabolizer</strong>? With what strength?</li>
-<li>And for an <strong>intermediate metabolizer</strong>?</li>
-<li>What about normal, rapid and ultrarapid metabolizers?</li>
-<li>Why not simply give a poor metabolizer a <strong>higher dose</strong> of clopidogrel?</li>
-</ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-33" class="callout-33-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Based on the 2022 CPIC update (cardiovascular indications):</p>
-<ol type="1">
-<li><strong>Avoid clopidogrel</strong> if possible, and use prasugrel or ticagrelor at standard dose if there is no contraindication. Strong recommendation.</li>
-<li>Also <strong>avoid standard-dose clopidogrel</strong> if possible, and use prasugrel or ticagrelor if there is no contraindication. Moderate strength (strengthened compared with the 2013 guideline).</li>
-<li>Use clopidogrel at the <strong>standard dose</strong>. The increased function of <code>*17</code> does not justify a change.</li>
-<li>In poor metabolizers, even higher doses do not produce enough active metabolite to reach adequate platelet inhibition. Prasugrel and ticagrelor do not depend on CYP2C19 in the same way, so they are the logical alternatives.</li>
+<li><code>DB00758</code>. In <a href="https://go.drugbank.com/drugs/DB00758">DrugBank</a> you can see its target (the platelet P2Y12 receptor), its metabolising enzymes and its drug interactions.</li>
+<li>Clopidogrel is a <strong>prodrug</strong>. CYP2C19 performs most of its conversion to the active metabolite. Patients with low CYP2C19 activity make less active drug, so their platelets are less inhibited and they have a higher risk of heart attack, stroke or stent thrombosis.</li>
 </ol>
 </div>
 </div>
@@ -1204,20 +1014,16 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>📘 Concept 7: CPIC levels for gene-drug pairs
+<span class="screen-reader-only">Note</span>📘 Concept 7: three scales to judge what you find
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Before writing a guideline, CPIC assigns each gene-drug pair a level:</p>
-<table class="table-striped caption-top table">
-<caption>CPIC levels (simplified)</caption>
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
+<p>Everything on the drug page comes with a grade. You will need these three scales in the patient case, so keep this box open.</p>
+<p><strong>1. CPIC level of the gene-drug pair</strong> (shown in the gene-drug pairs list)</p>
+<table class="caption-top table">
 <thead>
 <tr class="header">
-<th>CPIC level</th>
+<th>Level</th>
 <th>Meaning</th>
 </tr>
 </thead>
@@ -1231,68 +1037,94 @@ ul.task-list li input[type="checkbox"] {
 <td>Genetic information <strong>could</strong> be used to change prescribing</td>
 </tr>
 <tr class="odd">
-<td><strong>C</strong></td>
-<td>No prescribing action recommended (evidence or alternatives insufficient)</td>
-</tr>
-<tr class="even">
-<td><strong>D</strong></td>
+<td><strong>C / D</strong></td>
 <td>No prescribing action recommended</td>
 </tr>
 </tbody>
 </table>
-<p>Only levels A and B lead to prescribing guidelines. CYP2C19 and clopidogrel is <strong>level A</strong>. You can check the level of any pair in the gene-drug pairs list.</p>
-</div>
-</div>
-</section>
-</section>
-<section id="sec-labels" class="level2" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="sec-labels"><span class="header-section-number">8</span> Drug labels</h2>
-<p>Regulatory agencies (FDA in the USA, EMA in Europe, PMDA in Japan, Swissmedic, Health Canada) sometimes include pharmacogenomic information in the official drug label. ClinPGx curates these labels and classifies them:</p>
-<table class="table-striped caption-top table">
-<caption>Pharmacogenomic levels of drug labels</caption>
+<p>Inside a guideline, each recommendation also has a <strong>strength</strong>: <em>strong</em>, <em>moderate</em> or <em>optional</em>.</p>
+<p><strong>2. Pharmacogenomic level of a drug label</strong> (FDA, EMA, PMDA, …)</p>
+<table class="caption-top table">
 <colgroup>
-<col style="width: 30%">
-<col style="width: 70%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>ClinPGx label level</th>
+<th>Level</th>
 <th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>Testing required</strong></td>
-<td>The label says genetic testing must be done before prescribing</td>
+<td>Genetic testing must be done before prescribing</td>
 </tr>
 <tr class="even">
 <td><strong>Testing recommended</strong></td>
-<td>The label recommends testing</td>
+<td>Testing is recommended</td>
 </tr>
 <tr class="odd">
 <td><strong>Actionable PGx</strong></td>
-<td>The label suggests a change (drug, dose) based on genotype, without requiring testing</td>
+<td>The label suggests a change based on genotype, without requiring testing</td>
 </tr>
 <tr class="even">
 <td><strong>Informative PGx</strong></td>
-<td>The label mentions a gene-drug effect with no clinical action</td>
+<td>The label mentions a gene-drug effect, with no clinical action</td>
 </tr>
 </tbody>
 </table>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<p><strong>3. Level of evidence of a summary annotation</strong> (one variant, one drug)</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Level</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1A</strong></td>
+<td>High: variant-specific guidance in a guideline or FDA label</td>
+</tr>
+<tr class="even">
+<td><strong>1B</strong></td>
+<td>High: strong, replicated association, but no guidance yet</td>
+</tr>
+<tr class="odd">
+<td><strong>2A / 2B</strong></td>
+<td>Moderate</td>
+</tr>
+<tr class="even">
+<td><strong>3</strong></td>
+<td>Low: single or conflicting studies</td>
+</tr>
+<tr class="odd">
+<td><strong>4</strong></td>
+<td>The evidence does not support an association</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="sec-case" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="sec-case"><span class="header-section-number">8</span> The patient case</h2>
+<p>This is the core of the lesson. You will use ClinPGx the way a hospital pharmacist would: to answer a real prescribing question, step by step.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: clopidogrel labels
+<span class="screen-reader-only">Important</span>🩺 The patient
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li>On the clopidogrel page, open the <strong>drug label</strong> annotations.</li>
-<li>Compare the FDA label with the EMA label.</li>
-</ol>
+<p><strong>Mr.&nbsp;A.</strong>, 62 years old, has just had a coronary stent implanted (PCI) after an acute coronary syndrome. The cardiologist plans to prescribe <strong>clopidogrel</strong> (with aspirin). He has no history of stroke or major bleeding.</p>
+<p>He has been taking <strong>omeprazole</strong> 20 mg/day for more than a year for gastric protection.</p>
+<p>A pharmacogenomic test reports: <strong>CYP2C19 <code>*1/*2</code></strong>.</p>
+<p>You are asked to review his medication.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
@@ -1301,16 +1133,160 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
+<span class="screen-reader-only">Warning</span>❓ Question 1: What is his phenotype?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li>Which agencies have a label annotation for clopidogrel?</li>
-<li>Which PGx level is given to the FDA label? Does it require testing?</li>
-<li>The FDA label carries a <strong>boxed warning</strong>. What is it about?</li>
-<li>Search for <code>abacavir</code> and look at its labels. How does its level compare with clopidogrel? Why?</li>
+<p>Translate Mr.&nbsp;A.’s diplotype into a CYP2C19 phenotype.</p>
+<p><em>Where to look:</em> the allele function table and the rules in Concept 4 (see <a href="#sec-allele-function" class="quarto-xref">Section&nbsp;6.1</a>).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>*1</code> (normal function) + <code>*2</code> (no function) = <strong>intermediate metabolizer (IM)</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question 2: What does the guideline recommend?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What does CPIC recommend for a CYP2C19 intermediate metabolizer who needs antiplatelet therapy after PCI? How strong is the recommendation? Would the recommendation be different if he were a poor metabolizer?</p>
+<p><em>Where to look:</em> clopidogrel page → guidelines → <strong>CPIC guideline for CYP2C19 and clopidogrel</strong>. Select the cardiovascular indication (ACS/PCI) and the phenotype.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Based on the 2022 CPIC update:</p>
+<ul>
+<li><strong>Intermediate metabolizer:</strong> avoid standard-dose clopidogrel if possible; use <strong>prasugrel or ticagrelor</strong> at standard dose if there is no contraindication. Strength: <strong>moderate</strong>.</li>
+<li><strong>Poor metabolizer:</strong> same advice, but the strength is <strong>strong</strong>.</li>
+</ul>
+<p>Increasing the clopidogrel dose is not the solution: these patients cannot make enough active metabolite. Prasugrel and ticagrelor do not depend on CYP2C19 in the same way. Mr.&nbsp;A. has no history of stroke (a contraindication for prasugrel), so both alternatives are possible.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question 3: How much can we trust this?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>What is the <strong>CPIC level</strong> of the CYP2C19-clopidogrel pair?</li>
+<li>What is the <strong>level of evidence</strong> of the summary annotation for <code>rs4244285</code> and clopidogrel?</li>
+<li>Open that summary annotation and scroll to the supporting papers. Do they all agree?</li>
 </ol>
+<p><em>Where to look:</em> (a) the gene-drug pairs list <a href="https://www.clinpgx.org/pairs" class="uri">https://www.clinpgx.org/pairs</a>; (b, c) the summary annotations on the clopidogrel page, filtered for <code>rs4244285</code>. Use Concept 7 to interpret the grades.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-33" class="callout-33-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><strong>Level A</strong>: genetic information <em>should</em> be used to change prescribing.</li>
+<li><strong>Level 1A</strong>: the variant has specific guidance in a guideline and a drug label, and is supported by many independent studies.</li>
+<li>No.&nbsp;Some studies find an association, others do not (different populations, sample sizes, outcomes). This is why ClinPGx summarises and grades many papers instead of relying on any single one, and partly why the recommendation for intermediate metabolizers is <em>moderate</em> rather than <em>strong</em>.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question 4: What do the regulators say?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>Which agencies have a pharmacogenomic label annotation for clopidogrel?</li>
+<li>Which PGx level does ClinPGx assign to the <strong>FDA</strong> label? Is testing required?</li>
+<li>The FDA label has a <strong>boxed warning</strong>. What is it about?</li>
+<li>Does the label say the same thing as CPIC about intermediate metabolizers?</li>
+</ol>
+<p><em>Where to look:</em> clopidogrel page → <strong>drug labels</strong>. Use Concept 7.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Show answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-35" class="callout-35-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>Several, including the FDA, EMA, PMDA, Swissmedic and Health Canada (the exact list may vary).</li>
+<li><strong>Actionable PGx</strong> (at the time of writing). Testing is not required.</li>
+<li>Diminished antiplatelet effect in patients who are CYP2C19 <strong>poor</strong> metabolizers; the label advises considering another P2Y12 inhibitor.</li>
+<li>Not exactly. The FDA warning focuses on poor metabolizers, while CPIC also recommends alternatives for intermediate metabolizers. Labels and guidelines are written by different bodies, at different times, with different purposes. That is why ClinPGx shows both side by side.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>❓ Question 5: What about his omeprazole?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mr.&nbsp;A.’s genotype and his omeprazole interact in <strong>two</strong> ways.</p>
+<ol type="a">
+<li>Omeprazole is itself metabolised (inactivated) by CYP2C19. What does CPIC recommend for an intermediate metabolizer on <strong>long-term</strong> omeprazole?</li>
+<li>Omeprazole also <strong>inhibits</strong> CYP2C19. What does that mean for his clopidogrel? What is this effect called?</li>
+<li>Compare the effect of his genotype on clopidogrel and on omeprazole. Why does it go in opposite directions?</li>
+</ol>
+<p><em>Where to look:</em> (a) omeprazole page → <strong>CPIC guideline for CYP2C19 and proton pump inhibitors</strong>; (b) the clopidogrel drug labels in ClinPGx, and the clopidogrel-omeprazole interaction in <a href="https://go.drugbank.com/drugs/DB00758">DrugBank</a>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1323,84 +1299,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div id="callout-37" class="callout-37-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li>Several, including the FDA, EMA, PMDA, Swissmedic and Health Canada (the exact list may vary).</li>
-<li><em>Actionable PGx</em> (at the time of writing). Testing is not required, but the label warns about reduced effectiveness in CYP2C19 poor metabolizers and advises considering another P2Y12 inhibitor.</li>
-<li>Diminished antiplatelet effect in patients who are CYP2C19 poor metabolizers.</li>
-<li>Abacavir labels are <strong>Testing required</strong>: patients must be tested for <code>HLA-B*57:01</code> before starting, because carriers are at high risk of a severe, potentially fatal hypersensitivity reaction. Here the consequence (life-threatening toxicity) and the evidence are strong enough to make testing mandatory.</li>
+<ol type="a">
+<li>Start with the standard dose. For chronic therapy (more than 12 weeks) with symptoms controlled, <strong>consider a 50% dose reduction</strong> and monitor efficacy. Intermediate metabolizers clear omeprazole more slowly, so they have higher exposure, which increases the risk of long-term side effects (e.g.&nbsp;infections, fractures).</li>
+<li>Omeprazole reduces CYP2C19 activity even further, so even less clopidogrel is activated. The FDA label advises <strong>avoiding omeprazole and esomeprazole</strong> with clopidogrel. This is <strong>phenoconversion</strong>: a co-administered drug makes the patient behave like a lower-activity phenotype than his genotype predicts (here, an intermediate metabolizer moving towards a poor metabolizer). Genes are not the whole story: always check the full medication list.</li>
+<li>Clopidogrel is a <strong>prodrug</strong> (CYP2C19 activates it): lower activity means <em>less</em> effect. Omeprazole is an <strong>active drug</strong> (CYP2C19 inactivates it): lower activity means <em>more</em> exposure. Same enzyme, same patient, opposite consequences (Concept 5).</li>
 </ol>
 </div>
 </div>
 </div>
-</div>
-</div>
-</section>
-<section id="sec-evidence" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="sec-evidence"><span class="header-section-number">9</span> Summary annotations and levels of evidence</h2>
-<p>Guidelines and labels exist for a few hundred gene-drug pairs. For thousands of other associations, ClinPGx offers <strong>summary annotations</strong>: a curated summary of all papers on one <strong>variant-drug</strong> pair, graded with a <strong>level of evidence</strong> computed from a scoring system (study size, replication, p-values, existence of guidelines, and so on).</p>
-<table class="table-striped caption-top table">
-<caption>ClinPGx levels of evidence for summary annotations</caption>
-<colgroup>
-<col style="width: 12%">
-<col style="width: 18%">
-<col style="width: 70%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Level</th>
-<th>Evidence</th>
-<th>In short</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>1A</strong></td>
-<td>High</td>
-<td>Variant-specific prescribing guidance in a guideline or FDA-approved label</td>
-</tr>
-<tr class="even">
-<td><strong>1B</strong></td>
-<td>High</td>
-<td>Strong, replicated association, but no variant-specific guidance yet</td>
-</tr>
-<tr class="odd">
-<td><strong>2A</strong></td>
-<td>Moderate</td>
-<td>Moderate evidence, in a well-known pharmacogene (VIP)</td>
-</tr>
-<tr class="even">
-<td><strong>2B</strong></td>
-<td>Moderate</td>
-<td>Moderate evidence, outside the VIPs</td>
-</tr>
-<tr class="odd">
-<td><strong>3</strong></td>
-<td>Low</td>
-<td>Single study, not replicated, or conflicting results</td>
-</tr>
-<tr class="even">
-<td><strong>4</strong></td>
-<td>Unsupported</td>
-<td>The evidence does not support an association</td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: grading the evidence
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Open the summary annotations: <a href="https://www.clinpgx.org/summaryAnnotations" class="uri">https://www.clinpgx.org/summaryAnnotations</a> (or the <em>Summary annotations</em> section of the clopidogrel page).</li>
-<li>Filter for <code>rs4244285</code> and <code>clopidogrel</code>.</li>
-<li>Open the annotation and read the text given for each genotype (GG, GA, AA).</li>
-<li>Scroll down to the list of supporting <strong>variant annotations</strong> (the individual papers).</li>
-</ol>
 </div>
 </div>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
@@ -1409,18 +1315,16 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
+<span class="screen-reader-only">Warning</span>❓ Question 6: Your final recommendation
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li>What is the level of evidence of <code>rs4244285</code> and clopidogrel? Why so high?</li>
-<li>What phenotype categories are covered (e.g.&nbsp;efficacy, toxicity, metabolism/PK)?</li>
-<li>Do all supporting papers agree? What does this tell you about single studies?</li>
-<li>Find a summary annotation for clopidogrel with level <strong>3</strong>. Would you change a prescription based on it?</li>
+<ol type="a">
+<li>Open <a href="https://pharmdog.clinpgx.org/">PharmDOG</a>, the ClinPGx prescribing tool. Enter Mr.&nbsp;A.’s CYP2C19 result and his two drugs (clopidogrel and omeprazole). Does the output match your answers to Questions 2 and 5? Does it warn you about the omeprazole-clopidogrel interaction?</li>
+<li>Write a short note (3 to 4 sentences) to the cardiologist with your recommendation.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-40-contents" aria-controls="callout-40" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-39-contents" aria-controls="callout-39" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1429,171 +1333,15 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-40" class="callout-40-contents callout-collapse collapse">
+<div id="callout-39" class="callout-39-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li><strong>Level 1A</strong>: the variant is part of a CPIC guideline and FDA label with variant-specific prescribing guidance, and it is supported by many independent studies.</li>
-<li>Typically efficacy (e.g.&nbsp;cardiovascular events, platelet reactivity) and metabolism/PK (active metabolite exposure).</li>
-<li>No.&nbsp;Some studies show an association, others do not (different populations, sample sizes, outcomes, co-medications). This is why evidence is summarised and graded instead of relying on any single paper.</li>
-<li>No.&nbsp;Level 3 evidence is preliminary. It is interesting for research, but it is not a basis for clinical decisions.</li>
+<ol type="a">
+<li>PharmDOG should confirm the intermediate metabolizer phenotype and the CPIC recommendations for both drugs. At the time of writing, its phenoconversion feature covered CYP2D6 only, so it may <strong>not</strong> warn you that omeprazole inhibits CYP2C19. Tools help, but the pharmacist still has to check drug-drug interactions (e.g.&nbsp;in DrugBank).</li>
+<li>Example note:</li>
 </ol>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Critical thinking question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>A colleague finds a paper reporting that a variant in gene X doubles the risk of a side effect of drug Y. In ClinPGx the corresponding summary annotation is <strong>level 3</strong>. Your colleague wants to recommend genotyping for all patients starting drug Y.</p>
-<p>What would you answer? Which additional information would you look for in ClinPGx before deciding?</p>
-</div>
-</div>
-</section>
-<section id="sec-case" class="level2" data-number="10">
-<h2 data-number="10" class="anchored" data-anchor-id="sec-case"><span class="header-section-number">10</span> Putting it together: a patient case</h2>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>🔬 Hands on: from genotype to prescription
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Mr.&nbsp;A., 62 years old, has just had a coronary stent implanted (PCI) after an acute coronary syndrome. The cardiologist plans to prescribe clopidogrel. A pharmacogenomic test reports: <strong>CYP2C19 <code>*1/*2</code></strong>. He also takes <strong>omeprazole</strong> for gastric protection.</p>
-<ol type="1">
-<li>Translate the diplotype into a phenotype (Section <a href="#sec-alleles" class="quarto-xref">Section&nbsp;6</a>).</li>
-<li>Find the CPIC recommendation (Section <a href="#sec-cpic" class="quarto-xref">Section&nbsp;7.1</a>).</li>
-<li>Open <a href="https://pharmdog.clinpgx.org/">PharmDOG</a>, the ClinPGx prescribing tool. Enter the CYP2C19 result and the drug clopidogrel, and compare its output with your answer.</li>
-<li>In DrugBank, check the interaction between <strong>clopidogrel and omeprazole</strong>.</li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>What is Mr.&nbsp;A.’s phenotype, and what do you recommend?</li>
-<li>Why does the omeprazole matter?</li>
-<li>What is <strong>phenoconversion</strong>?</li>
-</ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-44-contents" aria-controls="callout-44" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-44" class="callout-44-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><code>*1/*2</code> is an <strong>intermediate metabolizer</strong>. CPIC recommends avoiding standard-dose clopidogrel if possible and using prasugrel or ticagrelor if there is no contraindication (moderate recommendation).</li>
-<li>Omeprazole <strong>inhibits</strong> CYP2C19. It can further reduce clopidogrel activation, and regulatory labels advise avoiding the combination with omeprazole or esomeprazole. A different gastroprotective strategy (or a different antiplatelet) should be discussed.</li>
-<li><strong>Phenoconversion</strong> is when a co-administered drug (an inhibitor or inducer) makes the <em>observed</em> phenotype different from the one predicted by the genotype. A genetic normal metabolizer taking a strong inhibitor may behave like an intermediate or poor metabolizer. Genes are not the only factor: always check the whole medication list. PharmDOG can account for phenoconversion for some genes (e.g.&nbsp;CYP2D6).</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="sec-connections" class="level2" data-number="11">
-<h2 data-number="11" class="anchored" data-anchor-id="sec-connections"><span class="header-section-number">11</span> How ClinPGx connects to the other databases</h2>
-<p>Across this course you followed <strong>one biological story through different databases</strong>. Shared identifiers are what make this possible.</p>
-<table class="table-striped caption-top table">
-<caption>One story, five databases</caption>
-<colgroup>
-<col style="width: 15%">
-<col style="width: 50%">
-<col style="width: 35%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Database</th>
-<th>Question it answers</th>
-<th>Identifier for our example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Ensembl</strong></td>
-<td>Where is the gene and its variants in the genome? How frequent are they?</td>
-<td>Gene <code>ENSG00000165841</code>; variant <code>rs4244285</code></td>
-</tr>
-<tr class="even">
-<td><strong>UniProt</strong></td>
-<td>What is the protein, what does it do, where is it?</td>
-<td><code>P33261</code> (CP2CJ_HUMAN)</td>
-</tr>
-<tr class="odd">
-<td><strong>PDB</strong></td>
-<td>What is its 3D structure?</td>
-<td>e.g.&nbsp;<code>4GQS</code></td>
-</tr>
-<tr class="even">
-<td><strong>DrugBank</strong></td>
-<td>What is the drug, its targets, enzymes, interactions?</td>
-<td><code>DB00758</code> (clopidogrel)</td>
-</tr>
-<tr class="odd">
-<td><strong>ClinPGx</strong></td>
-<td>How should a patient’s genotype change prescribing?</td>
-<td>Gene <code>PA124</code>, drug <code>PA449053</code></td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>❓ Challenge (if time allows)
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Repeat the reasoning chain for <strong>CYP2D6 and codeine</strong>.</p>
-<ol type="1">
-<li>Is codeine a prodrug? What is it converted into?</li>
-<li>What does CPIC recommend for a CYP2D6 <strong>ultrarapid</strong> metabolizer? And for a <strong>poor</strong> metabolizer?</li>
-<li>Why is the risk for ultrarapid metabolizers particularly serious?</li>
-</ol>
-<div class="callout callout-style-default callout-note callout-titled" title="Show answer">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-46-contents" aria-controls="callout-46" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Show answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-46" class="callout-46-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li>Yes. CYP2D6 converts codeine into <strong>morphine</strong>, the active opioid.</li>
-<li>For both ultrarapid and poor metabolizers, CPIC recommends <strong>avoiding codeine</strong> and using a non-tramadol alternative. For ultrarapid metabolizers the risk is toxicity; for poor metabolizers it is lack of pain relief.</li>
-<li>Ultrarapid metabolizers produce morphine quickly and in large amounts, which can cause life-threatening respiratory depression. Deaths have been reported in children after tonsillectomy and in breastfed infants of ultrarapid metabolizer mothers. Note the symmetry with clopidogrel: the same logic (prodrug activation) leads to opposite risks at the two ends of the phenotype scale.</li>
-</ol>
+<blockquote class="blockquote">
+<p><em>Mr.&nbsp;A. is a CYP2C19 intermediate metabolizer (<code>*1/*2</code>), so he is expected to activate clopidogrel poorly. According to the CPIC guideline (moderate recommendation), we suggest ticagrelor or prasugrel instead of clopidogrel, as he has no contraindication. This also avoids the clopidogrel-omeprazole interaction. Omeprazole can be continued; given his genotype and long-term use, a dose reduction could be considered if his symptoms remain controlled.</em></p>
+</blockquote>
 </div>
 </div>
 </div>
@@ -1615,11 +1363,11 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><strong>ClinPGx</strong> (formerly PharmGKB) integrates PharmGKB, CPIC and PharmCAT into one free pharmacogenomics resource.</li>
 <li>The core reasoning is <strong>genotype → diplotype → phenotype → recommendation</strong>.</li>
-<li><strong>Star alleles</strong> name haplotypes; each has a <strong>function</strong>, and two alleles together predict a <strong>metabolizer phenotype</strong>.</li>
-<li>For <strong>prodrugs</strong> such as clopidogrel and codeine, low enzyme activity means <em>less</em> effect, not more toxicity.</li>
-<li><strong>CPIC guidelines</strong> tell you <em>how</em> to use a known genotype; <strong>drug labels</strong> show the regulatory position; <strong>levels of evidence</strong> tell you how much to trust an association.</li>
-<li>Genes are not the whole story: <strong>phenoconversion</strong> by co-medications matters.</li>
-<li>Stable identifiers connect ClinPGx to <strong>Ensembl</strong>, <strong>UniProt</strong>, <strong>PDB</strong> and <strong>DrugBank</strong>: one biological story, many layers of information.</li>
+<li>The <strong>drug page</strong> is the usual starting point: it gathers guidelines, drug labels and summary annotations.</li>
+<li><strong>CPIC guidelines</strong> say <em>what to do</em>; <strong>drug labels</strong> give the regulatory position; <strong>levels of evidence</strong> say <em>how much to trust</em> an association.</li>
+<li>For <strong>prodrugs</strong> such as clopidogrel, low enzyme activity means <em>less</em> effect, not more toxicity.</li>
+<li>Genes are not the whole story: co-medications can cause <strong>phenoconversion</strong>.</li>
+<li>Stable identifiers connect ClinPGx to <strong>Ensembl</strong>, <strong>UniProt</strong>, <strong>PDB</strong> and <strong>DrugBank</strong>.</li>
 </ul>
 </div>
 </div>
@@ -1630,9 +1378,12 @@ ul.task-list li input[type="checkbox"] {
 <blockquote class="blockquote">
 <p>ClinPGx. Stanford University. <a href="https://www.clinpgx.org/" class="uri">https://www.clinpgx.org/</a></p>
 </blockquote>
-<p>Guideline used in this lesson:</p>
+<p>Guidelines used in this lesson:</p>
 <blockquote class="blockquote">
 <p>Lee CR, Luzum JA, Sangkuhl K, <em>et al.</em> Clinical Pharmacogenetics Implementation Consortium Guideline for CYP2C19 Genotype and Clopidogrel Therapy: 2022 Update. <em>Clin Pharmacol Ther.</em> 2022;112(5):959-967. <a href="https://doi.org/10.1002/cpt.2526" class="uri">https://doi.org/10.1002/cpt.2526</a></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Lima JJ, Thomas CD, Barbarino J, <em>et al.</em> Clinical Pharmacogenetics Implementation Consortium (CPIC) Guideline for CYP2C19 and Proton Pump Inhibitor Dosing. <em>Clin Pharmacol Ther.</em> 2021;109(6):1417-1423. <a href="https://doi.org/10.1002/cpt.2015" class="uri">https://doi.org/10.1002/cpt.2015</a></p>
 </blockquote>
 <p>Levels of evidence:</p>
 <blockquote class="blockquote">
