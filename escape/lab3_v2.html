@@ -85,6 +85,12 @@ form.lock{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
 @keyframes unlock{from{transform:scale(.98);opacity:.6}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.shake,.unlock{animation:none}}
 .lessons{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.logwrap{overflow-x:auto}
+.log{width:100%;border-collapse:collapse;font-family:var(--f-mono);font-size:.85rem;font-variant-numeric:tabular-nums}
+.log th,.log td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.log th{color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:.72rem}
+.log td.r{text-align:right}.log th.r{text-align:right}
+.log tr.fast td{color:var(--amber)}
 .big{font-family:var(--f-mono);font-size:clamp(2rem,8vw,3.2rem);font-weight:600;font-variant-numeric:tabular-nums;color:var(--amber)}
 .confirm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.9rem;color:var(--muted)}
 footer{color:var(--muted);font-size:.8rem;padding-block:0 32px}
@@ -174,9 +180,10 @@ var TOOLS=[{label:"DrugBank",url:"https://go.drugbank.com"},{label:"UniProt",url
 
 /* ---------- State ---------- */
 var KEY="lab3-lockdown-v2";
-var S=load()||{team:"",start:null,room:0,hints:[],wrong:0,done:null,found:[]};
-if(!S.found)S.found=[];
+var S=load()||{team:"",start:null,room:0,hints:[],wrong:0,done:null,found:[],ends:[],wrongBy:[]};
+if(!S.found)S.found=[];if(!S.ends)S.ends=[];if(!S.wrongBy)S.wrongBy=[];
 function load(){try{var raw=localStorage.getItem(KEY);return raw?JSON.parse(raw):null;}catch(e){return null;}}
+function addWrong(){S.wrong++;S.wrongBy[S.room]=(S.wrongBy[S.room]||0)+1;}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 
 var $=function(id){return document.getElementById(id);};
@@ -237,7 +244,7 @@ function renderStart(){
     e.preventDefault();
     var name=$("team-name").value.trim();
     if(!name){$("start-msg").textContent="Type a team name to start.";$("start-msg").className="msg warn";return;}
-    S={team:name,start:Date.now(),room:0,hints:[],wrong:0,done:null,found:[]};save();render();
+    S={team:name,start:Date.now(),room:0,hints:[],wrong:0,done:null,found:[],ends:[],wrongBy:[]};save();render();
   });
 }
 
@@ -287,9 +294,9 @@ function renderRoom(){
       if(r.answers[a].h===h){var data=await unseal(r.answers[a].d,r.key+v);solved(data);return;}
     }
     for(var i=0;i<r.near.length;i++){
-      if(r.near[i].h===h){msg.textContent=r.near[i].msg;msg.className="msg warn";S.wrong++;save();renderBar();return;}
+      if(r.near[i].h===h){msg.textContent=r.near[i].msg;msg.className="msg warn";addWrong();save();renderBar();return;}
     }
-    S.wrong++;save();renderBar();
+    addWrong();save();renderBar();
     msg.textContent="ACCESS DENIED. That code does not open this door.";msg.className="msg bad";
     form.classList.remove("shake");void form.offsetWidth;form.classList.add("shake");
   });
@@ -297,7 +304,7 @@ function renderRoom(){
 
 function solved(data){
   var r=ROOMS[S.room];
-  S.found[S.room]=data;S.room++;save();
+  S.found[S.room]=data;S.ends[S.room]=Date.now();S.room++;save();
   view.innerHTML="";
   var c=el("section",{class:"card unlock"});
   c.appendChild(el("div",{class:"hazard"}));
@@ -334,13 +341,30 @@ function renderExit(){
     if(!v){msg.textContent="Type the word first.";msg.className="msg warn";return;}
     var h=await sha256(EXIT.salt+v);
     if(EXIT.answers.indexOf(h)>=0){S.done=Date.now();save();render();return;}
-    if(EXIT.near.indexOf(h)>=0){msg.textContent="So close. Use exactly the ten letters you hold.";msg.className="msg warn";S.wrong++;save();renderBar();return;}
-    S.wrong++;save();renderBar();
+    if(EXIT.near.indexOf(h)>=0){msg.textContent="So close. Use exactly the ten letters you hold.";msg.className="msg warn";addWrong();save();renderBar();return;}
+    addWrong();save();renderBar();
     msg.textContent="ACCESS DENIED. Try another order of the letters.";msg.className="msg bad";
     form.classList.remove("shake");void form.offsetWidth;form.classList.add("shake");
   });
 }
 
+
+function clock(ms){var d=new Date(ms);return [d.getHours(),d.getMinutes(),d.getSeconds()].map(function(x){return String(x).padStart(2,"0");}).join(":");}
+function logHtml(){
+  var rows="",prev=S.start,FAST=30000;
+  var names=ROOMS.map(function(r,i){return (i+1)+". "+r.name;}).concat(["Exit door"]);
+  for(var i=0;i<=ROOMS.length;i++){
+    var end=i<ROOMS.length?S.ends[i]:S.done;
+    if(!end){continue;}
+    var dur=prev?end-prev:0,h=0;
+    if(i<ROOMS.length){for(var k=0;k<S.hints.length;k++){if(String(S.hints[k]).split(".")[0]===String(i))h++;}}
+    var fast=i<ROOMS.length&&dur<FAST;
+    rows+='<tr'+(fast?' class="fast"':'')+'><td>'+escapeHtml(names[i])+'</td><td>'+clock(end)+'</td><td class="r">'+fmt(dur)+'</td><td class="r">'+(S.wrongBy[i]||0)+'</td><td class="r">'+(i<ROOMS.length?h:"")+'</td><td>'+(fast?"under 30 s":"")+'</td></tr>';
+    prev=end;
+  }
+  return '<div class="note"><div class="eyebrow">Activity log</div><p>Started at '+clock(S.start)+'. Times are real time, without hint penalties.</p>'+
+    '<div class="logwrap"><table class="log"><thead><tr><th>Room</th><th>Solved at</th><th class="r">Time in room</th><th class="r">Wrong codes</th><th class="r">Hints</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div></div>';
+}
 function renderDone(){
   view.innerHTML="";
   var c=el("section",{class:"card unlock"});
@@ -353,6 +377,7 @@ function renderDone(){
     '<h1>'+(inTime?"You escaped":"You escaped, in overtime")+'</h1>'+
     '<div class="big">'+fmt(t).replace("+","")+'</div>'+
     '<p>'+S.hints.length+' hint'+(S.hints.length===1?"":"s")+' (included in the time) &middot; '+S.wrong+' wrong code'+(S.wrong===1?"":"s")+'. Show this screen to your teacher.</p>'+
+    logHtml()+
     '<div class="note"><div class="eyebrow">What the ten rooms taught you</div><ol class="lessons">'+lessons+'</ol></div>';
   c.appendChild(inner);view.appendChild(c);
 }
@@ -369,7 +394,7 @@ function render(){
 $("reset").addEventListener("click",function(){$("reset").hidden=true;$("reset-confirm").hidden=false;});
 $("reset-no").addEventListener("click",function(){$("reset-confirm").hidden=true;$("reset").hidden=false;});
 $("reset-yes").addEventListener("click",function(){
-  S={team:"",start:null,room:0,hints:[],wrong:0,done:null,found:[]};
+  S={team:"",start:null,room:0,hints:[],wrong:0,done:null,found:[],ends:[],wrongBy:[]};
   try{localStorage.removeItem(KEY);}catch(e){}
   $("reset-confirm").hidden=true;$("reset").hidden=false;render();
 });

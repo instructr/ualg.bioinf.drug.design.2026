@@ -32,4 +32,4 @@ You are locked in Lab 3. Use **DrugBank**, **UniProt** and the **PDB** to get ou
 - Ranking: **time** (hints included), then **fewest wrong codes**.
 - The **first 4 teams** win: 1.00 point, 0.75, 0.50, and 0.25, respectively. Every other team gets a **bonus mission**.
 
-[Start the escape room](escape/lab3.html){.btn .btn-primary .btn-lg role="button" target="_blank"}
+[Start the escape room](escape/lab3_v2.html){.btn .btn-primary .btn-lg role="button" target="_blank"}
