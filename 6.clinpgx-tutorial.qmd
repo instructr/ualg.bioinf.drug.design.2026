@@ -492,7 +492,7 @@ What does CPIC recommend for a CYP2C19 intermediate metabolizer who needs
 antiplatelet therapy after PCI? How strong is the recommendation? Would the
 recommendation be different if he were a poor metabolizer?
 
-*Where to look:* [clopidogrel page](https://www.clinpgx.org/chemical/PA449053/overview) → prescribing info → **CPIC souce**. Click the **Details** link and search in *Table 1: Antiplatelet therapy recommendations based on CYP2C19 phenotype when considering clopidogrel for cardiovascular indications* for the indications for the relevant genotype (`*1/*2`).
+*Where to look:* [clopidogrel page](https://www.clinpgx.org/chemical/PA449053/overview) → prescribing info → **CPIC source**. Click the **Details** link and search in *Table 1: Antiplatelet therapy recommendations based on CYP2C19 phenotype when considering clopidogrel for cardiovascular indications* for the indications for the relevant genotype (`*1/*2`).
 
 ::: {.callout-note collapse="true" title="Show answer"}
 Based on the 2022 CPIC update:
@@ -532,7 +532,7 @@ d. Does **EMA** attribute the same PGx level as **FDA**?
 *Where to look:* clopidogrel page → **drug labels**. Use Concept 7.
 
 ::: {.callout-note collapse="true" title="Show answer"}
-a. Several, including the FDA, HCSC, PMDA, Swissmedic and EMA (at the time of writting).
+a. Several, including the FDA, HCSC, PMDA, Swissmedic and EMA (at the time of writing).
 b. **Actionable PGx** (at the time of writing). Testing is not required.
 c. "Consider use of another platelet P2Y12 inhibitor in patients identified as CYP2C19 poor metabolizers".
 d. No. 
@@ -578,7 +578,7 @@ d. Clopidogrel is a **prodrug** (CYP2C19 activates it): lower activity means
 ## ❓ Question 6: Your final recommendation
 
 a. Open [PharmDOG](https://pharmdog.clinpgx.org/), the ClinPGx prescribing
-   tool. Enter Mr. A.'s CYP2C19 genetic result and then search for his two drugs (clopidogrel and omeprazole). Does the ifnormation match your answers to the previous questions? Does it warn you about the omeprazole-clopidogrel interaction?
+   tool. Enter Mr. A.'s CYP2C19 genetic result and then search for his two drugs (clopidogrel and omeprazole). Does the information match your answers to the previous questions? Does it warn you about the omeprazole-clopidogrel interaction?
 b. Write a short note (3 to 4 sentences) to the cardiologist with your
    recommendation.
 
@@ -590,7 +590,7 @@ a. PharmDOG should confirm the intermediate metabolizer phenotype and the
 b. Example note to the cardiologist:
 
 > *Mr. A. is a CYP2C19 intermediate metabolizer (`*1/*2`), so he is expected
-> to activate clopidogrel poorly. According to the CPIC guideline (moderate
+> to activate clopidogrel poorly. According to the CPIC guideline (strong
 > recommendation), we suggest ticagrelor or prasugrel instead of clopidogrel,
 > as he has no contraindication. This also avoids the clopidogrel-omeprazole
 > interaction. Omeprazole can be continued; given his genotype and long-term
