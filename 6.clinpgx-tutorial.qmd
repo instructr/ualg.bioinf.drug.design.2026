@@ -1,5 +1,5 @@
 ---
-title: "From genotype to prescription with ClinPGx"
+title: "ClinPGx | From genotype to prescription"
 subtitle: "A pharmacogenomics walk-through using CYP2C19 and clopidogrel as an example"
 author:
   - name: "Isabel Duarte"
